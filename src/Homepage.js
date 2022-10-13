@@ -1,8 +1,14 @@
 import React from 'react'
+import Search from './Components/Homepage/Search'
+import {Container} from 'react-bootstrap'
 
 function Homepage() {
   return (
-    <div>Homepage</div>
+    <div>
+        <Container>
+        <Search/>
+        </Container>
+    </div>
   )
 }
 
