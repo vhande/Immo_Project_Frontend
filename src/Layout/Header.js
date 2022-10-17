@@ -12,18 +12,13 @@ function Header({ searchResultHandler,inputHandler }) {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">Blueberry</Navbar.Brand>
+                <Navbar.Brand href="#home">IMMO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Link to={'/'} className="nav-link text-decoration-none">Homepage</Link>
+                        <Link to={'/newhouse'} className="nav-link text-decoration-none">Add House</Link>
                         <Link to={'/contact'} className="nav-link text-decoration-none">Contact</Link>
-                        <NavDropdown title="Categories" id="collasible-nav-dropdown">
-                            <Link to={'/search'} onClick={searchResultHandler} className="dropdown-item text-decoration-none">Adventure</Link>
-
-                            {/* <NavDropdown.Divider /> */}
-                            <Link to={'/movies/comedy'} className="dropdown-item text-decoration-none">Comedy</Link>
-                        </NavDropdown>
                     </Nav>
                     <Nav className="d-flex flex-row mx-2">
                         <Link to={'/#social'}><FaTwitter fill='white' className="display-6 bg-primary p-1 rounded-1 mx-1" /></Link>
