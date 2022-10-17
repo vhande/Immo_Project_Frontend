@@ -3,6 +3,10 @@ body {
     height: auto;
 }
 
-.search {
+.home-container {
     max-width: 700px;
+}
+
+.pills {
+    width:9em;
 }
