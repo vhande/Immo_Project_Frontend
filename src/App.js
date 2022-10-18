@@ -3,7 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import Layout from './Layout/Layout'
 import Homepage from './Homepage'
 import AdvancedSearch from './AdvancedSearch'
-import Ad from './aAd'
+import Ad from './Ad'
 
 function App() {
   return (
