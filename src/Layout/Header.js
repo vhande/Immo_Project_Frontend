@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {BsFillPersonFill} from 'react-icons/bs'
 function Header() {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="white">
             <Container className="d-flex justify-content-between">
                 <Navbar.Brand href="#home">IMMO</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
