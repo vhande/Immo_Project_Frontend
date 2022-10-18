@@ -3,6 +3,15 @@ body {
     height: auto;
 }
 
+:root {
+    --blue: #182747;
+    --green: #78938A;
+}
+
+.nav-link {
+    color: var(--blue) !important;
+    }
+
 .home-container {
     max-width: 700px;
 }
@@ -28,6 +37,13 @@ body {
     justify-content: flex-end;
 }
 
-.image-link__text {
-   
+
+.nav-pills .nav-link.active {
+    background-color: var(--blue);
+    color:white !important;
+}
+
+.btn {
+    background-color: var(--blue);
+    color:white !important;
 }
