@@ -10,3 +10,24 @@ body {
 .pills {
     width:9em;
 }
+
+.city {
+    height: 5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    font-size: 1rem;
+    text-shadow: 1px 1px black;
+    color: #fff;
+    width: 100%;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.image-link__text {
+   
+}

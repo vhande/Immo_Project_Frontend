@@ -1,7 +1,8 @@
 import React from 'react'
 import Search from './Components/Homepage/Search'
-import OnSale from './Components/Homepage/OnSale'
+import ForSale from './Components/Homepage/ForSale'
 import SearchByCity from './Components/Homepage/SearchByCity'
+import ForRent from './Components/Homepage/ForRent'
 import {Container} from 'react-bootstrap'
 
 function Homepage() {
@@ -9,8 +10,9 @@ function Homepage() {
     <div>
         <Container>
         <Search/>
-        <OnSale/>
+        <ForSale/>
         <SearchByCity/>
+        <ForRent/>
         </Container>
     </div>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
-import {Card, Button, Container,Row,Col} from 'react-bootstrap'
+import {Card, Container} from 'react-bootstrap'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-function OnSale() {
+function ForSale() {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -87,4 +87,4 @@ function OnSale() {
   )
 }
 
-export default OnSale
+export default ForSale
