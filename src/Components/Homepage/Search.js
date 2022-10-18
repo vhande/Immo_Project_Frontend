@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 function Search() {
   return (
-    <Container fluid className="home-container">
+    <Container fluid className="search-container">
         <Card className="border-0 d-flex p-4 bg-light justify-content-center align-items-center">
         <Nav variant="pills" className="m-1 pills d-flex justify-content-center border rounded align-items-center " defaultActiveKey="#">
       <Nav.Item>

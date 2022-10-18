@@ -8,12 +8,17 @@ body {
     --green: #78938A;
 }
 
+.navbar {
+    border-bottom:0.1em solid var(--blue);
+}
+
 .nav-link {
     color: var(--blue) !important;
     }
 
-.home-container {
+.search-container {
     max-width: 700px;
+    margin-top: 20%;
 }
 
 .pills {
@@ -46,4 +51,8 @@ body {
 .btn {
     background-color: var(--blue);
     color:white !important;
+}
+
+.dropdown-toggle::after {
+    border:none;
 }

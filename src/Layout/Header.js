@@ -2,11 +2,16 @@ import React from 'react'
 import { Container, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { BsFillPersonFill } from 'react-icons/bs'
+import {RiHomeSmileFill} from 'react-icons/ri'
+
 function Header() {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="white">
+        <Navbar fixed="top" collapseOnSelect expand="lg" className="navbar" bg="white">
             <Container className="d-flex justify-content-between">
-                <Navbar.Brand href="#home">IMMO</Navbar.Brand>
+                <div className="d-flex align-items-center justify-content-center">
+                <RiHomeSmileFill fontSize="1.5em" className="me-1"/>
+                <Link className="navbar-brand" to={'/'}> IMMO</Link>
+                </div>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
@@ -61,7 +66,7 @@ function Header() {
                     </Nav>
                     <Nav className="">
                         <Link to={'/ad'} className="nav-link text-decoration-none">Publish an Ad</Link>
-                        <Link to={'/profile'} className="nav-link text-decoration-none"><span className="me-1"><BsFillPersonFill /></span>Log in</Link>
+                        <Link to={'/login'} className="nav-link text-decoration-none"><span className="me-1"><BsFillPersonFill /></span>Log in</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
