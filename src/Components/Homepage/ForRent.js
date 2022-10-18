@@ -19,7 +19,7 @@ function ForRent() {
       <Card className="m-3 " border="dark" style={{ width: '25rem' }}>
            <Card.Body className="d-flex  flex-column align-items-center justify-content-center">
           <Card.Title>See All Popular Properties</Card.Title>
-          <Button><GrNext/></Button>
+          <Button><GrNext fill="#FFFF" /></Button>
           </Card.Body>
       </Card>
     </Container>
