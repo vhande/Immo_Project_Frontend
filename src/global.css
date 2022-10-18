@@ -56,3 +56,6 @@ body {
 .dropdown-toggle::after {
     border:none;
 }
+.advancedSearch{
+    margin-top: 5rem;
+}
