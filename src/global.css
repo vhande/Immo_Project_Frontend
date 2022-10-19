@@ -18,7 +18,7 @@ body {
 
 .search-container {
     max-width: 700px;
-    margin-top: 20%;
+    margin-top: 7%;
 }
 
 .pills {
@@ -34,7 +34,7 @@ body {
     font-size: 1rem;
     text-shadow: 1px 1px black;
     color: #fff;
-    width: 100%;
+    width: 80%;
     font-family: Montserrat,sans-serif;
     font-weight: 700;
     display:flex;
@@ -56,3 +56,14 @@ body {
 .dropdown-toggle::after {
     border:none;
 }
+
+.carousel-card {
+    max-width:270px;
+    max-height:276px;
+}
+
+.card-img {
+    max-width:270x;
+    max-height:160px;
+}
+

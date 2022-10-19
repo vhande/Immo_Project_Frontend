@@ -3,9 +3,9 @@ import {Container, Row, Col, Card} from 'react-bootstrap'
 
 function SearchByCity() {
   return (
-   <>
-    <h1>Search by city for sale</h1>
-    <Container fluid className="searchbycity">
+   <div  className="mt-3">
+    <h3 className="p-3" style={{"color":"var(--blue)"}}>Search by city for sale</h3>
+    <Container fluid className="m-3 searchbycity">
     <Row>
             <Col lg={2} md={4} sm={4} xs={6} className="p-2">
         <Card style={{"background-image": 'url("https://assets.immoweb.be/95/images/artworks/cities/brussels.jpg")'}} className="city" >
@@ -72,7 +72,7 @@ function SearchByCity() {
         </Col>
     </Row>
    </Container>
-   </>
+   </div>
   )
 }
 

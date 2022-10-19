@@ -1,8 +1,9 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { BsFillPersonFill } from 'react-icons/bs'
 import {RiHomeSmileFill} from 'react-icons/ri'
+import {BsSearch} from 'react-icons/bs'
 
 function Header() {
     return (
@@ -19,15 +20,12 @@ function Header() {
                             <Nav>
                                 <NavDropdown
                                     title="For Sale">
-                                    <Dropdown.ItemText>Type of Property</Dropdown.ItemText>
-                                    <Dropdown.Divider />
-                                    <NavDropdown.Item href="#">
-                                        Appartment
-                                    </NavDropdown.Item>
                                     <NavDropdown.Item href="#">House</NavDropdown.Item>
                                     <NavDropdown.Item href="#">Appartment</NavDropdown.Item>
                                     <NavDropdown.Item href="#">House and Appartment</NavDropdown.Item>
                                     <NavDropdown.Item href="#">Garage</NavDropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item className="d-flex align-items-center" href="/advanced-search">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
@@ -37,15 +35,13 @@ function Header() {
                                 <NavDropdown
                                     title="For Rent"
                                 >
-                                    <Dropdown.ItemText>Type of Property</Dropdown.ItemText>
-                                    <Dropdown.Divider />
-                                    <NavDropdown.Item href="#">
-                                        Appartment
-                                    </NavDropdown.Item>
+
                                     <NavDropdown.Item href="#">House</NavDropdown.Item>
                                     <NavDropdown.Item href="#">Appartment</NavDropdown.Item>
                                     <NavDropdown.Item href="#">House and Appartment</NavDropdown.Item>
                                     <NavDropdown.Item href="#">Garage</NavDropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item className="d-flex align-items-center" href="/advanced-search">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
