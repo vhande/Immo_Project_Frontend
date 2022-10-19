@@ -56,6 +56,7 @@ body {
 .dropdown-toggle::after {
     border:none;
 }
+<<<<<<< HEAD
 
 .carousel-card {
     max-width:270px;
@@ -67,3 +68,10 @@ body {
     max-height:160px;
 }
 
+.advancedSearch{
+    margin-top: 5rem;
+}
+
+.adContainer{
+    margin-top: 5rem;
+}

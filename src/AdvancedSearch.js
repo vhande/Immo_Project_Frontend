@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Col, Row, InputGroup, Form } from "react-bootstrap";
-import { FcSearch } from "react-icons/fc";
+import { BsSearch } from "react-icons/bs";
 
 function AdvancedSearch() {
   return (
     <>
-      <Container>
+      <Container className="advancedSearch">
         <Row className="d-flex justify-content-center">
           <Col md={4}>
             <h2>Advanced search</h2>
@@ -16,7 +16,7 @@ function AdvancedSearch() {
                 aria-describedby="basic-addon1"
               />
               <InputGroup.Text id="basic-addon1">
-                <FcSearch></FcSearch>
+              <BsSearch/>
               </InputGroup.Text>
             </InputGroup>
             <h3>Transaction type</h3>
