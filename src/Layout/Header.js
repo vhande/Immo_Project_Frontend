@@ -14,7 +14,6 @@ function Header() {
     const showModal = () => {
         setModalShow(true);
     }
-
     return (
         <>
         <LoginModal  closeModal={closeModal} modalShow={modalShow}/>

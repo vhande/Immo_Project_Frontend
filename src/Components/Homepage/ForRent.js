@@ -6,9 +6,7 @@ function ForRent() {
   return (
     <>
     <h3 className="p-3" style={{"color":"var(--blue)"}}>Most Popular Properties</h3>
-    <Container className="mb-3">
-    <Row className="d-flex align-items-center justify-content-center">
-        <Col sm={12} md={12} lg={4} >
+    <Container className="mb-3 d-flex justify-content-between">
     <Card className="mx-2" style={{"width":"22rem"}}>
       <Card.Img style={{"max-height":"200px"}} variant="top" src="https://picsum.photos/200" />
       <Card.Body>
@@ -18,8 +16,6 @@ function ForRent() {
         <Card.Title className="m-0 text-secondary" style={{"font-size":"0.9em"}}>Oudenaarde</Card.Title>
       </Card.Body>
     </Card>
-    </Col>
-    <Col sm={12} md={12} lg={4}>
     <Card className="mx-2" style={{"width":"22rem"}}>
       <Card.Img style={{"max-height":"200px"}} variant="top" src="https://picsum.photos/200" />
       <Card.Body>
@@ -29,16 +25,13 @@ function ForRent() {
         <Card.Title className="m-0 text-secondary" style={{"font-size":"0.9em"}}>Oudenaarde</Card.Title>
       </Card.Body>
     </Card>
-    </Col>
-    <Col sm={12} md={12} lg={4}>
     <Card className="mx-2"style={{"width":"22rem"}}>
+
       <Card.Body className="d-flex  flex-column align-items-center justify-content-center">
           <Card.Title>See All Popular Properties</Card.Title>
           <Button><GrNext fill="#FFFF" /></Button>
       </Card.Body>
     </Card>
-    </Col>
-    </Row>
     </Container>
     </>
   )

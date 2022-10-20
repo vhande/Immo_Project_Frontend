@@ -7,14 +7,12 @@ import {Container} from 'react-bootstrap'
 
 function Homepage() {
   return (
-    <div>
         <Container>
         <Search/>
         <ForSale/>
         <SearchByCity/>
         <ForRent/>
         </Container>
-    </div>
   )
 }
 

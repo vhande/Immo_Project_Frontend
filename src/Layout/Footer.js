@@ -4,7 +4,7 @@ import {FiExternalLink} from 'react-icons/fi'
 
 function Footer() {
   return (
-    <Container fluid className="footer bg-light m-0 p-0" style={{"color":"var(--blue)"}}>
+    <Container fluid className="footer bg-light m-0 p-0 " style={{"color":"var(--blue)"}}>
         <div className="d-flex justify-content-evenly align-items-between p-2">
     
           <div>
