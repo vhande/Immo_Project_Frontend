@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap'
+import { Container, Nav, Navbar, NavDropdown, Dropdown, Button } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { BsFillPersonFill } from 'react-icons/bs'
 import {RiHomeSmileFill} from 'react-icons/ri'
@@ -7,9 +7,17 @@ import {BsSearch} from 'react-icons/bs'
 import LoginModal from './LoginModal'
 
 function Header() {
+    const [modalShow, setModalShow] = React.useState(false);
+    const closeModal = () =>{
+        setModalShow(false);
+    }
+    const showModal = () => {
+        setModalShow(true);
+    }
+
     return (
         <>
-        <LoginModal/>
+        <LoginModal  closeModal={closeModal} modalShow={modalShow}/>
         <Navbar fixed="top" collapseOnSelect expand="lg" className="navbar" bg="white">
             <Container className="d-flex justify-content-between">
                 <div className="d-flex align-items-center justify-content-center">
@@ -65,7 +73,7 @@ function Header() {
                     </Nav>
                     <Nav className="">
                         <Link to={'/ad'} className="nav-link text-decoration-none">Publish an Ad</Link>
-                        <Link to={'/login'} className="nav-link text-decoration-none"><span className="me-1"><BsFillPersonFill /></span>Log in</Link>
+                        <Button onClick={showModal} className="nav-link text-decoration-none border-0 bg-dark" style={{"color":"green"}}><span className="me-1"><BsFillPersonFill /></span>Log in</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

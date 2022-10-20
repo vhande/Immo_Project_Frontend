@@ -4,7 +4,7 @@ import { Container, Nav, Navbar, Button, Row, Col } from "react-bootstrap";
 function Ad() {
   return (
     <>
-      <Container className="justify-content-center text-center adContainer">
+      <Container className="justify-content-center text-center first-div">
         <Row>
           <Col md={12}>
             <h2>Publication of your classified</h2>

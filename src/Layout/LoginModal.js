@@ -1,8 +1,22 @@
 import React from 'react'
+import {Modal, Button} from 'react-bootstrap'
 
-function LoginModal() {
+function LoginModal({closeModal, modalShow}) {
   return (
-    <div>LoginModal</div>
+    <Modal show={modalShow} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={closeModal}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
   )
 }
 
