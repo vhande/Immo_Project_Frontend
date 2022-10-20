@@ -73,6 +73,10 @@ body {
 .advancedSearch{
     margin-top: 5rem;
 }
+.center-pills {
+    display: flex !important;
+    justify-content: center !important;
+}
 
 .adContainer{
     margin-top: 5rem;
