@@ -17,17 +17,17 @@ function Header() {
     return (
         <>
         <LoginModal  closeModal={closeModal} modalShow={modalShow}/>
-        <Navbar fixed="top" collapseOnSelect expand="lg" className="navbar" bg="white">
+        <Navbar style={{"color":"var(--blue)"}} fixed="top" collapseOnSelect expand="lg" className="navbar" bg="white">
             <Container className="d-flex justify-content-between">
-                <div className="d-flex align-items-center justify-content-center">
+                <Link style={{"color":"var(--blue)"}} className="navbar-brand" to={'/'}><div className="d-flex align-items-center justify-content-center">
                 <RiHomeSmileFill fontSize="1.5em" className="me-1"/>
-                <Link className="navbar-brand" to={'/'}> IMMO</Link>
-                </div>
+                <div className="navbar-brand"> IMMO</div>
+                </div></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Navbar.Collapse>
-                            <Nav>
+                            <Nav  >
                                 <NavDropdown
                                     title="For Sale">
                                     <NavDropdown.Item href="#">House</NavDropdown.Item>
@@ -72,7 +72,7 @@ function Header() {
                     </Nav>
                     <Nav className="">
                         <Link to={'/ad'} className="nav-link text-decoration-none">Publish an Ad</Link>
-                        <Button onClick={showModal} className="nav-link text-decoration-none border-0 bg-dark" style={{"color":"green"}}><span className="me-1"><BsFillPersonFill /></span>Log in</Button>
+                        <Button onClick={showModal} className="text-start loginbtn nav-link text-decoration-none border-0 bg-white"><span className="me-1"><BsFillPersonFill /></span>Log in</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -7,12 +7,14 @@ import {Container} from 'react-bootstrap'
 
 function Homepage() {
   return (
-        <Container>
+
+        <Container fluid className="homepage">
         <Search/>
         <ForSale/>
         <SearchByCity/>
         <ForRent/>
         </Container>
+      
   )
 }
 

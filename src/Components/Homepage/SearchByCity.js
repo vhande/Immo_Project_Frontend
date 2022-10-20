@@ -3,7 +3,7 @@ import {Container, Row, Col, Card} from 'react-bootstrap'
 
 function SearchByCity() {
   return (
-   <div  className="mt-3">
+   <Container fluid  className="mt-3">
     <h3 className="p-3" style={{"color":"var(--blue)"}}>Search by city for sale</h3>
     <Container fluid className="m-3 searchbycity">
     <Row>
@@ -72,7 +72,7 @@ function SearchByCity() {
         </Col>
     </Row>
    </Container>
-   </div>
+   </Container>
   )
 }
 

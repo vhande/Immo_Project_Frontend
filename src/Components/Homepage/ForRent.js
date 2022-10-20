@@ -1,11 +1,11 @@
 import React from 'react'
-import {Container, Card, Button, Row, Col} from 'react-bootstrap'
+import {Container, Card, Button} from 'react-bootstrap'
 import {GrNext} from 'react-icons/gr'
 
 function ForRent() {
   return (
-    <>
-    <h3 className="p-3" style={{"color":"var(--blue)"}}>Most Popular Properties</h3>
+    <Container fluid>
+    <h3 className="search-container p-3" style={{"color":"var(--blue)"}}>Most Popular Properties</h3>
     <Container className="mb-3 d-flex justify-content-between">
     <Card className="mx-2" style={{"width":"22rem"}}>
       <Card.Img style={{"max-height":"200px"}} variant="top" src="https://picsum.photos/200" />
@@ -33,7 +33,7 @@ function ForRent() {
       </Card.Body>
     </Card>
     </Container>
-    </>
+    </Container>
   )
 }
 

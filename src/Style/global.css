@@ -1,36 +1,32 @@
-html {
-    height:100%;
-    width: 100%;
-    box-sizing:border-box;
-  
-}
 
 body{
-  min-width: 100%;
-  position:relative;
-  margin:0;
-  min-height:100%;
-  padding-bottom: 10rem;
-  padding-top:5rem;
-  box-sizing:inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-
+    min-width: 100%;
+    position:relative;
+    margin:0;
+    min-height:100%;
+    padding-bottom: 10rem;
+    padding-top:5rem;
+    box-sizing:inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer {
-    position: absolute;
+    position:absolute;
     right:0;
     left:0;
     bottom:0;
 }
+
+.homepage {
+    width:100vw;
+}
+
 :root {
     --blue: #182747;
     --green: #78938A;
-    --doc-height: 100%;
 }
 
 .navbar {
@@ -79,13 +75,13 @@ body{
     background-color: var(--blue);
     color:white !important;
 }
+.loginbtn {
+    color:var(--blue) !important;
+}
 
 .dropdown-toggle::after {
     border:none;
 }
-
-/* <<<<<<< HEAD */
-
 
 .carousel-card {
     max-width:270px;
@@ -96,4 +92,3 @@ body{
     max-width:270x;
     max-height:160px;
 }
-
