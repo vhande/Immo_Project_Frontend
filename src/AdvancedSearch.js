@@ -5,7 +5,7 @@ import { BsSearch } from "react-icons/bs";
 function AdvancedSearch() {
   return (
     <>
-      <Container className="advancedSearch">
+      <Container className="first-div">
         <Row className="d-flex justify-content-center">
           <Col md={4}>
             <h2>Advanced search</h2>

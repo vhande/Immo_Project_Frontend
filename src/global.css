@@ -8,6 +8,10 @@ body {
     --green: #78938A;
 }
 
+.first-div {
+    margin-top: 7%;
+}
+
 .navbar {
     border-bottom:0.1em solid var(--blue);
 }
@@ -68,20 +72,4 @@ body {
 .card-img {
     max-width:270x;
     max-height:160px;
-}
-
-.advancedSearch{
-    margin-top: 5rem;
-}
-.center-pills {
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.adContainer{
-    margin-top: 5rem;
-}
-
-.loginContainer{
-    margin-top: 5rem !important;
 }
