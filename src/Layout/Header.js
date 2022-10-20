@@ -4,9 +4,12 @@ import {Link} from 'react-router-dom'
 import { BsFillPersonFill } from 'react-icons/bs'
 import {RiHomeSmileFill} from 'react-icons/ri'
 import {BsSearch} from 'react-icons/bs'
+import LoginModal from './LoginModal'
 
 function Header() {
     return (
+        <>
+        <LoginModal/>
         <Navbar fixed="top" collapseOnSelect expand="lg" className="navbar" bg="white">
             <Container className="d-flex justify-content-between">
                 <div className="d-flex align-items-center justify-content-center">
@@ -67,6 +70,7 @@ function Header() {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        </>
     )
 }
 
