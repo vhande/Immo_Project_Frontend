@@ -7,7 +7,7 @@ function AdvancedSearch() {
     <>
       <Container className="first-div">
         <Row className="d-flex justify-content-center">
-          <Col md={4}>
+          <Col >
             <h2>Advanced search</h2>
             <InputGroup className="mb-3">
               <Form.Control

@@ -92,3 +92,7 @@ body{
     max-width:270x;
     max-height:160px;
 }
+
+.modal-content{
+    width: max-content !important;
+}
