@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {Link} from 'react-router-dom'
 import {Container, Form, Button, InputGroup} from 'react-bootstrap'
 import './Style/shortpage.css'
 import {AiFillCloseCircle, AiFillEye} from 'react-icons/ai'
@@ -7,6 +8,7 @@ import { useFormik } from 'formik'
 function CreateAccount() {
   const [show, setShow] = useState("password")
   const [show2, setShow2] = useState("password")
+  const [success, setSuccess] = useState("")
 
   const validate = values => {
     const errors = {}
@@ -47,7 +49,7 @@ function CreateAccount() {
 
     },
     validate,
-    onSubmit: (values , { resetForm }) => {
+    onSubmit: (values) => {
       fetch('http://localhost:4000/register',{
         method:'POST',
         headers:{
@@ -58,11 +60,15 @@ function CreateAccount() {
     })
     .then(res=>res.json())
     .then(data=>{
+      if(data.success) {
+        setSuccess(data.success)
+      }
       if(data.error) {
         alert(data.error)
       }
+     
     return data})
-    resetForm({values:""});
+    
     }
     
     
@@ -78,6 +84,8 @@ function CreateAccount() {
    
   return (
     <Container fluid className="form-container d-flex flex-column align-items-center justify-content-center">
+      {success === "" ?
+      <>
       <h4>Create an account</h4>
       <Form onSubmit={formik.handleSubmit} className="form">
       <Form.Group 
@@ -148,9 +156,14 @@ function CreateAccount() {
       </Form.Group>
       <Button type="submit" className="mb-3">
         Create my account
-      </Button>
+      </Button> 
       </Form>
-    </Container>
+      </> : 
+      <>
+      <p className="lead">{success}</p>
+      <Link to={"/"}><Button className="m-3">Go to homepage</Button></Link>
+      </> }
+    </Container> 
   )
 }
 

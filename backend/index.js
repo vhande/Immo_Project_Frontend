@@ -40,8 +40,10 @@ app.post('/register', (req,res)=> {
                 .then(answer=> {
                     res.json({
                         message:'saved',
-                        data:answer
+                        data:answer,
+                        success:"Account created"
                     })
+                
                 })
             }
             else {
