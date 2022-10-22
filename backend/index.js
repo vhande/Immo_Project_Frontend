@@ -4,7 +4,6 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-
 const app = express();
 app.use(express.json())
 app.use(cors())
@@ -22,7 +21,6 @@ const userSchema = mongoose.Schema({
 })
 
 const User = mongoose.model('users',userSchema)
-
 
 app.post('/register', (req,res)=> {
     const firstname = req.body.firstname
@@ -47,11 +45,33 @@ app.post('/register', (req,res)=> {
                 })
             }
             else {
-                res.send({error:"User exists"})
+                res.send({error:"This e-mail address already exists in our database. Please use another one."})
                 console.log("User exists")
             }
         })
    
+})
+
+app.post('/login', (req,res) => {
+    const {email} = req.body;
+    const {password} = req.body;
+    User.find({email})
+    .then(data => { 
+        console.log(data)
+        if (data.length > 0) {
+            let isPassCorrect = bcrypt.compareSync(password,data[0].password)
+            if(isPassCorrect) {
+                res.json({
+                    message:'saved',
+                    success:"Done"
+                })
+            } 
+        } else {
+            res.send({error:"Username or password incorrect"})
+            console.log("Username or password incorrect")        
+        }
+    })
+
 })
 
 app.listen(4000, ()=> {

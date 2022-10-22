@@ -22,8 +22,6 @@ function Search() {
     <Form.Select className="my-1 shadow-none" aria-label="Default select example">
       <option value="1">House</option>
       <option value="2">Appartment</option>
-      <option value="3">House and Appartment</option>
-      <option value="4">Garage</option>
     </Form.Select>
     </Col>
     <Col md={6}>
