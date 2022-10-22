@@ -40,7 +40,7 @@ function LoginModal({closeModal, modalShow}) {
     
   return (
     <Modal size={700} show={modalShow} onHide={closeModal}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={()=>{setErr("")}}>
           <Modal.Title>Log in to enjoy all features</Modal.Title>
         </Modal.Header>
         <Container>
