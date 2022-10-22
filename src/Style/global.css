@@ -1,4 +1,6 @@
-
+*{
+    color: var(--blue)
+}
 body{
     min-width: 100%;
     position:relative;
@@ -41,10 +43,6 @@ body{
     max-width: 700px;
 }
 
-.form-container {
-    max-width: 500px;
-}
-
 .pills {
     width:9em;
 }
@@ -73,7 +71,7 @@ body{
 
 .btn {
     background-color: var(--blue);
-    color:white !important;
+    border-radius: var(--bs-border-radius-xl)!important;
 }
 .loginbtn {
     color:var(--blue) !important;

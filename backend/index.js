@@ -21,20 +21,35 @@ const userSchema = mongoose.Schema({
     password:String
 })
 
-const User = mongoose.model('Users',userSchema)
+const User = mongoose.model('users',userSchema)
 
 
 app.post('/register', (req,res)=> {
-    const {firstname, lastname, email, password} = req.body
-    const securepassword = bcrypt.hashSync(password,10)
-    const user = new User({firstname, lastname, email, password:securepassword})
-    user.save()
-    .then(answer=> {
-        res.json({
-            message:'saved',
-            data:answer
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const email = req.body.email
+    const password = req.body.password
+    
+    User.find({email})
+    .then( data => 
+        {
+            if (data.length === 0) {
+                const securepassword = bcrypt.hashSync(password,10)
+                const user = new User({firstname, lastname, email, password:securepassword})
+                user.save()
+                .then(answer=> {
+                    res.json({
+                        message:'saved',
+                        data:answer
+                    })
+                })
+            }
+            else {
+                res.send({error:"User exists"})
+                console.log("User exists")
+            }
         })
-    })
+   
 })
 
 app.listen(4000, ()=> {

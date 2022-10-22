@@ -11,4 +11,7 @@ body{
   align-items: center;
   justify-content: center;
   box-sizing:inherit;
+  width: 100%;
 }
+
+
