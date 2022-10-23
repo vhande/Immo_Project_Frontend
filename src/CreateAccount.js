@@ -86,7 +86,7 @@ function CreateAccount() {
   }
 
   return (
-    <Container fluid className="form-container d-flex flex-column align-items-center justify-content-center">
+    <Container fluid className="first-div d-flex flex-column align-items-center justify-content-center">
       {success === "" ?
         <>
           <h4>Create an account</h4>

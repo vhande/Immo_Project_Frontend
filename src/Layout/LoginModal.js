@@ -1,17 +1,20 @@
 import React from 'react'
 import {Modal, Button, Container, Row, Col, InputGroup, Form} from 'react-bootstrap'
 import {BsCheckLg} from "react-icons/bs"
-import {useRef, useState} from 'react'
+import {useRef, useState, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import { AiFillCloseCircle, AiFillEye } from 'react-icons/ai'
+import Token from '/Users/hande/Desktop/Working Space/Final Project/immo/src/Context/Token'
 
 function LoginModal({closeModal, modalShow}) {
   const email = useRef(null)
   const password = useRef(null)
   const [err, setErr] = useState("")
   const [show, setShow] = useState("password")
+  const context = useContext(Token)
 
-  const clickEvent = () => {
+
+  const clickEvent = async () => {
   fetch('http://localhost:4000/login',{
     method:'POST',
     headers:{
@@ -28,8 +31,12 @@ function LoginModal({closeModal, modalShow}) {
       if (data.error) {
         setErr(data.error)
       } else {
-        alert(data.success)
+        context.setToken(data.token)
+        context.setFirstname(data.payload.firstname)
+        context.setLastname(data.payload.lastname)
+        closeModal()
       }
+      
     })
     }
 
@@ -77,7 +84,8 @@ function LoginModal({closeModal, modalShow}) {
               </InputGroup>
         </Form.Group>
         {err !== "" ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{err}</Form.Label> : ""}
-        <Button onClick={clickEvent}>Login</Button>
+         <Button onClick={clickEvent}>Login</Button>
+       
         </Form>     
 
         </Col>

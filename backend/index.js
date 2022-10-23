@@ -2,11 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
+
 require('dotenv').config();
+
 
 const app = express();
 app.use(express.json())
 app.use(cors())
+
+const jwtSecret = process.env.KEY
+const jwtExpirySeconds = 1000;
 
 main().catch(err => console.log(err));
 async function main() {
@@ -61,11 +67,17 @@ app.post('/login', (req,res) => {
         if (data.length > 0) {
             let isPassCorrect = bcrypt.compareSync(password,data[0].password)
             if(isPassCorrect) {
-                res.json({
-                    message:'saved',
-                    success:"Done"
+                jwt.sign({email}, jwtSecret,{
+                    algorithm:"HS256", expiresIn:"600s"
+                }, (err, token) => {
+                    res.json({
+                        payload: req.body,
+                        token: token
+                    })
                 })
-            } 
+            } else {
+                res.send({error:"Username or password incorrect"})
+            }
         } else {
             res.send({error:"Username or password incorrect"})
             console.log("Username or password incorrect")        

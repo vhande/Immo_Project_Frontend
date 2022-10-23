@@ -6,10 +6,17 @@ import AdvancedSearch from './AdvancedSearch'
 import Classified from './Classified'
 import Ad from './Ad'
 import CreateAccount from './CreateAccount'
+import Token from './Context/Token'
+import {useState} from 'react'
 
 
 function App() {
+  const [token,setToken] = useState("")
+  const [firstname,setFirstname] = useState("")
+  const [lastname, setLastname] = useState("")
+  
   return (
+    <Token.Provider value={{token, setToken, firstname, setFirstname, lastname, setLastname}}>
     <Layout>
         <Routes>
             <Route path="/" element={<Homepage/>} />
@@ -19,6 +26,7 @@ function App() {
             <Route path="/create-account" element={<CreateAccount/>} />
         </Routes>
     </Layout>
+    </Token.Provider>
   )
 }
 

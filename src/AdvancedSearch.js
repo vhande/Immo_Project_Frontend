@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Col, Row, InputGroup, Form } from "react-bootstrap";
+import { Container, Col, Row, InputGroup, Form, Button} from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 
 function AdvancedSearch() {
@@ -60,7 +60,6 @@ function AdvancedSearch() {
               <option value="1">House</option>
               <option value="2">Appartment</option>
               <option value="3">House and Appartment</option>
-              <option value="1">Garage</option>
             </Form.Select>
             <h3>Budget</h3>
             <InputGroup className="mb-3">
@@ -69,6 +68,7 @@ function AdvancedSearch() {
               <InputGroup.Text>Maximum</InputGroup.Text>
               <Form.Control aria-label="Maximum price" />
             </InputGroup>
+            <Button>Search</Button>
           </Col>
         </Row>
       </Container>
