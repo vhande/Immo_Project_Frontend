@@ -16,7 +16,7 @@ const jwtExpirySeconds = 1000;
 
 main().catch(err => console.log(err));
 async function main() {
-    await mongoose.connect(process.env.URL, (err) => console.log('connected'))
+    await mongoose.connect(process.env.DIGITALCITY, (err) => console.log('connected'))
 }
 
 const userSchema = mongoose.Schema({
@@ -68,11 +68,13 @@ app.post('/login', (req,res) => {
             let isPassCorrect = bcrypt.compareSync(password,data[0].password)
             if(isPassCorrect) {
                 jwt.sign({email}, jwtSecret,{
-                    algorithm:"HS256", expiresIn:"600s"
+                    algorithm:"HS256", expiresIn:"10s"
                 }, (err, token) => {
                     res.json({
                         payload: req.body,
-                        token: token
+                        token: token,
+                        firstname: data[0].firstname,
+                        lastname: data[0].lastname
                     })
                 })
             } else {
@@ -83,8 +85,24 @@ app.post('/login', (req,res) => {
             console.log("Username or password incorrect")        
         }
     })
-
 })
+
+app.post('/profile', (req,res,next) => {
+    const {token} = req.body
+    jwt.verify(token, jwtSecret, (err,decoded)=> {
+        if(decoded !== undefined) {
+            res.json({
+                success:"Access"
+            })
+            next()
+        } else {
+            //forbidden
+            res.send({error:"Session has expired"})
+        }
+    })
+})
+
+const isTokenExists = 
 
 app.listen(4000, ()=> {
     console.log("Runnig")

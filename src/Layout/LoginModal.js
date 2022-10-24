@@ -1,10 +1,10 @@
 import React from 'react'
 import {Modal, Button, Container, Row, Col, InputGroup, Form} from 'react-bootstrap'
 import {BsCheckLg} from "react-icons/bs"
-import {useRef, useState, useContext} from 'react'
+import {useRef, useState, useContext, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import { AiFillCloseCircle, AiFillEye } from 'react-icons/ai'
-import Token from '/Users/hande/Desktop/Working Space/Final Project/immo/src/Context/Token'
+import Token from '../Context/Token'
 
 function LoginModal({closeModal, modalShow}) {
   const email = useRef(null)
@@ -31,19 +31,26 @@ function LoginModal({closeModal, modalShow}) {
       if (data.error) {
         setErr(data.error)
       } else {
-        context.setToken(data.token)
-        context.setFirstname(data.payload.firstname)
-        context.setLastname(data.payload.lastname)
+        localStorage.setItem("payload", data.payload)
+        localStorage.setItem("firstname",data.firstname)
+        localStorage.setItem("lastname",data.lastname)
+        localStorage.setItem("token", data.token)
         closeModal()
+        window.location.reload()
       }
-      
     })
     }
+
+    useEffect(()=> {
+      context.setToken(localStorage.getItem("token"))
+      context.setFirstname(localStorage.getItem("firstname"))
+      context.setLastname(localStorage.getItem("lastname"))
+    },[])
 
     const showPassword = () => {
       show === "password" ? setShow("text") : setShow("password")
     }
-  
+
     
   return (
     <Modal size={700} show={modalShow} onHide={closeModal}>

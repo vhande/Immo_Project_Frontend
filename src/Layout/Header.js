@@ -7,7 +7,7 @@ import {FiExternalLink} from 'react-icons/fi'
 import {BsSearch} from 'react-icons/bs'
 import LoginModal from './LoginModal'
 import {useContext} from 'react'
-import Token from '/Users/hande/Desktop/Working Space/Final Project/immo/src/Context/Token'
+import Token from '../Context/Token'
 
 function Header() {
     const context = useContext(Token)
@@ -18,6 +18,12 @@ function Header() {
     const showModal = () => {
         setModalShow(true);
     }
+
+    const logout = () => {
+        context.setToken("")
+        localStorage.removeItem("token")
+        
+      }
     return (
         <>
         
@@ -73,13 +79,13 @@ function Header() {
                     </Nav>
                     <Nav className="">
                         <Link to={'/ad'} className="nav-link text-decoration-none">Publish an Ad</Link>
-                        {context.token !== "" ? 
+                        {context.token !== null ?
                           <Navbar.Collapse>
                           <Nav>
                               <NavDropdown
                                   title="My Immo">
-                                  <NavDropdown.Item href="#">My profile</NavDropdown.Item>
-                                  <NavDropdown.Item onClick={()=> context.setToken("")}>Log out</NavDropdown.Item>
+                                  <NavDropdown.Item href="/profile">My profile</NavDropdown.Item>
+                                  <NavDropdown.Item href="/" onClick={logout}>Log out</NavDropdown.Item>
                               </NavDropdown>
                           </Nav>
                       </Navbar.Collapse>
