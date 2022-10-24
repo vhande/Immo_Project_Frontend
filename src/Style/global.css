@@ -92,5 +92,5 @@ body{
 }
 
 .modal-content{
-    width: max-content !important;
+   width: auto;
 }

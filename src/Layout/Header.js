@@ -7,7 +7,7 @@ import {FiExternalLink} from 'react-icons/fi'
 import {BsSearch} from 'react-icons/bs'
 import LoginModal from './LoginModal'
 import {useContext} from 'react'
-import Token from '/Users/hande/Desktop/Working Space/Final Project/immo/src/Context/Token'
+import Token from '../Context/Token'
 
 function Header() {
     const context = useContext(Token)
