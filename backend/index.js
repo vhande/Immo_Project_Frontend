@@ -2,7 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const multer = require("multer");
+const { MdFastRewind } = require('react-icons/md');
 
 require('dotenv').config();
 
@@ -10,9 +12,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json())
 app.use(cors())
-
-const jwtSecret = process.env.KEY
-const jwtExpirySeconds = 1000;
+app.use('/uploads',express.static('./uploads'))
 
 main().catch(err => console.log(err));
 async function main() {
@@ -27,6 +27,49 @@ const userSchema = mongoose.Schema({
 })
 
 const User = mongoose.model('users',userSchema)
+
+const classifiedSchema = mongoose.Schema({
+    type:String,
+    city:String,
+    price:String,
+    floor:String,
+    bedrooms:String,
+    garden:String,
+    description:String,
+    filename:String
+})
+
+const Classified = mongoose.model('classifieds', classifiedSchema) 
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, './uploads'),
+    filename: (req, file, cb) => cb(null, file.originalname)
+})
+
+    const uploader = multer({ 
+        storage,
+        fileFilter:(req,file,callback)=>{
+            let arr = ['image/jpeg','image/jpg','image/png','image/gif']
+            let extensions = "/jpg|jpeg|png|gif/"
+            let isValidImg = arr.filter(img=>img===file.mimetype)
+            console.log(extensions.match(file.originalname.split(".")[1]),"testttt")
+            console.log(isValidImg.length>0)
+            if(isValidImg.length>0 && extensions.match(file.originalname.split(".")[1])!==null){
+                callback(null,true)
+            }else{
+                callback(new Error("Not allowed!!!"))
+            }
+        }
+     })
+
+     app.post('/ad',uploader.single('document'),(req, res) => {
+    console.log(req.file.filename)
+        response.json({
+            msg: 'ok'
+        })
+    })
+
+
 
 app.post('/register', (req,res)=> {
     const firstname = req.body.firstname
@@ -58,6 +101,8 @@ app.post('/register', (req,res)=> {
    
 })
 
+const jwtSecret = process.env.KEY
+const jwtExpirySeconds = 1000;
 app.post('/login', (req,res) => {
     const {email} = req.body;
     const {password} = req.body;
@@ -102,7 +147,6 @@ app.post('/profile', (req,res,next) => {
     })
 })
 
-const isTokenExists = 
 
 app.listen(4000, ()=> {
     console.log("Runnig")

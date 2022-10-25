@@ -36,8 +36,8 @@ function CreateAccount() {
     else if (values.confirmation !== values.password) {
       errors.confirmation = "The passwords do not match"
     }
-    return errors
 
+    return errors
   }
 
   const formik = useFormik({
@@ -57,7 +57,6 @@ function CreateAccount() {
         headers: {
           'Content-Type': 'application/json'
         },
-        // must be string data type !JSON.stringify!
         body: JSON.stringify(values, null, 2)
       })
         .then(res => res.json())

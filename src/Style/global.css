@@ -73,6 +73,14 @@ body{
     background-color: var(--blue);
     border-radius: var(--bs-border-radius-xl)!important;
 }
+
+.btn:hover {
+    box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn:focus {
+    box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
 .loginbtn {
     color:var(--blue) !important;
 }
