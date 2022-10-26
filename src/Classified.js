@@ -28,7 +28,29 @@ function Classified() {
         </Container>
       </Container>
       <Container>
-        <ClassifiedAlbum/>
+        <Row>
+          <Col md={4}>
+            <ClassifiedAlbum />
+          </Col>
+          <Col md={4} className="d-column pt-3">
+            <img
+              className="classifiedPhoto"
+              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
+              alt="new"
+            />
+            <img
+              className="classifiedPhoto"
+              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
+              alt="new"
+            />
+            <img
+              className="classifiedPhoto"
+              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
+              alt="new"
+            />
+          </Col>
+        </Row>
+        
       </Container>
     </>
   );
