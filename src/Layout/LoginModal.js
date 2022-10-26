@@ -52,8 +52,8 @@ function LoginModal({ closeModal, modalShow }) {
 
   return (
     
-    <Modal show={modalShow} onHide={closeModal} size="lg" >
-      <Container className="d-column align-items-center text-align-center">
+    <Modal show={modalShow} onHide={closeModal} size="lg"  >
+      <Container className=" d-column align-items-center text-center">
         <Row>
           <Col md={6}>
             <Modal.Header
@@ -75,19 +75,19 @@ function LoginModal({ closeModal, modalShow }) {
               <span>
                 <BsCheckLg />
               </span>{" "}
-              Receive useful tips and tricks to better buy and sell
+              Easily save your searches and your favourite ads
             </p>
             <p>
               <span>
                 <BsCheckLg />
               </span>{" "}
-              Receive useful tips and tricks to better buy and sell
+              Receive new classifieds first in your mailbox
             </p>
             <p>
               <span>
                 <BsCheckLg />
               </span>{" "}
-              Receive useful tips and tricks to better buy and sell
+              Our policy respects the privacy of the users of our website
             </p>
 
             <Link to={"create-account"}>
@@ -103,10 +103,10 @@ function LoginModal({ closeModal, modalShow }) {
                 setErr("");
               }}
             >
-              <Modal.Title>Log in to enjoy all features</Modal.Title>
+              <Modal.Title>I already have an account</Modal.Title>
             </Modal.Header>
 
-            <Form className="d-column">
+            <Form className="d-column mt-2">
               <Form.Group className="mb-3">
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control type="email" ref={email} />

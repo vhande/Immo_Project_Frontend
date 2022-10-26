@@ -7,6 +7,7 @@ import Classified from './Classified'
 import Ad from './Ad'
 import CreateAccount from './CreateAccount'
 import Token from './Context/Token'
+
 import {useState} from 'react'
 
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/ad" element={<Ad />} />
             <Route path="/classified/:id" element={<Classified/>} />
             <Route path="/create-account" element={<CreateAccount/>} />
+           
         </Routes>
     </Layout>
     </Token.Provider>
