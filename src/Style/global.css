@@ -74,11 +74,11 @@ body{
     border-radius: var(--bs-border-radius-xl)!important;
 }
 
-.btn:hover {
+.btnad:hover {
     box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.btn:focus {
+.btnad:focus {
     box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 .loginbtn {

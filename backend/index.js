@@ -30,13 +30,12 @@ const User = mongoose.model('users',userSchema)
 
 const classifiedSchema = mongoose.Schema({
     type:String,
+    classifiedtype:String,
     city:String,
     price:String,
-    floor:String,
     bedrooms:String,
-    garden:String,
     description:String,
-    filename:String
+    file:String
 })
 
 const Classified = mongoose.model('classifieds', classifiedSchema) 
