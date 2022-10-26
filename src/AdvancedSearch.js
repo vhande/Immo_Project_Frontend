@@ -42,18 +42,18 @@ function AdvancedSearch() {
             </Form>
             <h3>Locations</h3>
             <Form.Select aria-label="Default select example">
-              <option value="1">Brussel</option>
-              <option value="2">Antwerp</option>
-              <option value="3">Gent</option>
-              <option value="1">Charleroi</option>
-              <option value="2">Liège</option>
-              <option value="3">Bruges</option>
-              <option value="1">Namur</option>
-              <option value="2">Leuven</option>
-              <option value="3">Mons</option>
-              <option value="1">Mechelen</option>
-              <option value="2">Aalst</option>
-              <option value="3">Hasselt</option>
+              <option value="Brussel">Brussel</option>
+              <option value="Antwerp">Antwerp</option>
+              <option value="Gent">Gent</option>
+              <option value="Charleroi">Charleroi</option>
+              <option value="Liège">Liège</option>
+              <option value="Bruges">Bruges</option>
+              <option value="Namur">Namur</option>
+              <option value="Leuven">Leuven</option>
+              <option value="Mons">Mons</option>
+              <option value="Mechelen">Mechelen</option>
+              <option value="Aalst">Aalst</option>
+              <option value="Hasselt">Hasselt</option>
             </Form.Select>
             <h3>Property Type</h3>
             <Form.Select aria-label="Default select example">
