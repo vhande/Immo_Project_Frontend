@@ -87,19 +87,19 @@ import Token from '../Context/Token'
                 <span>
                   <BsCheckLg />
                 </span>{" "}
-                Receive useful tips and tricks to better buy and sell
+                Easily save your searches and your favourite ads
               </p>
               <p>
                 <span>
                   <BsCheckLg />
                 </span>{" "}
-                Receive useful tips and tricks to better buy and sell
+                Receive new classifieds first in your mailbox
               </p>
               <p>
                 <span>
                   <BsCheckLg />
                 </span>{" "}
-                Receive useful tips and tricks to better buy and sell
+                Our policy respects the privacy of the users of our website
               </p>
 
               <Link to={"create-account"}>
