@@ -97,18 +97,54 @@ body{
    
 }
 
+/* --------------------------Classified PART------------------------ */
+
 .classifiedContainer{
-    background-color: rgb(255, 183, 183);
+    background-color: rgb(178, 234, 231);
     width: 100vw;
     height: fit-content !important;
 }
 .classifiedPhoto{
-    margin-left: 8rem;
+    width: 200px;
     margin-top: 2rem;
-    width: 100px;
+}
+
+.classifiedPhotoBig{
+    margin-top: 2rem;
+    width: 500px;
     
-   
 }
-.classifiedPhoto1{
-    position: absolute;
-}
+@media screen and (min-width: 100px) {
+    .classifiedPhoto {
+      opacity: 0;
+    }
+  }
+
+@media screen and (min-width: 400px) {
+    .classifiedPhoto {
+      opacity: 0;
+      margin-left: 2rem;
+    }
+  }
+  
+  @media screen and (min-width: 800px) {
+    .classifiedPhoto  {
+        opacity: 0;
+        
+    }
+    
+  }
+  @media screen and (min-width: 992px) {
+    .classifiedPhoto  {
+        opacity: 1;
+        
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .classifiedPhoto  {
+        opacity: 1;
+        
+    }
+  }
+
+  /* -------------------------------------------------- */
