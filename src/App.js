@@ -9,7 +9,9 @@ import CreateAccount from './CreateAccount'
 import Token from './Context/Token'
 import Profile from './Profile'
 import ProtectedRoute from './ProtectedRoute'
+import Search from './Search'
 import { useState } from 'react'
+import { GrSearchAdvanced } from 'react-icons/gr'
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
             <Route path="/classified/:id" element={<Classified />} />
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </Layout>
       </ProtectedRoute>

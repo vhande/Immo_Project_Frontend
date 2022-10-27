@@ -40,6 +40,7 @@ function Ad() {
   const propertySchema = 
   yup.object().shape({
     classifiedtype: yup.string().required('This field is required'),
+    propertytype: yup.string().required('This field is required'),
     city: yup.string().required('This field is required'),
     price: yup.number().required('This field is required').min(100, 'Min value 100.')
     .max(1000000, 'Max value 1000000.'),
@@ -47,12 +48,11 @@ function Ad() {
     .max(10, 'Max value 10.'),
     description: yup.string().required('This field is required'),
     file: yup.mixed().required('File is required')
-    // .test("fileSize", "The file is too large", (value) => {
-    //   if (!value.length) return true // attachment is optional
-    //   return value[0].size <= 2000000
-    // }),
+    .test("fileSize", "The file is too large", (file) => {
+      //if u want to allow only certain file sizes
+      return file && file.size >= 4000000;
+    })
   })
-
 
   const formik = useFormik({
 
@@ -99,7 +99,7 @@ function Ad() {
             className="mb-3">
             <Form.Label className="m-0">Type of classified</Form.Label>
             <div className="d-flex justify-content-center align-items-center">
-              {console.log(formik.values.classifiedtype, formik.values.city, "Hello")}
+              {console.log(formik.values, formik.values.city, formik.values.bedrooms, "Hello")}
       <ButtonGroup 
       className="mb-2 border"
       value={formik.values.classifiedtype}
@@ -127,11 +127,14 @@ function Ad() {
             <Form.Label className="m-0">Property Type</Form.Label>
             <Form.Select
             name="propertytype"
+            id="propertytype"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.propertytype}>
+              <option value="Select one" selected>Select one</option>
               <option value="Brussel">House</option>
               <option value="Antwerp">Appartment</option>
+              {formik.touched.propertytype && formik.errors.propertytype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.propertytype}</Form.Label> : null}
             </Form.Select>
           </Form.Group>
           <Form.Group
@@ -142,7 +145,8 @@ function Ad() {
             name="city"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.city}>
+            value={bedroom}>
+              <option value="Select one" selected>Select one</option>
               <option value="Brussel">Brussel</option>
               <option value="Antwerp">Antwerp</option>
               <option value="Gent">Gent</option>
@@ -176,13 +180,13 @@ function Ad() {
             <div className="d-flex justify-content-around align-items-center">
               <Button onClick={bedroomRemove}>-</Button>
               <Form.Control 
-              className="text-center"
+              className="text-center form-control"
               type="text"
               id="bedrooms"
               name="bedrooms"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={bedroom === formik.values.bedrooms}/>
+              value={bedroom}/>
               <Button onClick={bedroomAdd}>+</Button>
             </div>
             {formik.touched.bedrooms && formik.errors.bedrooms ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.bedrooms}</Form.Label> : null}
@@ -207,6 +211,7 @@ function Ad() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name} />
+            {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null}
           </Form.Group>
           <Button type="submit" disabled={!formik.isValid} onClick={submitEvent}>Submit</Button>
         </Form>
