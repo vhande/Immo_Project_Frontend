@@ -4,7 +4,6 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require("multer");
-const { MdFastRewind } = require('react-icons/md');
 
 require('dotenv').config();
 
@@ -12,7 +11,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json())
 app.use(cors())
-app.use('/uploads',express.static('./uploads'))
+
 
 main().catch(err => console.log(err));
 async function main() {
@@ -40,6 +39,8 @@ const classifiedSchema = mongoose.Schema({
 
 const Classified = mongoose.model('classifieds', classifiedSchema) 
 
+app.use('/uploads',express.static('uploads'))
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, './uploads'),
     filename: (req, file, cb) => cb(null, file.originalname)
@@ -51,7 +52,6 @@ const storage = multer.diskStorage({
             let arr = ['image/jpeg','image/jpg','image/png','image/gif']
             let extensions = "/jpg|jpeg|png|gif/"
             let isValidImg = arr.filter(img=>img===file.mimetype)
-            console.log(extensions.match(file.originalname.split(".")[1]),"testttt")
             console.log(isValidImg.length>0)
             if(isValidImg.length>0 && extensions.match(file.originalname.split(".")[1])!==null){
                 callback(null,true)
@@ -61,11 +61,22 @@ const storage = multer.diskStorage({
         }
      })
 
-     app.post('/ad',uploader.single('document'),(req, res) => {
-    console.log(req.file.filename)
-        response.json({
-            msg: 'ok'
-        })
+     app.post('/ad',uploader.single("file"),(req, res) => {
+        const classifiedtype = req.body.classifiedtype
+        const propertytype = req.body.propertytype
+        const city = req.body.city
+        const price = req.body.price
+        const bedrooms = req.body.bedrooms
+        const description = req.body.description
+        console.log(req.body)
+        
+       
+
+        // const classified= new Classified({classifiedtype, propertytype, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
+        // classified.save()
+        // res.json({
+        //     msg: 'ok'
+        // })
     })
 
 

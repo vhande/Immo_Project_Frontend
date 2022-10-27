@@ -13,6 +13,7 @@ function Ad() {
   const [bedroom, setBedroom] = useState(0)
   const [submit, setSubmit] = useState(false)
 
+
   const [checked, setChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('1');
 
@@ -32,9 +33,10 @@ function Ad() {
     }
   }
 
-  const submitEvent = () => {
-    setSubmit(true)
-  }
+
+  // const submitEvent = () => {
+  //   setSubmit(true)
+  // }
 
   
   const propertySchema = 
@@ -47,35 +49,32 @@ function Ad() {
     bedrooms: yup.number().required('This field is required').min(0, 'Min value 0.')
     .max(10, 'Max value 10.'),
     description: yup.string().required('This field is required'),
-    file: yup.mixed().required('File is required')
-    .test("fileSize", "The file is too large", (file) => {
-      //if u want to allow only certain file sizes
-      return file && file.size >= 4000000;
-    })
+    // file: yup.mixed().required('File is required')
   })
 
   const formik = useFormik({
 
     initialValues: {
-    validateOnMount: true,
     classifiedtype:"",
     propertytype:"",
     city:"",
     price:"",
-    floor:"",
     bedrooms:"",
     description:"",
+    picture:"",
     file:""
+
     },
     validationSchema: propertySchema,
     onSubmit: (values) => {
-      fetch('http://localhost:4000/register', {
+      const formData = new FormData()
+      formData.append('classifiedtype',values.classifiedtype)
+      formData.append('propertype',values.propertytype)
+      formData.append('file',values.file)
+      fetch('http://localhost:4000/ad', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // must be string data type !JSON.stringify!
-        body: JSON.stringify(values, null, 2)
+        headers: new Headers ({Accept: "application.json"}),
+        body: formData
       })
         .then(res => res.json())
         .then(data => {
@@ -93,8 +92,9 @@ function Ad() {
 
   return (
     <>
+
       {count > 0 ? submit === false ?
-        <Form onSubmit={formik.handleSubmit}>
+        <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data" method="post" action='/ad'>
             <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Type of classified</Form.Label>
@@ -121,6 +121,7 @@ function Ad() {
         ))}
       </ButtonGroup>
       </div>
+      {formik.touched.classifiedtype && formik.errors.classifiedtype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.classifiedtype}</Form.Label> : null}
           </Form.Group>
           <Form.Group
             className="mb-3">
@@ -134,8 +135,8 @@ function Ad() {
               <option value="Select one" selected>Select one</option>
               <option value="Brussel">House</option>
               <option value="Antwerp">Appartment</option>
-              {formik.touched.propertytype && formik.errors.propertytype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.propertytype}</Form.Label> : null}
             </Form.Select>
+            {formik.touched.propertytype && formik.errors.propertytype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.propertytype}</Form.Label> : null}
           </Form.Group>
           <Form.Group
             className="mb-3">
@@ -145,8 +146,8 @@ function Ad() {
             name="city"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={bedroom}>
-              <option value="Select one" selected>Select one</option>
+            value={formik.values.city}>
+              <option value="Select one">Select one</option>
               <option value="Brussel">Brussel</option>
               <option value="Antwerp">Antwerp</option>
               <option value="Gent">Gent</option>
@@ -186,7 +187,7 @@ function Ad() {
               name="bedrooms"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={bedroom}/>
+              value={formik.values.bedrooms}/>
               <Button onClick={bedroomAdd}>+</Button>
             </div>
             {formik.touched.bedrooms && formik.errors.bedrooms ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.bedrooms}</Form.Label> : null}
@@ -208,12 +209,11 @@ function Ad() {
             <Form.Control 
             type="file"
             name="file"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name} />
-            {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null}
+            onChange={(e)=> formik.setFieldValue('file', e.target.files[0])}/>
+           
+            {/* {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null} */}
           </Form.Group>
-          <Button type="submit" disabled={!formik.isValid} onClick={submitEvent}>Submit</Button>
+          <Button type="submit">Submit</Button>
         </Form>
         : "Successful"
         :
