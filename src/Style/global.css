@@ -1,150 +1,171 @@
-*{
-    color: var(--blue)
+* {
+  color: var(--blue);
 }
-body{
-   
-    padding-top:4rem;
-    
+html {
+  height: 100%;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 100%;
+
+  position: relative;
+
+  margin: 0;
+
+  min-height: 100%;
+
+  padding-bottom: 10rem;
+
+  padding-top: 5rem;
+
+  box-sizing: inherit;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
 }
 
 .footer {
-    position: fixed;
-    right:0;
-    left:0;
-    bottom:0;
-}
+  position: absolute;
 
+  right: 0;
+
+  left: 0;
+
+  bottom: 0;
+}
 .homepage {
-    width:100vw;
+  width: 100vw;
 }
 
 :root {
-    --blue: #182747;
-    --green: #78938A;
+  --blue: #182747;
+  --green: #78938a;
 }
 
 .navbar {
-    border-bottom:0.1em solid var(--blue);
+  border-bottom: 0.1em solid var(--blue);
 }
 
 .nav-link {
-    color: var(--blue) !important;
-    }
+  color: var(--blue) !important;
+}
 
 .search-container {
-    max-width: 700px;
+  max-width: 700px;
 }
 
 .pills {
-    width:9em;
+  width: 9em;
 }
 
 .city {
-    height: 5rem;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    text-align: center;
-    font-size: 1rem;
-    text-shadow: 1px 1px black;
-    color: #fff;
-    width: 80%;
-    font-family: Montserrat,sans-serif;
-    font-weight: 700;
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  height: 5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  font-size: 1rem;
+  text-shadow: 1px 1px black;
+  color: #fff;
+  width: 80%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .nav-pills .nav-link.active {
-    background-color: var(--blue);
-    color:white !important;
+  background-color: var(--blue);
+  color: white !important;
 }
 
 .btn {
-    background-color: var(--blue);
-    border-radius: var(--bs-border-radius-xl)!important;
+  background-color: var(--blue);
+  border-radius: var(--bs-border-radius-xl) !important;
 }
 
 .btnad:hover {
-    box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .btnad:focus {
-    box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 .loginbtn {
-    color:var(--blue) !important;
+  color: var(--blue) !important;
 }
 
 .dropdown-toggle::after {
-    border:none;
+  border: none;
 }
 
 .carousel-card {
-    max-width:270px;
-    max-height:276px;
+  max-width: 270px;
+  max-height: 276px;
 }
 
 .card-img {
-    max-width:270x;
-    max-height:160px;
+  max-width: 270x;
+  max-height: 160px;
 }
 
-.modal-content{
-   width: auto;
-   border-radius: 20px;
-   
+.modal-content {
+  width: auto;
+  border-radius: 20px;
 }
 
 /* --------------------------Classified PART------------------------ */
 
-.classifiedContainer{
-    background-color: rgb(178, 234, 231);
-    width: 100vw;
-    height: fit-content !important;
+.classifiedContainer {
+  background-color: rgb(178, 234, 231);
+  width: 100vw;
+  height: fit-content !important;
 }
-.classifiedPhoto{
-    width: 200px;
-    margin-top: 2rem;
+.classifiedPhoto {
+  width: 200px;
+  margin-top: 2rem;
 }
 
-.classifiedPhotoBig{
-    margin-top: 2rem;
-    width: 500px;
-    
+.classifiedPhotoBig {
+  margin-top: 2rem;
+  width: 450px;
 }
 @media screen and (min-width: 100px) {
-    .classifiedPhoto {
-      opacity: 0;
-    }
+  .classifiedPhoto {
+    opacity: 0;
   }
+}
 
 @media screen and (min-width: 400px) {
-    .classifiedPhoto {
-      opacity: 0;
-      margin-left: 2rem;
-    }
+  .classifiedPhoto {
+    opacity: 0;
   }
-  
-  @media screen and (min-width: 800px) {
-    .classifiedPhoto  {
-        opacity: 0;
-        
-    }
-    
-  }
-  @media screen and (min-width: 992px) {
-    .classifiedPhoto  {
-        opacity: 1;
-        
-    }
-  }
-  @media screen and (min-width: 1200px) {
-    .classifiedPhoto  {
-        opacity: 1;
-        
-    }
-  }
+}
 
-  /* -------------------------------------------------- */
+@media screen and (min-width: 800px) {
+  .classifiedPhoto {
+    opacity: 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .classifiedPhoto {
+    opacity: 1;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .classifiedPhoto {
+    opacity: 1;
+  }
+}
+
+/* -------------------------------------------------- */
