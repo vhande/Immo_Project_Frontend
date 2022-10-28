@@ -1,21 +1,19 @@
 import React from "react";
 import { Container, Nav, Button, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
-import { MdApartment } from 'react-icons/md'
+import { MdApartment, MdPostAdd } from 'react-icons/md'
 import { GiFamilyHouse } from 'react-icons/gi'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useFormik } from 'formik'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 import * as yup from 'yup'
 
 
 function Ad() {
   const [count, setCount] = useState(0)
-  const [bedroom, setBedroom] = useState(0)
-  const [submit, setSubmit] = useState(false)
-
-
-  const [checked, setChecked] = useState(false);
+  const [success, setSuccess] = useState("")
   const [radioValue, setRadioValue] = useState('1');
+  const {hook} = useRef(null);
 
   const radios = [
     { name: 'Sell', value: 'sell' },
@@ -23,33 +21,30 @@ function Ad() {
   ];
 
 
-  const bedroomAdd = () => {
-    setBedroom(bedroom + 1)
-  }
-
-  const bedroomRemove = () => {
-    if (bedroom > 0) {
-      setBedroom(bedroom - 1)
-    }
-  }
 
 
   // const submitEvent = () => {
   //   setSubmit(true)
   // }
 
-  
-  const propertySchema = 
+
+  const propertySchema =
   yup.object().shape({
-    classifiedtype: yup.string().required('This field is required'),
+    classifiedtype: yup.string().required('This field is required').test('classifiedtype', 'This field is required', value => value !== "Select one"),
     propertytype: yup.string().required('This field is required'),
-    city: yup.string().required('This field is required'),
+    city: yup.string().required('This field is required').test('city', 'This field is required', value => value !== "Select one"),
     price: yup.number().required('This field is required').min(100, 'Min value 100.')
     .max(1000000, 'Max value 1000000.'),
     bedrooms: yup.number().required('This field is required').min(0, 'Min value 0.')
     .max(10, 'Max value 10.'),
     description: yup.string().required('This field is required'),
-    // file: yup.mixed().required('File is required')
+    file: yup.mixed().required('File is required').test('fileSize', "File is too large", value => value.size <= 4000000).test("type", "Only the following formats are accepted: .jpeg, .jpg and .png", (value) => {
+      return value && (
+          value.type === "image/jpeg" ||
+          value.type === "image/jpg" ||
+          value.type === "image/png"
+      );
+  }),
   })
 
   const formik = useFormik({
@@ -61,7 +56,6 @@ function Ad() {
     price:"",
     bedrooms:"",
     description:"",
-    picture:"",
     file:""
 
     },
@@ -70,6 +64,10 @@ function Ad() {
       const formData = new FormData()
       formData.append('classifiedtype',values.classifiedtype)
       formData.append('propertype',values.propertytype)
+      formData.append('city',values.city)
+      formData.append('price',values.price)
+      formData.append('bedrooms',values.bedrooms)
+      formData.append('descripton',values.description)
       formData.append('file',values.file)
       fetch('http://localhost:4000/ad', {
         method: 'POST',
@@ -79,7 +77,7 @@ function Ad() {
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-
+            setSuccess(data.success)
           }
           if (data.error) {
 
@@ -90,53 +88,83 @@ function Ad() {
       }
     })
 
+    console.log(formik.values, formik.values.city, formik.values.bedrooms, "Hello")
+
   return (
     <>
 
-      {count > 0 ? submit === false ?
+      {count > 0 ? success === "" ?
         <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data" method="post" action='/ad'>
             <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Type of classified</Form.Label>
-            <div className="d-flex justify-content-center align-items-center">
-              {console.log(formik.values, formik.values.city, formik.values.bedrooms, "Hello")}
-      <ButtonGroup 
-      className="mb-2 border"
-      value={formik.values.classifiedtype}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}>
-        {radios.map((radio, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`radio-${idx}`}
-            type="radio"
-            variant="secondary"
+            <Form.Select
+            id="classifiedtype"
             name="classifiedtype"
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-      </ButtonGroup>
-      </div>
+            value={formik.values.classifiedtype}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}>
+            <option value="Select one">Select one</option>
+            <option value="Rent">Rent</option>
+            <option value="Sell">Sell</option>
+            </Form.Select>
       {formik.touched.classifiedtype && formik.errors.classifiedtype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.classifiedtype}</Form.Label> : null}
           </Form.Group>
           <Form.Group
             className="mb-3">
-            <Form.Label className="m-0">Property Type</Form.Label>
-            <Form.Select
+            <Form.Label className="m-0">Type of property</Form.Label>
+            <div className="d-flex justify-content-center align-items-center">
+            <ButtonGroup
+      className="mb-2"
+      value={formik.values.propertytype}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}>
+        <ToggleButton
+            id="house"
+            type="radio"
+            variant="secondary"
             name="propertytype"
-            id="propertytype"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.propertytype}>
-              <option value="Select one" selected>Select one</option>
-              <option value="Brussel">House</option>
-              <option value="Antwerp">Appartment</option>
-            </Form.Select>
-            {formik.touched.propertytype && formik.errors.propertytype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.propertytype}</Form.Label> : null}
+            value="house"
+            checked={radioValue === "house"}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+            className="bg-transparent border m-3 d-flex flex-column align-items-center"
+            style={{
+
+                paddingTop: "6%",
+                paddingBottom: "6%",
+                width: "30%",
+                border: "solid 0.5px",
+
+              }}
+          >
+              <GiFamilyHouse size={70} />
+              <p>House</p>
+          </ToggleButton>
+          <ToggleButton
+            id="appartment"
+            type="radio"
+            variant="secondary"
+            name="propertytype"
+            value="appartment"
+            checked={radioValue === "appartment"}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+            className="bg-transparent border m-3"
+            style={{
+
+                paddingTop: "6%",
+                paddingBottom: "6%",
+                width: "30%",
+                border: "solid 0.5px",
+
+              }}
+          >
+              <MdApartment size={70} />
+              <p>Appartment</p>
+          </ToggleButton>
+
+          </ButtonGroup>
+          </div>
+          {formik.touched.propertytype && formik.errors.propertytype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.propertytype}</Form.Label> : null}
           </Form.Group>
           <Form.Group
             className="mb-3">
@@ -166,8 +194,8 @@ function Ad() {
           <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Requested property price</Form.Label>
-            <Form.Control 
-            type="text" 
+            <Form.Control
+            type="text"
             id="price"
             name="price"
             onChange={formik.handleChange}
@@ -178,9 +206,7 @@ function Ad() {
           <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Number of bedrooms</Form.Label>
-            <div className="d-flex justify-content-around align-items-center">
-              <Button onClick={bedroomRemove}>-</Button>
-              <Form.Control 
+              <Form.Control
               className="text-center form-control"
               type="text"
               id="bedrooms"
@@ -188,16 +214,14 @@ function Ad() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.bedrooms}/>
-              <Button onClick={bedroomAdd}>+</Button>
-            </div>
             {formik.touched.bedrooms && formik.errors.bedrooms ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.bedrooms}</Form.Label> : null}
           </Form.Group>
           <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Description of your classified</Form.Label>
-            <Form.Control 
+            <Form.Control
             as="textarea"
-            name="description" 
+            name="description"
             rows={3}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -206,67 +230,34 @@ function Ad() {
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Pictures</Form.Label>
-            <Form.Control 
+            <Form.Control
             type="file"
             name="file"
-            onChange={(e)=> formik.setFieldValue('file', e.target.files[0])}/>
-           
-            {/* {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null} */}
+            onBlur={formik.handleBlur}
+            onChange={(e)=> {formik.setFieldValue('file', e.target.files[0])}}/>
+            {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null}
           </Form.Group>
           <Button type="submit">Submit</Button>
         </Form>
-        : "Successful"
+        : 
+        <Container  fluid className="d-flex flex-column justify-content-center align-items-center">
+        <p className="lead">{success}</p>
+        <Link to={"/"}><Button className="m-3">Go to homepage</Button></Link>
+        </Container>
         :
-        <Container className="d-flex flex-column justify-content-center text-center first-div">
-          <h2>Publication of your classified</h2>
-          <p>
+        <Container className="d-flex flex-column justify-content-center text-center align-items-center">
+      
+              <MdPostAdd size={70} />
+    
+          
+
+
+          <h2 className="my-3">Publication of your classified</h2>
+          <p className="lead my-3">
             We recommend you to provide as many details as possible to optimize
             the quality of your classified.
           </p>
-          <div className="d-flex justify-content-center align-items-center">
-            <Nav
-              variant="pills"
-              defaultActiveKey="sell"
-              className="m-1 pills d-flex justify-content-center border rounded align-items-center"
-            >
-              <Nav.Item>
-                <Nav.Link value="sell" eventKey="sell">Sell</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link value="sell" eventKey="rent">Rent</Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </div>
-          <p>Select your property type and start making your classified</p>
-          <div className="d-flex justify-content-center align-items-center">
-            <Button value="house" className="btnad bg-transparent border m-3"
-              style={{
-
-                paddingTop: "6%",
-                paddingBottom: "6%",
-                width: "30%",
-                border: "solid 0.5px",
-
-              }}
-            >
-              <GiFamilyHouse size={70} />
-              <p>House</p>
-            </Button>
-            <Button value="appartment" className="btnad bg-transparent border m-3"
-              style={{
-
-                paddingTop: "6%",
-                paddingBottom: "6%",
-                width: "30%",
-                border: "solid 0.5px",
-
-              }}
-            >
-              <MdApartment size={70} />
-              <p>Appartment</p>
-            </Button>
-          </div>
-          <Button onClick={() => setCount(count + 1)} className="mx-auto m-4">Start</Button>
+          <Button onClick={() => setCount(count + 1)} className="mx-auto m-4 btn-lg">Start</Button>
         </Container>
       }
     </>

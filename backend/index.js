@@ -37,7 +37,8 @@ const classifiedSchema = mongoose.Schema({
     file:String
 })
 
-const Classified = mongoose.model('classifieds', classifiedSchema) 
+const ClassifiedRent = mongoose.model('classifiedsrent', classifiedSchema) 
+const ClassifiedSale = mongoose.model('classifiedssale', classifiedSchema) 
 
 app.use('/uploads',express.static('uploads'))
 
@@ -47,18 +48,7 @@ const storage = multer.diskStorage({
 })
 
     const uploader = multer({ 
-        storage,
-        fileFilter:(req,file,callback)=>{
-            let arr = ['image/jpeg','image/jpg','image/png','image/gif']
-            let extensions = "/jpg|jpeg|png|gif/"
-            let isValidImg = arr.filter(img=>img===file.mimetype)
-            console.log(isValidImg.length>0)
-            if(isValidImg.length>0 && extensions.match(file.originalname.split(".")[1])!==null){
-                callback(null,true)
-            }else{
-                callback(new Error("Not allowed!!!"))
-            }
-        }
+        storage
      })
 
      app.post('/ad',uploader.single("file"),(req, res) => {
@@ -68,15 +58,22 @@ const storage = multer.diskStorage({
         const price = req.body.price
         const bedrooms = req.body.bedrooms
         const description = req.body.description
-        console.log(req.body)
-        
-       
 
-        // const classified= new Classified({classifiedtype, propertytype, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
-        // classified.save()
-        // res.json({
-        //     msg: 'ok'
-        // })
+
+        if (classifiedtype === "rent") {
+        const classifiedrent= new ClassifiedRent({classifiedtype, propertytype, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
+        classifiedrent.save()
+        res.json({
+            success:"Your ad has been created"
+        })
+
+    } else {
+        const classifiedsale= new ClassifiedSale({classifiedtype, propertytype, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
+        classifiedsale.save()
+        res.json({
+            success:"Your ad has been created"
+        })
+    }      
     })
 
 
