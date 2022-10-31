@@ -49,6 +49,7 @@ body {
 :root {
   --blue: #182747;
   --green: #78938a;
+  
 }
 
 .navbar {
@@ -97,9 +98,7 @@ body {
   border-radius: var(--bs-border-radius-xl) !important;
 }
 
-.btnad:hover {
-  
-}
+
 
 .btnad:active {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1) !important;
@@ -129,14 +128,17 @@ body {
 
 /* --------------------------Classified PART------------------------ */
 
+
+
 .classifiedContainer {
-  background-color: rgb(178, 234, 231);
+  background-color: rgb(208, 255, 253);
   width: 100vw;
-  height: fit-content !important;
+  margin-top: 0 !important;
 }
 .classifiedPhoto {
   width: 200px;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .classifiedPhotoBig {
