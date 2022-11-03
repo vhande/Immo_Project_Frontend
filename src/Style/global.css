@@ -126,6 +126,14 @@ body {
   border-radius: 20px;
 }
 
+.btn-close{
+  
+  position: absolute !important;
+  top: 15px;
+  right: 15px;
+  
+  
+}
 /* --------------------------Classified PART------------------------ */
 
 
