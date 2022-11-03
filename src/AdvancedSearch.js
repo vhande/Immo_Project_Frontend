@@ -59,7 +59,6 @@ function AdvancedSearch() {
             <Form.Select aria-label="Default select example">
               <option value="1">House</option>
               <option value="2">Appartment</option>
-              <option value="3">House and Appartment</option>
             </Form.Select>
             <h3>Budget</h3>
             <InputGroup className="mb-3">

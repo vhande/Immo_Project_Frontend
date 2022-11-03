@@ -1,7 +1,31 @@
 import React from "react";
 import { Card, Container, Row, Col, CardGroup } from "react-bootstrap";
+import Features from './Context/Features'
+import { useContext, useEffect } from 'react'
 
 function Search() {
+  const context = useContext(Features)
+
+  const validate = ()  => {
+    console.log(context.city)
+    fetch('http://localhost:4000/search',{
+    method:'POST',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      "classifiedtype": context.classifiedtype,
+      "type": context.propertytype,
+      "city": context.city})
+  })
+  .then(res=>res.json())
+  .then(data=>console.log(data))
+}
+
+  useEffect(()=> {
+    validate()
+  })
+
   return (
     <>
       <Container className="d-flex align-items-center">

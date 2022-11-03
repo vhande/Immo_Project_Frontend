@@ -8,9 +8,11 @@ import {BsSearch} from 'react-icons/bs'
 import LoginModal from './LoginModal'
 import {useContext} from 'react'
 import Token from '../Context/Token'
+import Features from '../Context/Features'
 
 function Header() {
     const context = useContext(Token)
+    const context2 = useContext(Features)
     const [modalShow, setModalShow] = React.useState(false);
     const closeModal = () =>{
         setModalShow(false);
@@ -24,6 +26,7 @@ function Header() {
         localStorage.removeItem("token")
         
       }
+    
     return (
         <>
         

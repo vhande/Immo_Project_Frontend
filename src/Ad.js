@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Nav, Button, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { Container, Button, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { MdApartment, MdPostAdd } from 'react-icons/md'
 import { GiFamilyHouse } from 'react-icons/gi'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
@@ -13,25 +13,11 @@ function Ad() {
   const [count, setCount] = useState(0)
   const [success, setSuccess] = useState("")
   const [radioValue, setRadioValue] = useState('1');
-  const {hook} = useRef(null);
-
-  const radios = [
-    { name: 'Sell', value: 'sell' },
-    { name: 'Rent', value: 'rent' },
-  ];
-
-
-
-
-  // const submitEvent = () => {
-  //   setSubmit(true)
-  // }
-
 
   const propertySchema =
   yup.object().shape({
     classifiedtype: yup.string().required('This field is required').test('classifiedtype', 'This field is required', value => value !== "Select one"),
-    propertytype: yup.string().required('This field is required'),
+    type: yup.string().required('This field is required'),
     city: yup.string().required('This field is required').test('city', 'This field is required', value => value !== "Select one"),
     price: yup.number().required('This field is required').min(100, 'Min value 100.')
     .max(1000000, 'Max value 1000000.'),
@@ -51,7 +37,7 @@ function Ad() {
 
     initialValues: {
     classifiedtype:"",
-    propertytype:"",
+    type:"",
     city:"",
     price:"",
     bedrooms:"",
@@ -63,8 +49,8 @@ function Ad() {
     onSubmit: (values) => {
       const formData = new FormData()
       formData.append('classifiedtype',values.classifiedtype)
-      formData.append('propertype',values.propertytype)
-      formData.append('city',values.city)
+      formData.append('type',values.type)
+      formData.append('city',values.city.toLowerCase())
       formData.append('price',values.price)
       formData.append('bedrooms',values.bedrooms)
       formData.append('descripton',values.description)
@@ -105,29 +91,28 @@ function Ad() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}>
             <option value="Select one">Select one</option>
-            <option value="Rent">Rent</option>
-            <option value="Sell">Sell</option>
+            <option value="rent">Rent</option>
+            <option value="sell">Sell</option>
             </Form.Select>
       {formik.touched.classifiedtype && formik.errors.classifiedtype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.classifiedtype}</Form.Label> : null}
           </Form.Group>
           <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Type of property</Form.Label>
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center mt-2">
             <ButtonGroup
-      className="mb-2"
-      value={formik.values.propertytype}
+      value={formik.values.type}
       onChange={formik.handleChange}
       onBlur={formik.handleBlur}>
         <ToggleButton
             id="house"
             type="radio"
             variant="secondary"
-            name="propertytype"
+            name="type"
             value="house"
             checked={radioValue === "house"}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-            className="bg-transparent border m-3 d-flex flex-column align-items-center"
+            onChange={(e) => setRadioValue(e.target.value)}
+            className="bg-transparent border mx-3 d-flex flex-column align-items-center"
             style={{
 
                 paddingTop: "6%",
@@ -144,11 +129,11 @@ function Ad() {
             id="appartment"
             type="radio"
             variant="secondary"
-            name="propertytype"
+            name="type"
             value="appartment"
             checked={radioValue === "appartment"}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-            className="bg-transparent border m-3"
+            onChange={(e) => setRadioValue(e.target.value)}
+            className="bg-transparent border mx-3"
             style={{
 
                 paddingTop: "6%",
@@ -164,11 +149,10 @@ function Ad() {
 
           </ButtonGroup>
           </div>
-          {formik.touched.propertytype && formik.errors.propertytype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.propertytype}</Form.Label> : null}
+          {formik.touched.type && formik.errors.type ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.type}</Form.Label> : null}
           </Form.Group>
-          <Form.Group
-            className="mb-3">
-            <Form.Label className="m-0">Adress</Form.Label>
+          <Form.Group>
+            <Form.Label >Adress</Form.Label>
             <Form.Select
             id="city"
             name="city"
@@ -176,7 +160,7 @@ function Ad() {
             onBlur={formik.handleBlur}
             value={formik.values.city}>
               <option value="Select one">Select one</option>
-              <option value="Brussel">Brussel</option>
+              <option value="Brussels">Brussels</option>
               <option value="Antwerp">Antwerp</option>
               <option value="Gent">Gent</option>
               <option value="Charleroi">Charleroi</option>
@@ -237,7 +221,7 @@ function Ad() {
             onChange={(e)=> {formik.setFieldValue('file', e.target.files[0])}}/>
             {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null}
           </Form.Group>
-          <Button type="submit">Submit</Button>
+          <Button className="d-block mx-auto mb-3" type="submit">Submit</Button>
         </Form>
         : 
         <Container  fluid className="d-flex flex-column justify-content-center align-items-center">

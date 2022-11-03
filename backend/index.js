@@ -53,22 +53,23 @@ const storage = multer.diskStorage({
 
      app.post('/ad',uploader.single("file"),(req, res) => {
         const classifiedtype = req.body.classifiedtype
-        const propertytype = req.body.propertytype
+        const type = req.body.type
         const city = req.body.city
         const price = req.body.price
         const bedrooms = req.body.bedrooms
         const description = req.body.description
 
+        console.log(req.body)
 
         if (classifiedtype === "rent") {
-        const classifiedrent= new ClassifiedRent({classifiedtype, propertytype, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
+        const classifiedrent= new ClassifiedRent({classifiedtype, type, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
         classifiedrent.save()
         res.json({
             success:"Your ad has been created"
         })
 
     } else {
-        const classifiedsale= new ClassifiedSale({classifiedtype, propertytype, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
+        const classifiedsale= new ClassifiedSale({classifiedtype, type, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
         classifiedsale.save()
         res.json({
             success:"Your ad has been created"
@@ -77,6 +78,33 @@ const storage = multer.diskStorage({
     })
 
 
+    app.post('/search', (req,res)=>{
+    const classifiedtype = req.body.classifiedtype
+    const type = req.body.type
+    const city = req.body.city
+    console.log(classifiedtype, type, city, "sdsad")
+    const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
+    
+    if (classifiedtype === "rent" && cities.map(item => item !== city)  ) {
+        ClassifiedRent.find({type:type})
+        .then(answer => {
+            res.json(answer)
+            console.log(answer)
+        })
+    } else if (classifiedtype === "rent" && cities.map(item=> item === city )) {
+        ClassifiedRent.find({type:type, city:city})
+        .then(answer => {
+            res.json(answer)
+            console.log(answer)
+        })
+    }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
+            ClassifiedSale.find({type:type})
+            .then(answer => res.json(answer))
+    } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
+        ClassifiedSale.find({type:type, city:city})
+        .then(answer => res.json(answer))
+    }
+})
 
 app.post('/register', (req,res)=> {
     const firstname = req.body.firstname
