@@ -77,34 +77,64 @@ const storage = multer.diskStorage({
     }      
     })
 
+    app.get('/search/:classifiedtype/:type/:city', (req,res) => {
+        const classifiedtype = req.params.classifiedtype
+        const type = req.params.type
+        const city = req.params.city
 
-    app.post('/search', (req,res)=>{
-    const classifiedtype = req.body.classifiedtype
-    const type = req.body.type
-    const city = req.body.city
-    console.log(classifiedtype, type, city, "sdsad")
-    const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
-    
-    if (classifiedtype === "rent" && cities.map(item => item !== city)  ) {
-        ClassifiedRent.find({type:type})
-        .then(answer => {
-            res.json(answer)
-            console.log(answer)
-        })
-    } else if (classifiedtype === "rent" && cities.map(item=> item === city )) {
-        ClassifiedRent.find({type:type, city:city})
-        .then(answer => {
-            res.json(answer)
-            console.log(answer)
-        })
-    }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
-            ClassifiedSale.find({type:type})
+        console.log(classifiedtype, type, city, "nananana")
+
+        const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
+
+        if (classifiedtype === "rent" && cities.map(item => item !== city)  ) {
+            ClassifiedRent.find({type:type})
+            .then(answer => {
+                res.json(answer)
+                console.log(answer)
+            })
+        } else if (classifiedtype === "rent" && cities.map(item=> item === city )) {
+            ClassifiedRent.find({type:type, city:city})
+            .then(answer => {
+                res.json(answer)
+                console.log(answer)
+            })
+        }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
+                ClassifiedSale.find({type:type})
+                .then(answer => res.json(answer))
+        } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
+            ClassifiedSale.find({type:type, city:city})
             .then(answer => res.json(answer))
-    } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
-        ClassifiedSale.find({type:type, city:city})
-        .then(answer => res.json(answer))
-    }
-})
+        }
+
+    })
+
+//     app.post('/search', (req,res)=>{
+//     const classifiedtype = req.body.classifiedtype
+//     const type = req.body.type
+//     const city = req.body.city
+//     console.log(classifiedtype, type, city, "sdsad")
+//     const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
+    
+//     if (classifiedtype === "rent" && cities.map(item => item !== city)  ) {
+//         ClassifiedRent.find({type:type})
+//         .then(answer => {
+//             res.json(answer)
+//             console.log(answer)
+//         })
+//     } else if (classifiedtype === "rent" && cities.map(item=> item === city )) {
+//         ClassifiedRent.find({type:type, city:city})
+//         .then(answer => {
+//             res.json(answer)
+//             console.log(answer)
+//         })
+//     }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
+//             ClassifiedSale.find({type:type})
+//             .then(answer => res.json(answer))
+//     } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
+//         ClassifiedSale.find({type:type, city:city})
+//         .then(answer => res.json(answer))
+//     }
+// })
 
 app.post('/register', (req,res)=> {
     const firstname = req.body.firstname

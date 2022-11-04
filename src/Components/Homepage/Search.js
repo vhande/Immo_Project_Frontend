@@ -4,6 +4,7 @@ import {BsSearch} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
 import {useEffect, useContext} from 'react'
 import Features from '../../Context/Features'
+
 function Search() {
 
 const context = useContext(Features)
@@ -16,7 +17,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       else if (context.propertytype === "") {
         context.setPropertytype("house")
       }
-    },[context.classifiedtype, context.propertytype])
+    },[context])
 
       const clickEvent = (e) => {
       context.setClassifiedtype(e.target.id)
@@ -71,7 +72,8 @@ console.log(context.propertytype, context.classifiedtype, context.city)
     <Col md={1}><Link to='/advanced-search'><Button className=" my-1">+</Button></Link></Col>
     </div>
     </Row>
-    <Link to={'/search'}><Button className="m-3 ">Search on the list</Button></Link>
+    
+    <a href={`/search/${context.classifiedtype}/${context.propertytype}/${context.city}`}><Button className="m-3 ">Search on the list</Button></a>
         </Card>
     </Container>
   )

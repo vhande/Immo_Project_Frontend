@@ -9,26 +9,26 @@ function Footer() {
     
           <div>
           <h5>About</h5>
-            <ui className="list-unstyled">
+            <ul className="list-unstyled">
               <li>Immo</li>
               <a className="text-decoration-none" rel="noreferrer"  target="_blank" style={{"color":"var(--blue)"}} href="https://www.linkedin.com"><li className="d-flex align-items-center ">Jobs<FiExternalLink className="m-1"/></li></a>
-            </ui>
+            </ul>
         </div>
           <div>
             <h5>Help</h5>
-            <ui className="list-unstyled">
+            <ul className="list-unstyled">
               <li>FAQ</li>
               <li>Contact Us</li>
-            </ui>
+            </ul>
             </div>
        
         <div>
             <h5>Follow Us</h5>
-            <ui className="list-unstyled">
+            <ul className="list-unstyled">
               <a className="text-decoration-none" target="_blank" style={{"color":"var(--blue)"}} rel="noreferrer" href="https://www.facebook.com"><li className="d-flex align-items-center ">Facebook<FiExternalLink className="m-1"/></li></a>
               <a className="text-decoration-none" rel="noreferrer"  target="_blank" style={{"color":"var(--blue)"}} href="https://www.twitter.com"><li className="d-flex align-items-center ">Twitter<FiExternalLink className="m-1"/></li></a>
               <a className="text-decoration-none" rel="noreferrer"  target="_blank" style={{"color":"var(--blue)"}} href="https://www.instagram.com"><li className="d-flex align-items-center ">Instagram<FiExternalLink className="m-1"/></li></a>
-            </ui>
+            </ul>
             </div>
 
         </div>

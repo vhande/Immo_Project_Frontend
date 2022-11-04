@@ -8,11 +8,11 @@ import {BsSearch} from 'react-icons/bs'
 import LoginModal from './LoginModal'
 import {useContext} from 'react'
 import Token from '../Context/Token'
-import Features from '../Context/Features'
+
 
 function Header() {
     const context = useContext(Token)
-    const context2 = useContext(Features)
+   
     const [modalShow, setModalShow] = React.useState(false);
     const closeModal = () =>{
         setModalShow(false);
@@ -45,8 +45,8 @@ function Header() {
                             <Nav  >
                                 <NavDropdown
                                     title="For Sale">
-                                    <NavDropdown.Item href="#">House</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">Appartment</NavDropdown.Item>
+                                    <NavDropdown.Item href="/search/sale/house">House</NavDropdown.Item>
+                                    <NavDropdown.Item href="/search/sale/appartment">Appartment</NavDropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item className="d-flex align-items-center" href="/advanced-search">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
                                 </NavDropdown>
@@ -58,8 +58,8 @@ function Header() {
                                 <NavDropdown
                                     title="For Rent"
                                 >
-                                    <NavDropdown.Item href="#">House</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">Appartment</NavDropdown.Item>
+                                    <NavDropdown.Item href="/search/rent/house">House</NavDropdown.Item>
+                                    <NavDropdown.Item href="/search/rent/appartment">Appartment</NavDropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item className="d-flex align-items-center" href="/advanced-search">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
                                 </NavDropdown>
