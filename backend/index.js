@@ -77,6 +77,26 @@ const storage = multer.diskStorage({
     }      
     })
 
+    app.get('/classified/:id', (req,res) => {
+        const id = req.params.id
+        ClassifiedRent.find({"_id":id})
+        .then(answer=> {
+            if (answer.length !== 0) {
+                res.json(answer)
+                console.log(answer)
+            }
+        })
+
+        ClassifiedSale.find({"_id":id})
+        .then(answer => {
+            if (answer.length !== 0) {
+                res.json(answer)
+                console.log(answer)
+            }      
+        })
+
+    })
+
     app.get('/search/:classifiedtype/:type/:city', (req,res) => {
         const classifiedtype = req.params.classifiedtype
         const type = req.params.type

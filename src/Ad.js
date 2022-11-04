@@ -53,7 +53,7 @@ function Ad() {
       formData.append('city',values.city.toLowerCase())
       formData.append('price',values.price)
       formData.append('bedrooms',values.bedrooms)
-      formData.append('descripton',values.description)
+      formData.append('description',values.description)
       formData.append('file',values.file)
       fetch('http://localhost:4000/ad', {
         method: 'POST',

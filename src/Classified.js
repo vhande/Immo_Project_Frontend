@@ -1,21 +1,40 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import {useState,useEffect} from 'react';
 
 function Classified() {
   const { id } = useParams();
+  const [result, setResult] = useState([])
+
+  useEffect(()=> {
+    const action = () => {
+      fetch(`http://localhost:4000/classified/${id}`)
+      .then(res=>res.json())
+      .then(data=>
+        { setResult(data)
+          console.log(data)})
+       }
+    action()     
+  },[id])
+
+
   return (
-    <>
+    <> 
+      {result.length === 0 ? "Loading" 
+      : <> 
       <Container
         fluid
         className="classifiedContainer d-flex align-items-between"
       >
+        
         <Container>
+      
           <Row>
             <Col md={6}>
-              <h2>House for sale</h2>
-              <p>4 bedrooms | 275m2</p>
-              <p>Adress</p>
+              <h2>{result[0].type.charAt(0).toUpperCase()+ result[0].type.slice(1)} for {result[0].classifiedtype}</h2>
+              <p>{result[0].bedrooms} bedrooms</p>
+              <p>{result[0].city.charAt(0).toUpperCase()+ result[0].city.slice(1)}</p>
               
             </Col>
             <Col md={3} className="d-column pt-3 classifiedImages">
@@ -23,7 +42,7 @@ function Classified() {
              
             </Col>
             <Col md={3}>
-              <p>House code</p>
+              <p>Immo Code: {result[0]._id}</p>
             </Col>
           </Row>
         </Container>
@@ -34,7 +53,7 @@ function Classified() {
            
             <img
               className="classifiedPhotoBig"
-              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
+              src={`http://localhost:4000${result[0].file}`}
               alt="new"
             />
           </Col>
@@ -55,10 +74,11 @@ function Classified() {
               src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
               alt="new"
             />
-          </Col>
-          
+          </Col> 
         </Row>
+        <p>{result[0].description}</p>
       </Container>
+      </> }
     </>
   );
 }

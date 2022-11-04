@@ -38,7 +38,8 @@ function App() {
               <Route path="/create-account" element={<CreateAccount />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/search/:classifiedtype/:type" element={<Search />} />
-              <Route path="/search/:classifiedtype/:type/:city" element={<Search />} />
+              <Route path="/search/:classifiedtype/:type/:city/" element={<Search />} />
+              <Route path="/search/:classifiedtype/:type/:city/?minBedroomCount=&minPrice=&maxPrice=" element={<Search />} />
             </Routes>
           </Layout>
         </ProtectedRoute>
