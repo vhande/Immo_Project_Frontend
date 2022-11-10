@@ -22,12 +22,16 @@ function App() {
   const [classifiedtype, setClassifiedtype] = useState("")
   const [propertytype, setPropertytype] = useState("")
   const [city, setCity] = useState("")
+  const [immocode, setImmocode] = useState("")
+  const [minbedroom, setMinbedroom] = useState("")
+  const [minbudget, setMinbudget] = useState("")
+  const [maxbudget, setMaxbudget] = useState("")
 
 
   return (
 
     <Token.Provider value={{ token, setToken, firstname, setFirstname, lastname, setLastname, }}>
-      <Features.Provider value={{ classifiedtype, setClassifiedtype, propertytype, setPropertytype, city, setCity }}>
+      <Features.Provider value={{ classifiedtype, setClassifiedtype, propertytype, setPropertytype, city, setCity, immocode, setImmocode, minbedroom,setMinbedroom, minbudget, setMinbudget, maxbudget, setMaxbudget}}>
         <ProtectedRoute>
           <Layout>
             <Routes>
@@ -38,8 +42,7 @@ function App() {
               <Route path="/create-account" element={<CreateAccount />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/search/:classifiedtype/:type" element={<Search />} />
-              <Route path="/search/:classifiedtype/:type/:city/" element={<Search />} />
-              <Route path="/search/:classifiedtype/:type/:city/?minBedroomCount=&minPrice=&maxPrice=" element={<Search />} />
+              <Route path="/search/:classifiedtype/:type/:city" element={<Search />} />
             </Routes>
           </Layout>
         </ProtectedRoute>

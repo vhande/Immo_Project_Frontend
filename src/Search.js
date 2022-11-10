@@ -1,17 +1,27 @@
 import React from "react";
 import { Card, Container, Row, Col, CardGroup } from "react-bootstrap";
-import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useState, useContext} from 'react'
+import { useParams, Link , useSearchParams, useLocation} from 'react-router-dom'
+import Features from "./Context/Features";
+
 
 function Search() {
   const {classifiedtype}  = useParams()
   const {type} = useParams()
   const {city} = useParams()
   const [result, setResult] = useState([])
+  const context = useContext(Features)
+
+  // to get queries from URL
+
+  const query = new URLSearchParams(useLocation().search);
+  const minBedroomCount = query.get('minBedroomCount')
+  const minPrice = query.get('minPrice')
+  const maxPrice = query.get('maxPrice')
 
   useEffect(()=> {
     const action = () => {
-      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}`)
+      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)
@@ -22,7 +32,7 @@ function Search() {
 
   return (
     <>
-    {result.length === 0 ? "Loading" :
+    {result.length === 0 ? "No result found" :
     result.map(item => 
       <Container className="d-flex align-items-center">
         <Row>

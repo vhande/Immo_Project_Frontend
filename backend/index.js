@@ -59,6 +59,7 @@ const storage = multer.diskStorage({
         const bedrooms = req.body.bedrooms
         const description = req.body.description
 
+
         console.log(req.body)
 
         if (classifiedtype === "rent") {
@@ -98,63 +99,89 @@ const storage = multer.diskStorage({
     })
 
     app.get('/search/:classifiedtype/:type/:city', (req,res) => {
+
+         // to check URL details
+         const url = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`)
+         console.log(url)
+       
         const classifiedtype = req.params.classifiedtype
         const type = req.params.type
         const city = req.params.city
+        const bedroom = req.query.minBedroomCount
+        const minPrice = req.query.minPrice
+        const maxPrice = req.query.maxPrice
 
-        console.log(classifiedtype, type, city, "nananana")
+        console.log(classifiedtype, bedroom, "bedroom", city, minPrice, maxPrice)
+        
 
         const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
-
-        if (classifiedtype === "rent" && cities.map(item => item !== city)  ) {
-            ClassifiedRent.find({type:type})
+        
+        classifiedtype === "rent" && (cities.filter(item => item === city)).length > 0 ? 
+            ClassifiedRent.find(
+                {type:type,
+                city:city,
+                bedrooms: {$gte:bedroom}})
             .then(answer => {
                 res.json(answer)
                 console.log(answer)
+                console.log("first")
             })
-        } else if (classifiedtype === "rent" && cities.map(item=> item === city )) {
-            ClassifiedRent.find({type:type, city:city})
+        : classifiedtype === "rent" ?
+            ClassifiedRent.find(
+                {type:type,
+                })
             .then(answer => {
                 res.json(answer)
                 console.log(answer)
+                console.log("second")
             })
-        }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
-                ClassifiedSale.find({type:type})
-                .then(answer => res.json(answer))
-        } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
-            ClassifiedSale.find({type:type, city:city})
-            .then(answer => res.json(answer))
-        }
-
+        : classifiedtype === "sale" && (cities.filter(item => item === city)).length > 0 && req.query.minBedroomCount != null ?
+            ClassifiedSale.find(
+                {city:city,
+                type:type,
+                bedrooms: {$gte:bedroom}
+                })
+            .then(answer => {
+                res.json(answer)
+                console.log(answer)
+                console.log("third")
+            })
+        
+        : classifiedtype === "sale" && (cities.filter(item => item === city)).length > 0 && req.query.minBedroomCount == null   ?
+            ClassifiedSale.find(
+                {city:city,
+                type:type,
+                
+               })
+            .then(answer => {
+                res.json(answer)
+                console.log(answer)
+                console.log("fourth")
+            })
+        : ClassifiedSale.find(
+                {
+                bedrooms: {$gte: bedroom},
+                type:type,
+                price: {$gte: minPrice, $lte: maxPrice}})
+            .then(answer => {
+                res.json(answer)
+                console.log(answer)
+                console.log("fifth")
+            })
     })
+    //     } else if (classifiedtype === "rent" && cities.map(item=> item === city ) && bedroom !== null) {
+          
+    //         })
+    //     }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
+    //             ClassifiedSale.find({type:type})
+    //             .then(answer => res.json(answer))
+    //     } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
+    //          ClassifiedSale.find({type:type, city:city})
+    //         .then(answer => res.json(answer))
+    //     }
 
-//     app.post('/search', (req,res)=>{
-//     const classifiedtype = req.body.classifiedtype
-//     const type = req.body.type
-//     const city = req.body.city
-//     console.log(classifiedtype, type, city, "sdsad")
-//     const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
-    
-//     if (classifiedtype === "rent" && cities.map(item => item !== city)  ) {
-//         ClassifiedRent.find({type:type})
-//         .then(answer => {
-//             res.json(answer)
-//             console.log(answer)
-//         })
-//     } else if (classifiedtype === "rent" && cities.map(item=> item === city )) {
-//         ClassifiedRent.find({type:type, city:city})
-//         .then(answer => {
-//             res.json(answer)
-//             console.log(answer)
-//         })
-//     }else if (classifiedtype === "sale" && cities.map(item => item !== city)) {
-//             ClassifiedSale.find({type:type})
-//             .then(answer => res.json(answer))
-//     } else if (classifiedtype === "sale" && cities.map(item => item === city)) {
-//         ClassifiedSale.find({type:type, city:city})
-//         .then(answer => res.json(answer))
-//     }
-// })
+    // })
+
 
 app.post('/register', (req,res)=> {
     const firstname = req.body.firstname

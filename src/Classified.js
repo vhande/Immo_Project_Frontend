@@ -38,7 +38,7 @@ function Classified() {
               
             </Col>
             <Col md={3} className="d-column pt-3 classifiedImages">
-              <h2>565$</h2>
+              <h2>€{result[0].price}</h2>
              
             </Col>
             <Col md={3}>
