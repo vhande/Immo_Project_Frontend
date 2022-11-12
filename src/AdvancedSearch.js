@@ -9,7 +9,7 @@ import Features from './Context/Features'
 import {useNavigate,  createSearchParams, } from 'react-router-dom'
 
 function AdvancedSearch() {
-  const [radioValue, setRadioValue] = useState('sale');
+  const [radioValue, setRadioValue] = useState('sell');
   const context = useContext(Features)
   const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`}
 
@@ -36,7 +36,7 @@ function AdvancedSearch() {
 
     initialValues: {
     immocode: "",
-    transaction:"sale",
+    transaction:"sell",
     location:"brussels",
     type:"house",
     minbedroom:"",
@@ -87,8 +87,8 @@ function AdvancedSearch() {
                     label="Buy"
                     name="transaction"
                     type="radio"
-                    value="sale"
-                    checked={radioValue === "sale"}
+                    value="sell"
+                    checked={radioValue === "sell"}
                     onChange={(e) => setRadioValue(e.target.value)}
                   />
                   <Form.Check

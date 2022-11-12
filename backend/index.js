@@ -4,6 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require("multer");
+const { NumberSchema } = require('yup');
 
 require('dotenv').config();
 
@@ -31,11 +32,15 @@ const classifiedSchema = mongoose.Schema({
     type:String,
     classifiedtype:String,
     city:String,
-    price:String,
-    bedrooms:String,
+    price:Number,
+    bedrooms:Number,
     description:String,
     file:String
-})
+},  {
+    timestamps: {
+      createdAt: 'created_at'
+    }
+  })
 
 const ClassifiedRent = mongoose.model('classifiedsrent', classifiedSchema) 
 const ClassifiedSale = mongoose.model('classifiedssale', classifiedSchema) 
@@ -64,14 +69,13 @@ const storage = multer.diskStorage({
 
         if (classifiedtype === "rent") {
         const classifiedrent= new ClassifiedRent({classifiedtype, type, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
-        classifiedrent.save()
+        classifiedrent.save({ timestamps: { createdAt: true}})
         res.json({
             success:"Your ad has been created"
         })
-
     } else {
         const classifiedsale= new ClassifiedSale({classifiedtype, type, city, price, bedrooms, description, file:`/uploads/${req.file.filename}`})
-        classifiedsale.save()
+        classifiedsale.save({ timestamps: { createdAt: true}})
         res.json({
             success:"Your ad has been created"
         })
@@ -107,67 +111,69 @@ const storage = multer.diskStorage({
         const classifiedtype = req.params.classifiedtype
         const type = req.params.type
         const city = req.params.city
-        const bedroom = req.query.minBedroomCount
-        const minPrice = req.query.minPrice
-        const maxPrice = req.query.maxPrice
+        let bedroom = req.query.minBedroomCount
+        let minPrice = req.query.minPrice
+        let maxPrice = req.query.maxPrice
+        const queryValues = Object.values(req.query)
+
+    
+       
 
         console.log(classifiedtype, bedroom, "bedroom", city, minPrice, maxPrice)
         
+        // to check if the value of the city is matching with one of the cities below.
 
         const cities = ["brussels", "antwerp","gent","charleroi", "liège", "bruges", "namur", "leuven", "mons", "mechelen", "aalst", "hasselt"]
+        let cityArray =  cities.filter(item => item === city)
+        console.log(cityArray, city, "aaaaaaa", cityArray.length) 
+
+        bedroom === 'null' || bedroom.length === 0 ? bedroom = "0" : ""
+        minPrice == 'null' || minPrice.length === 0 ? minPrice = 1 : ""
+        maxPrice == 'null' || maxPrice.length === 0 ? maxPrice = 1000000 : ""
+
         
-        classifiedtype === "rent" && (cities.filter(item => item === city)).length > 0 ? 
-            ClassifiedRent.find(
+        classifiedtype === "sell" && cityArray.length === 1 ?
+            ClassifiedSale.find(
                 {type:type,
                 city:city,
-                bedrooms: {$gte:bedroom}})
+                bedrooms: {$gte:bedroom},
+                price:{$gte: minPrice, $lte:maxPrice}})
             .then(answer => {
                 res.json(answer)
                 console.log(answer)
                 console.log("first")
+                console.log(minPrice, maxPrice, bedroom, "aaaa")
             })
-        : classifiedtype === "rent" ?
-            ClassifiedRent.find(
-                {type:type,
-                })
-            .then(answer => {
+
+        : classifiedtype === "sell" ?
+          ClassifiedSale.find(
+                {
+                type:type})
+                .then(answer => {
                 res.json(answer)
                 console.log(answer)
                 console.log("second")
             })
-        : classifiedtype === "sale" && (cities.filter(item => item === city)).length > 0 && req.query.minBedroomCount != null ?
-            ClassifiedSale.find(
-                {city:city,
-                type:type,
-                bedrooms: {$gte:bedroom}
-                })
+        : classifiedtype === "rent" && cityArray.length === 1 ?
+            ClassifiedRent.find(
+            {
+            type:type,
+            bedrooms: {$gte:bedroom},
+            price:{$gte: minPrice, $lte:maxPrice}})
             .then(answer => {
-                res.json(answer)
-                console.log(answer)
-                console.log("third")
-            })
-        
-        : classifiedtype === "sale" && (cities.filter(item => item === city)).length > 0 && req.query.minBedroomCount == null   ?
-            ClassifiedSale.find(
-                {city:city,
-                type:type,
-                
-               })
+            res.json(answer)
+            console.log(answer)
+            console.log("third")
+        })
+        :
+        ClassifiedRent.find(
+            {
+            type:type})
             .then(answer => {
-                res.json(answer)
-                console.log(answer)
-                console.log("fourth")
-            })
-        : ClassifiedSale.find(
-                {
-                bedrooms: {$gte: bedroom},
-                type:type,
-                price: {$gte: minPrice, $lte: maxPrice}})
-            .then(answer => {
-                res.json(answer)
-                console.log(answer)
-                console.log("fifth")
-            })
+            res.json(answer)
+            console.log(answer)
+            console.log("fourth")
+        })
     })
     //     } else if (classifiedtype === "rent" && cities.map(item=> item === city ) && bedroom !== null) {
           

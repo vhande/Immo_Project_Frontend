@@ -32,7 +32,7 @@ function Search() {
 
   return (
     <>
-    {result.length === 0 ? "No result found" :
+    {result.length === 0 ? "Loading" :
     result.map(item => 
       <Container className="d-flex align-items-center">
         <Row>
