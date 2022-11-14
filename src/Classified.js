@@ -18,6 +18,9 @@ function Classified() {
     action()     
   },[id])
 
+  const toUpperCase = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
 
   return (
     <> 
@@ -32,9 +35,9 @@ function Classified() {
       
           <Row>
             <Col md={6}>
-              <h2>{result[0].type.charAt(0).toUpperCase()+ result[0].type.slice(1)} for {result[0].classifiedtype}</h2>
+              <h2>{toUpperCase(result[0].type)} for {result[0].classifiedtype}</h2>
               <p>{result[0].bedrooms} bedrooms</p>
-              <p>{result[0].city.charAt(0).toUpperCase()+ result[0].city.slice(1)}</p>
+              <p>{toUpperCase(result[0].city)}</p>
               
             </Col>
             <Col md={3} className="d-column pt-3 classifiedImages">
