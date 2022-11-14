@@ -32,21 +32,17 @@ function Search() {
 
   return (
     <>
-    {result.length === 0 ? "Loading" :
+      <Container className="d-flex flex-column align-items-center">
+            {result.length === 0 ? "Loading" :
     result.map(item => 
-      <Container className="d-flex align-items-center">
-        <Row>
-          <Col>
-            <CardGroup>
-            <Link to={`/classified/${item._id}`}>
-              <Card>
+      <Link to={`/classified/${item._id}`} className="text-decoration-none">
+              <Card className="m-3">
                 <Card.Img
                   variant="top"
+                  className="card-img"
                   src={`http://localhost:4000${item.file}`}
                   key={item.file}
                 />
-              </Card>
-              <Card>
                 <Card.Body className="align-items-center d-flex flex-column">
                   <Card.Title style={{ "fontSize": "1.9em" }}>
                   {item.type.charAt(0).toUpperCase()+ item.type.slice(1)}
@@ -69,11 +65,9 @@ function Search() {
                 </Card.Body>
               </Card>
               </Link>
-            </CardGroup>
-          </Col>
-        </Row>
+                  )}
       </Container>
-      )  }
+  
     </>
   );
 }

@@ -92,7 +92,7 @@ function Ad() {
             onBlur={formik.handleBlur}>
             <option value="Select one">Select one</option>
             <option value="rent">Rent</option>
-            <option value="sell">Sell</option>
+            <option value="sale">Sell</option>
             </Form.Select>
       {formik.touched.classifiedtype && formik.errors.classifiedtype ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.classifiedtype}</Form.Label> : null}
           </Form.Group>

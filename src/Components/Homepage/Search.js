@@ -40,7 +40,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
         <Nav.Link   id="rent" eventKey="rent" >Rent</Nav.Link>
       </Nav.Item>
       <Nav.Item >
-        <Nav.Link   id="sell" eventKey="buy" >Buy</Nav.Link>
+        <Nav.Link   id="sale" eventKey="buy" >Buy</Nav.Link>
       </Nav.Item>
     </Nav>
     <Row>
