@@ -102,6 +102,28 @@ const storage = multer.diskStorage({
 
     })
 
+
+    app.get('/latest', (req,res)=>{
+        ClassifiedSale.find().sort({ _id: -1 }).limit(2)
+        .then(answer => {
+            res.json(answer)
+            console.log(answer)
+        })
+    })
+
+    app.get('/', (req,res)=> {
+        ClassifiedSale.find({})
+        .then(answer => {
+            res.json(answer)
+            console.log(answer)
+    
+        })
+
+    })
+
+
+
+
     app.get('/search/:classifiedtype/:type/:city', (req,res) => {
 
          // to check URL details
@@ -132,7 +154,7 @@ const storage = multer.diskStorage({
         maxPrice == 'null' || maxPrice.length === 0 ? maxPrice = 1000000 : ""
 
         
-        classifiedtype === "sell" && cityArray.length === 1 ?
+        classifiedtype === "sale" && cityArray.length === 1 ?
             ClassifiedSale.find(
                 {type:type,
                 city:city,
@@ -145,7 +167,7 @@ const storage = multer.diskStorage({
                 console.log(minPrice, maxPrice, bedroom, "aaaa")
             })
 
-        : classifiedtype === "sell" ?
+        : classifiedtype === "sale" ?
           ClassifiedSale.find(
                 {
                 type:type})
