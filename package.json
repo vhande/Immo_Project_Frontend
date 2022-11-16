@@ -20,9 +20,7 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
-  "engines":{"node":"v16.17.0"},
   "scripts": {
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix immo && npm run build --prefix immo",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
