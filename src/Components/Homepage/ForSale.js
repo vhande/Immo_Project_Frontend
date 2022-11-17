@@ -9,7 +9,7 @@ function ForSale() {
 
   useEffect(() => {
     const action = () => {
-      fetch(`https://localhost:4000/getall`)
+      fetch(`http://localhost:4000/getall`)
         .then(res => res.json())
         .then(data => {
           setResult(data)
@@ -63,7 +63,7 @@ function ForSale() {
         {result.length !== 0 ? result.map(item =>
             <a href={`/classified/${item._id}`} className="text-decoration-none">
               <Card className="carousel-card" key={item._id}>
-                <Card.Img className="card-img" variant="top" src={`https://localhost:4000${item.file}`} />
+                <Card.Img className="card-img" variant="top" src={`http://localhost:4000${item.file}`} />
                 <Card.Body>
                   <Card.Title style={{ "fontSize": "0.9em" }}>{toUpperCase(item.type)}</Card.Title>
                   <Card.Title className="my-1" style={{ "fontSize": "1.4em" }}>€{item.price}</Card.Title>

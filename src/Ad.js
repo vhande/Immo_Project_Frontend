@@ -55,7 +55,7 @@ function Ad() {
       formData.append('bedrooms',values.bedrooms)
       formData.append('description',values.description)
       formData.append('file',values.file)
-      fetch('https://localhost:4000/ad', {
+      fetch('https://immo-backend.herokuapp.com/ad', {
         method: 'POST',
         headers: new Headers ({Accept: "application.json"}),
         body: formData
@@ -160,18 +160,18 @@ function Ad() {
             onBlur={formik.handleBlur}
             value={formik.values.city}>
               <option value="Select one">Select one</option>
-              <option value="Brussels">Brussels</option>
-              <option value="Antwerp">Antwerp</option>
-              <option value="Gent">Gent</option>
-              <option value="Charleroi">Charleroi</option>
-              <option value="Liège">Liège</option>
-              <option value="Bruges">Bruges</option>
-              <option value="Namur">Namur</option>
-              <option value="Leuven">Leuven</option>
-              <option value="Mons">Mons</option>
-              <option value="Mechelen">Mechelen</option>
-              <option value="Aalst">Aalst</option>
-              <option value="Hasselt">Hasselt</option>
+              <option value="brussels">Brussels</option>
+              <option value="antwerp">Antwerp</option>
+              <option value="gent">Gent</option>
+              <option value="charleroi">Charleroi</option>
+              <option value="liege">Liège</option>
+              <option value="bruges">Bruges</option>
+              <option value="namur">Namur</option>
+              <option value="leuven">Leuven</option>
+              <option value="mons">Mons</option>
+              <option value="mechelen">Mechelen</option>
+              <option value="aalst">Aalst</option>
+              <option value="hasselt">Hasselt</option>
             </Form.Select>
             {formik.touched.city && formik.errors.city ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.city}</Form.Label> : null}
           </Form.Group>

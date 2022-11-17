@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Form, Button, InputGroup } from 'react-bootstrap'
-import './Style/shortpage.css'
 import { AiFillCloseCircle, AiFillEye } from 'react-icons/ai'
 import { useFormik } from 'formik'
 
