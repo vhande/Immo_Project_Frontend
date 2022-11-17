@@ -9,7 +9,7 @@ function Classified() {
 
   useEffect(()=> {
     const action = () => {
-      fetch(`http://localhost:4000/classified/${id}`)
+      fetch(`https://immo-website.herokuapp.com/api/classified/${id}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)
@@ -56,7 +56,7 @@ function Classified() {
            
             <img
               className="classifiedPhotoBig"
-              src={`http://localhost:4000${result[0].file}`}
+              src={`https://immo-website.herokuapp.com${result[0].file}`}
               alt="new"
             />
           </Col>

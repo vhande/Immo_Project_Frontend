@@ -5,7 +5,7 @@ import Token from './Context/Token'
 function ProtectedRoute({children}) {
     const context = useContext(Token)
     const validate = ()  => {
-        fetch('http://localhost:4000/profile',{
+        fetch('https://immo-website.herokuapp.com/api/profile',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'

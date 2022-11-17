@@ -52,7 +52,7 @@ function CreateAccount() {
     },
     validate,
     onSubmit: (values) => {
-      fetch('http://localhost:4000/register', {
+      fetch('https://immo-website.herokuapp.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
