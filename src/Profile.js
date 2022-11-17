@@ -7,7 +7,7 @@ function Profile() {
    
     useEffect(()=> {   
       const validate = ()  => {
-        fetch('https://immo-website.herokuapp.com/api/profile',{
+        fetch('https://localhost:4000/profile',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'

@@ -21,7 +21,7 @@ function Search() {
 
   useEffect(()=> {
     const action = () => {
-      fetch(`https://immo-website.herokuapp.com/api/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
+      fetch(`https://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)

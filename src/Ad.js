@@ -55,7 +55,7 @@ function Ad() {
       formData.append('bedrooms',values.bedrooms)
       formData.append('description',values.description)
       formData.append('file',values.file)
-      fetch('https://immo-website.herokuapp.com/api/ad', {
+      fetch('https://localhost:4000/ad', {
         method: 'POST',
         headers: new Headers ({Accept: "application.json"}),
         body: formData

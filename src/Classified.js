@@ -9,7 +9,7 @@ function Classified() {
 
   useEffect(()=> {
     const action = () => {
-      fetch(`https://immo-website.herokuapp.com/api/classified/${id}`)
+      fetch(`https://localhost:4000/classified/${id}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)

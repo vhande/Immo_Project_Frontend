@@ -81,7 +81,7 @@ function Header() {
                         </Navbar.Collapse>
                     </Nav>
                     <Nav className="">
-                        <Link to={'/ad'} className="nav-link text-decoration-none">Publish an Ad</Link>
+                        <a href='/ad' className="nav-link text-decoration-none">Publish an Ad</a>
                         {context.token !== null ?
                           <Navbar.Collapse>
                           <Nav>

@@ -8,7 +8,7 @@ function ForRent() {
 
   useEffect(() => {
     const action = () => {
-      fetch(`https://immo-website.herokuapp.com/api/latest`)
+      fetch(`https://localhost:4000/latest`)
         .then(res => res.json())
         .then(data => {
           setResult(data)
@@ -27,7 +27,7 @@ function ForRent() {
     {result.length !== 0 ? 
     result.map(item=> 
     <Card className="m-2" style={{"width":"22rem"}}>
-      <Card.Img style={{"maxHeight":"200px"}} variant="top" src={`https://immo-website.herokuapp.com${item.file}`} />
+      <Card.Img style={{"maxHeight":"200px"}} variant="top" src={`https://localhost:4000${item.file}`} />
       <Card.Body>
         <Card.Title style={{"fontSize":"0.9em"}}>{toUpperCase(item.type)}</Card.Title>
         <Card.Title className="my-1" style= {{"fontSize":"1.4em"}}>€{item.price}</Card.Title>
