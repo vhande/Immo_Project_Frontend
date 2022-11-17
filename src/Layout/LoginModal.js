@@ -105,12 +105,9 @@ function LoginModal({ closeModal, modalShow }) {
               </span>{" "}
               Our policy respects the privacy of the users of our website
             </p>
-
-            <Link to={"create-account"}>
-              <Button style={{ marginBottom: "1rem" }} onClick={closeModal}>
+              <Button href="/create-account" style={{ marginBottom: "1rem" }} onClick={closeModal}>
                 Register
               </Button>
-            </Link>
           </Col>
           <Col md={6} style={{ borderLeft: "1px dotted rgba(71, 255, 255)" }}>
             <Modal.Header
@@ -122,7 +119,7 @@ function LoginModal({ closeModal, modalShow }) {
               <Modal.Title>Log in to enjoy all features</Modal.Title>
             </Modal.Header>
 
-            <Form className="d-column">
+            <Form className="mt-3">
               <Form.Group className="mb-3">
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control type="email" ref={email} />
