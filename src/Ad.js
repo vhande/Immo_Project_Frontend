@@ -78,8 +78,9 @@ function Ad() {
 
   return (
     <>
-
+    
       {count > 0 ? success === "" ?
+      <Container fluid style={{maxWidth:"700px"}} className="d-flex flex-column justify-content-center align-items-center mt-3">
         <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data" method="post" action='/ad'>
             <Form.Group
             className="mb-3">
@@ -223,19 +224,15 @@ function Ad() {
           </Form.Group>
           <Button className="d-block mx-auto mb-3" type="submit">Submit</Button>
         </Form>
+        </Container>
         : 
-        <Container  fluid className="d-flex flex-column justify-content-center align-items-center">
+        <Container  fluid className="center-div d-flex flex-column justify-content-center align-items-center">
         <p className="lead">{success}</p>
         <Link to={"/"}><Button className="m-3">Go to homepage</Button></Link>
         </Container>
         :
-        <Container className="d-flex flex-column justify-content-center text-center align-items-center">
-      
+        <Container fluid className="center-div d-flex flex-column justify-content-center align-items-center">
               <MdPostAdd size={70} />
-    
-          
-
-
           <h2 className="my-3">Publication of your classified</h2>
           <p className="lead my-3">
             We recommend you to provide as many details as possible to optimize

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext} from 'react'
+import {Container} from 'react-bootstrap'
 import Token from './Context/Token'
 
 function Profile() {
@@ -7,7 +8,7 @@ function Profile() {
    
     useEffect(()=> {   
       const validate = ()  => {
-        fetch('https://localhost:4000/profile',{
+        fetch('http://localhost:4000/profile',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -29,9 +30,9 @@ function Profile() {
         validate()
     },[context])
   return (
-    <>
-    {err === "" ? <h1 className="m-5">Welcome {context.firstname} </h1> : <h1>{err}</h1>} 
-    </>
+    <Container fluid className="center-div d-flex justify-content-center align-items-center">
+    {err === "" ? <h1 className="m-5" >Welcome {context.firstname} </h1> : <h1>{err}</h1>} 
+    </Container>
   )
 }
 

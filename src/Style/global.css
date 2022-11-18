@@ -2,9 +2,17 @@
   color: var(--blue);
 }
 
+:root {
+  --blue: #182747;
+  --green: #78938a;
+  
+}
+
 html {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -16,6 +24,10 @@ body {
   padding-top: 5rem;
 }
 
+.center-div {
+  height: calc(100vh - 20rem);
+}
+
 .footer {
   position: absolute;
   right: 0;
@@ -25,12 +37,6 @@ body {
 
 .homepage {
   width: 100vw;
-}
-
-:root {
-  --blue: #182747;
-  --green: #78938a;
-  
 }
 
 .navbar {
@@ -66,14 +72,29 @@ body {
   justify-content: flex-end;
 }
 
+.immo-agency {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  border-color: var(--green) !important;
+  background-color: #f8f9fa !important;
+  margin: 3rem;
+  max-height: 30rem;
+  max-width: 30rem;
+}
+
 .nav-pills .nav-link.active {
   background-color: var(--blue);
   color: white !important;
 }
 
 .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0px 0px 0px 1px var(--blue) !important;
+  border: 2px, solid, var(--blue)  !important; 
 }
+
 .btn {
   background-color: var(--blue);
   border-radius: var(--bs-border-radius-xl) !important;
@@ -133,22 +154,40 @@ body {
   margin-top: 2rem;
   width: 450px;
 }
+
 @media screen and (max-width: 400px) {
   .classifiedPhoto {
     opacity: 0;
   }
 
+  .agency {
+    visibility: hidden;
+  }
+
+  .search-page-container {
+    display:flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
 }
 
-@media screen and (max-width: 450px) {
-  .agency {
-    display:none;
-  }
-}
 
 @media screen and (min-width: 400px) {
   .classifiedPhoto {
     opacity: 0;
+  }
+
+  .agency {
+    visibility: hidden;
+  }
+
+  .search-page-container {
+    display:flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
 }
@@ -157,16 +196,55 @@ body {
   .classifiedPhoto {
     opacity: 0;
   }
+
+  .agency {
+    visibility: hidden;
+  }
+
+  .search-page-container {
+    display:flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+
+
 }
 @media screen and (min-width: 992px) {
   .classifiedPhoto {
     opacity: 1;
   }
+
+  .agency {
+    visibility: visible;
+  }
+
+  .search-page-container {
+    display:flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    align-items: flex-start !important;
+  }
+
 }
 @media screen and (min-width: 1200px) {
   .classifiedPhoto {
     opacity: 1;
   }
+
+  .agency {
+    visibility: visible;
+  }
+
+  .search-page-container {
+    display:flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    align-items: flex-start !important;
+  }
+
+
 }
 
 /* -------------------------------------------------- */
