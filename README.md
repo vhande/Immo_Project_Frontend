@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Immo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend of the Immo project is a React App. 
 
 ## Available Scripts
 
