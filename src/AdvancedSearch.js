@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { InputGroup, Form, Button, ButtonGroup} from "react-bootstrap";
+import { InputGroup, Form, Button, ButtonGroup, Container} from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import { useState, useContext } from 'react'
 import { useFormik } from 'formik'
@@ -28,9 +28,9 @@ function AdvancedSearch() {
 
   const propertySchema =
   yup.object().shape({
-  minbedroom:  yup.number().typeError("Please enter a number").min(1, 'Min value 1.').max(10, 'Max value 10.'),
-  minbudget: yup.number().typeError("Please enter a number").min(0, 'Min value 0.').max(10, 'Max value 300.'),
-  maxbudget: yup.number().typeError("Please enter a number").min(0, 'Min value 300.').max(10, 'Max value 1000000.')})
+  minbedroom: yup.number().typeError("Please enter a number").min(1, 'Min 1').max(10, 'Max 10'),
+  minbudget: yup.number().typeError("Please enter a number").min(0, 'Min 1').max(1000000, 'Max 10'),
+  maxbudget: yup.number().typeError("Please enter a number").min(100, 'Min 100').max(1000000, 'Max 1000000')})
 
   const formik = useFormik({
 
@@ -58,9 +58,7 @@ function AdvancedSearch() {
     context.setMaxbudget(formik.values.maxbudget)
 
   return (
-    <>
-
-    {console.log(formik.values.type, "aaaa")}
+    <Container fluid className="center-div" style={{maxWidth:"500px"}}>
      <h2>Advanced search</h2>
      {console.log(formik.values, context.classifiedtype)}
           <Form onSubmit={formik.handleSubmit}>
@@ -168,12 +166,12 @@ function AdvancedSearch() {
             </Form.Group>
             </Form>
             
-            {context.immocode !== "" ? <a href={`/classified/${context.immocode}`}><Button>Search</Button></a> :
-            <Button onClick={clickAction}>Search</Button>} 
+            {context.immocode !== "" ? <a href={`/classified/${context.immocode}`}><Button disabled={Object.keys(formik.errors).length > 0}>Search</Button></a> :
+            <Button className="mt-3"disabled={Object.keys(formik.errors).length > 0} onClick={clickAction}>Search</Button>} 
 
 
         
-            </>
+            </Container>
         
  
   );

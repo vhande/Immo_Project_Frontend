@@ -222,7 +222,7 @@ function Ad() {
             onChange={(e)=> {formik.setFieldValue('file', e.target.files[0])}}/>
             {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null}
           </Form.Group>
-          <Button className="d-block mx-auto mb-3" type="submit">Submit</Button>
+          <Button className="d-block mx-auto mb-3" type="submit" disabled={Object.keys(formik.errors).length > 0}>Submit</Button>
         </Form>
         </Container>
         : 

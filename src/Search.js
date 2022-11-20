@@ -3,6 +3,7 @@ import { Card, Container, Pagination, Dropdown, DropdownButton } from "react-boo
 import { useEffect, useState, useContext } from 'react'
 import { useParams, Link, useLocation } from 'react-router-dom'
 import Features from "./Context/Features";
+import { BsFillEmojiNeutralFill } from "react-icons/bs";
 
 
 function Search() {
@@ -11,7 +12,7 @@ function Search() {
   const { city } = useParams()
   const [result, setResult] = useState([])
   const context = useContext(Features)
-  const [sort,setSort] = useState("")
+  const [value,setValue] = useState("Newest")
 
   // to get queries from URL
 
@@ -25,32 +26,42 @@ function Search() {
       fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
         .then(res => res.json())
         .then(data => {
-          setResult(data)
+          setResult(data.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)}))
           console.log(data)
         })
     }
-    action()
-  }, [classifiedtype, type, city])
+    action() 
+  }, [classifiedtype, type, city, minBedroomCount, minPrice, maxPrice])
 
 
-  const clickEvent = (e) => {
-  return e.target.name.length > 0 ? setSort(e.target.name) : ""
-  sort.contains("Newest") ? result.map(item => item.created_at)
 
+
+  const sortEvent = (e) => {
+     console.log(e.target.name)
+     e.target.name === "Cheapest" ?
+     setResult(result.sort((a,b) => { return a.price - b.price}))
+     : e.target.name === "Most expensive" ?
+     setResult(result.sort((a,b) => { return b.price - a.price}))
+     : e.target.name === "Newest" ? 
+     setResult(result.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)})) : setResult(result)
+    
   }
+
+  console.log(result, "new")
+
   return (
     <>
       <Container fluid className="search-page-container d-flex flex-row justify-content-around align-items-start">
         <Container fluid className="d-flex flex-column justify-content-center align-items-center">
-      <Container fluid className="d-flex justify-content-end align-items-start">
-    <DropdownButton className="mt-5" onClick={clickEvent} title={sort} value={sort}>
-            <Dropdown.Item name="Newest" eventKey="1" href="#" active>Newest</Dropdown.Item>
-            <Dropdown.Item name="Cheapest"eventKey="2" href="#">Most expensive</Dropdown.Item>
-            <Dropdown.Item name="Most expensive" eventKey="3" href="#">
-              Most expensive
-            </Dropdown.Item>
-          </DropdownButton>
+      <Container fluid className="d-flex flex-row justify-content-end align-items-center mt-5">
+        <h5 className="mx-2 my-1">Sort:</h5>
+        <DropdownButton title={value}>
+      <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Newest">Newest</Dropdown.Item>
+      <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Cheapest">Cheapest</Dropdown.Item>
+      <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e); {console.log(e.target.name)}}} href="#" name="Most expensive">Most expensive</Dropdown.Item>
+    </DropdownButton>
           </Container>  
+         
 
           {result.length === 0 ? "Loading" :
             result.map(item =>
