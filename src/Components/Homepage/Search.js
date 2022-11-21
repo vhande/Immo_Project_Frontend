@@ -1,9 +1,8 @@
 import React from 'react'
-import {Container,Card, Nav, Form, Button, Row, Col} from 'react-bootstrap'
-import {BsSearch} from 'react-icons/bs'
-import {Link} from 'react-router-dom'
+import {Container,Card, Nav, Button, Row, Col} from 'react-bootstrap'
 import {useEffect, useContext} from 'react'
 import Features from '../../Context/Features'
+import { AutoComplete, Input, Select } from 'antd';
 
 function Search() {
 
@@ -22,13 +21,16 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       const clickEvent = (e) => {
       context.setClassifiedtype(e.target.id)
     }
-     const changeEvent = (e) => {
-      context.setPropertytype(e.target.value)
-     }
 
-     const typeEvent = (e) => {
+     const autocorrectEvent = (e) => {
       context.setCity(e.target.value.toLowerCase())
      }
+
+
+    
+    const options = [
+      {value: "Brussels"}, {value:"Antwerp"}, {value:"Gent"}, {value:"Charleroi"}, {value:"Liege"}, {value:"Bruges"}, {value:"Namur"}, {value:"Leuven"}, {value:"Mons"}, {value:"Mechelen"}, {value:"Aalst"}, {value:"Hasselt"}, 
+    ];
     
 
   return (
@@ -44,33 +46,40 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       </Nav.Item>
     </Nav>
     <Row>
-    <div className="d-flex">
+    <div className="d-flex align-items-center">
       <Col md={6}>
-    <Form.Select className="my-1 shadow-none" aria-label="Default select example"  onChange={(e)=>{changeEvent(e)}} >
-      <option value="house">House</option>
-      <option value="appartment">Appartment</option>
-    </Form.Select>
+      <Select 
+      size="large" 
+      defaultValue="house"
+      style={{
+        width: 250,
+      }}
+      onChange={(value)=>{context.setPropertytype(value)}} 
+      options={[
+        {
+          value: 'house',
+          label: 'House',
+        },
+        {
+          value: 'appartment',
+          label: 'Appartment',
+        },]} />
     </Col>
+
     <Col md={6}>
-    <div className=" bg-white d-flex align-items-center border rounded m-1 pe-2">
-    <input className="form-control border-0 outline-0 shadow-none" type="text"  list="location" placeholder="Where?" onChange={(e)=>{typeEvent(e)}}/> <BsSearch/></div>
-    <datalist id="location">
-  <option value="Brussels"></option>
-  <option value="Antwerp"></option>
-  <option value="Gent"></option>
-  <option value="Charleroi"></option>
-  <option value="Liège"></option>
-  <option value="Bruges"></option>
-  <option value="Namur"></option>
-  <option value="Leuven"></option>
-  <option value="Mons"></option>
-  <option value="Mechelen"></option>
-  <option value="Aalst"></option>
-  <option value="Hasselt"></option>
-</datalist>
-    </Col>
-    <Col md={1}><Link to='/advanced-search'><Button className=" my-1">+</Button></Link></Col>
-    </div>
+    <AutoComplete
+    popupClassName="certain-category-search-dropdown"
+    filterOption={true}
+   
+    style={{
+      width: 250,
+    }}
+    options={options}
+  >
+    <Input.Search onChange={(e)=>{autocorrectEvent(e)}} size="large" placeholder="Where?" onSelect={(e)=>{autocorrectEvent(e)}} />
+  </AutoComplete>
+ </Col>
+ </div>
     </Row>
     
     <a href={`/search/${context.classifiedtype}/${context.propertytype}/${context.city}`}><Button className="m-3 ">Search on the list</Button></a>

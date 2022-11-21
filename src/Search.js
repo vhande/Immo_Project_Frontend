@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, Container, Pagination, Dropdown, DropdownButton } from "react-bootstrap";
-import { useEffect, useState, useContext } from 'react'
+import { Card, Container, Dropdown, DropdownButton } from "react-bootstrap";
+import { useEffect, useState } from 'react'
 import { useParams, Link, useLocation } from 'react-router-dom'
-import Features from "./Context/Features";
-import { BsFillEmojiNeutralFill } from "react-icons/bs";
+
 
 
 function Search() {
@@ -11,7 +10,6 @@ function Search() {
   const { type } = useParams()
   const { city } = useParams()
   const [result, setResult] = useState([])
-  const context = useContext(Features)
   const [value,setValue] = useState("Newest")
 
   // to get queries from URL
@@ -55,7 +53,7 @@ function Search() {
         <Container fluid className="d-flex flex-column justify-content-center align-items-center">
       <Container fluid className="d-flex flex-row justify-content-end align-items-center mt-5">
         <h5 className="mx-2 my-1">Sort:</h5>
-        <DropdownButton title={value}>
+    <DropdownButton title={value}>
       <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Newest">Newest</Dropdown.Item>
       <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Cheapest">Cheapest</Dropdown.Item>
       <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e); {console.log(e.target.name)}}} href="#" name="Most expensive">Most expensive</Dropdown.Item>

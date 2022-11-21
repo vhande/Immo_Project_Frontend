@@ -28,7 +28,7 @@ function ForSale() {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 5,
       slidesToSlide: 1,
 
     },
@@ -48,21 +48,19 @@ function ForSale() {
   return (
     <Container fluid className="mt-3">
       <h3 className="p-3" style={{ "color": "var(--blue)" }}>Properties in the spotlight</h3>
-      <Carousel 
-      responsive={responsive} 
-      itemAriaLabel='forSale'
-      swipeable={true}
-      draggable={false}
-      showDots={false}
-      ssr={true} // means to render carousel on server-side.
-      infinite={true}
-      keyBoardControl={true}
-      customTransition="1"
-      containerClass="container-with-dots"
-      itemClass="px-3">
+      <Carousel
+       swipeable={false}
+       draggable={false}
+       showDots={false}
+       infinite={true}
+       responsive={responsive}
+       keyBoardControl={true}
+       customTransition="all .5"
+       containerClass="carousel-container"
+      itemAriaLabel='forSale'>
         {result.length !== 0 ? result.map(item =>
             <a href={`/classified/${item._id}`} className="text-decoration-none">
-              <Card className="carousel-card" key={item._id}>
+              <Card className="carousel-card mx-3" key={item._id}>
                 <Card.Img className="card-img" variant="top" src={`http://localhost:4000${item.file}`} />
                 <Card.Body>
                   <Card.Title style={{ "fontSize": "0.9em" }}>{toUpperCase(item.type)}</Card.Title>

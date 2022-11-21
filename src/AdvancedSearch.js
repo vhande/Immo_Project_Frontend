@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { InputGroup, Form, Button, ButtonGroup, Container} from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import { useState, useContext } from 'react'
@@ -113,7 +112,7 @@ function AdvancedSearch() {
               <option value="antwerp">Antwerp</option>
               <option value="gent">Gent</option>
               <option value="charleroi">Charleroi</option>
-              <option value="liège">Liège</option>
+              <option value="liege">Liège</option>
               <option value="bruges">Bruges</option>
               <option value="namur">Namur</option>
               <option value="leuven">Leuven</option>

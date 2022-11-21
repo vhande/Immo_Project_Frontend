@@ -2,6 +2,10 @@
   color: var(--blue);
 }
 
+a {
+  text-decoration: none;
+}
+
 :root {
   --blue: #182747;
   --green: #78938a;
@@ -146,22 +150,30 @@ body {
 }
 .classifiedPhoto {
   width: 200px;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin: 1rem;
+
 }
 
 .classifiedPhotoBig {
-  margin-top: 2rem;
-  width: 450px;
+  margin: 2rem;
+  width: 500px;
 }
+
+.lead {
+  text-align: justify;
+}
+
 
 @media screen and (max-width: 400px) {
   .classifiedPhoto {
-    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
   }
 
   .agency {
     visibility: hidden;
+    max-height: 0;
   }
 
   .search-page-container {
@@ -170,17 +182,31 @@ body {
     justify-content: center !important;
     align-items: center !important;
   }
+
+  #classified-navbar {
+    visibility: hidden;
+    max-height: 0;
+  }
+
+  .classified-mobile {
+    visibility:visible;
+    max-height: 100%;
+  }
+
 
 }
 
 
 @media screen and (min-width: 400px) {
   .classifiedPhoto {
-    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
   }
 
   .agency {
     visibility: hidden;
+    max-height: 0;
   }
 
   .search-page-container {
@@ -189,16 +215,30 @@ body {
     justify-content: center !important;
     align-items: center !important;
   }
+
+  #classified-navbar {
+    visibility: hidden;
+    max-height: 0;
+  }
+
+  .classified-mobile {
+    visibility:visible;
+    max-height: 100%;
+  }
+
 
 }
 
 @media screen and (min-width: 800px) {
   .classifiedPhoto {
-    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
   }
 
   .agency {
     visibility: hidden;
+    max-height: 0;
   }
 
   .search-page-container {
@@ -208,16 +248,28 @@ body {
     align-items: center !important;
   }
 
+  #classified-navbar {
+    visibility: hidden;
+    max-height: 0;
+  }
+
+  .classified-mobile {
+    visibility:visible;
+    max-height: 100%;
+  }
 
 
 }
 @media screen and (min-width: 992px) {
   .classifiedPhoto {
-    opacity: 1;
+    visibility:visible;
+    max-height: 100%;
+    max-width: 100%;
   }
 
   .agency {
-    visibility: visible;
+    visibility:visible;
+    max-height: 100%;
   }
 
   .search-page-container {
@@ -225,16 +277,29 @@ body {
     flex-direction: row !important;
     justify-content: space-around !important;
     align-items: flex-start !important;
+  }
+
+  #classified-navbar {
+    visibility:visible;
+    max-height: 100%;
+  }
+
+  .classified-mobile {
+    visibility:hidden;
+    max-height: 0;
   }
 
 }
 @media screen and (min-width: 1200px) {
   .classifiedPhoto {
-    opacity: 1;
+    visibility:visible;
+    max-height: 100%;
+    max-width: 100%;
   }
 
   .agency {
-    visibility: visible;
+    visibility:visible;
+    max-height: 100%;
   }
 
   .search-page-container {
@@ -244,6 +309,15 @@ body {
     align-items: flex-start !important;
   }
 
+  #classified-navbar {
+    visibility:visible;
+    max-height: 100;
+  }
+
+  .classified-mobile {
+    visibility:hidden;
+    max-height: 0;
+  }
 
 }
 

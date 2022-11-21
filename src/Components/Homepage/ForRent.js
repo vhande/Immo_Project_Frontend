@@ -39,7 +39,7 @@ function ForRent() {
     <Card className="m-2"style={{"width":"22rem"}}>
       <Card.Body className="d-flex  flex-column align-items-center  justify-content-center">
           <Card.Title>See All Recent Properties</Card.Title>
-          <Button href="/search/sale/house"style={{width:'50%', height:"20%", marginTop:'10px'}}><FcNext style={{fontSize: '40px'}}/></Button>
+          <Button href="/search/sale/house" style={{width:'50%', height:"20%", marginTop:'10px'}}><FcNext style={{fontSize: '40px'}}/></Button>
       </Card.Body>
     </Card>
     </Container>
