@@ -57,12 +57,14 @@ function AdvancedSearch() {
     context.setMaxbudget(formik.values.maxbudget)
 
   return (
-    <Container fluid className="center-div" style={{maxWidth:"500px"}}>
-     <h2>Advanced search</h2>
+    <>
+    <Container fluid className="center-div d-flex flex-column align-items-center justify-content-center" style={{maxWidth:"500px"}}>
+    <h4 className="pb-2">Advanced Search</h4>
      {console.log(formik.values, context.classifiedtype)}
           <Form onSubmit={formik.handleSubmit}>
             <InputGroup className="mb-3">
             <Form.Control 
+              placeholder="Immo code"
               name="immocode" 
               id="immocode"
               onChange={formik.handleChange}
@@ -171,7 +173,7 @@ function AdvancedSearch() {
 
         
             </Container>
-        
+            </>
  
   );
 }
