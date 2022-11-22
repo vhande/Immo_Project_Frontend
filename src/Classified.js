@@ -11,7 +11,7 @@ function Classified() {
 
   useEffect(()=> {
     const action = () => {
-      fetch(`http://localhost:4000/classified/${id}`)
+      fetch(`https://immo-backend.herokuapp.com/classified/${id}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)
@@ -58,24 +58,24 @@ function Classified() {
           <div className="d-flex justify-content-center">
             <img
               className="classifiedPhotoBig"
-              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
+              src={`https://immo-backend.herokuapp.com${result[0].file}`}
               alt="new"
             />
           </div>
           <div className="d-flex flex-column classifiedImages">
             <img
               className="classifiedPhoto"
-              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
+              src={`https://immo-backend.herokuapp.com${result[0].file}`}
               alt="new"
             />
             <img
               className="classifiedPhoto"
-              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
+              src={`https://immo-backend.herokuapp.com${result[0].file}`}
               alt="new"
             />
             <img
               className="classifiedPhoto"
-              src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
+              src={`https://immo-backend.herokuapp.com${result[0].file}`}
               alt="new"
             />
           </div> 

@@ -21,7 +21,7 @@ function Search() {
 
   useEffect(() => {
     const action = () => {
-      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
+      fetch(`https://immo-backend.herokuapp.com/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
         .then(res => res.json())
         .then(data => {
           setResult(data.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)}))
@@ -61,7 +61,7 @@ function Search() {
           </Container>  
          
 
-          {result.length === 0 ? "Loading" :
+          {result.length === 0 ? <p className="lead mt-4">No properties to show, try a different combination.</p> :
             result.map(item =>
               <Link to={`/classified/${item._id}`} className="text-decoration-none">
                 <Card
@@ -70,7 +70,7 @@ function Search() {
                   <Card.Img
                     variant="top"
                     style={{ maxWidth: "400px", maxHeight: "500px" }}
-                    src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=450"
+                    src={`https://immo-backend.herokuapp.com${item.file}`}
                     key={item.file}
                   />
                   <Card.Body className="align-items-center d-flex flex-column">

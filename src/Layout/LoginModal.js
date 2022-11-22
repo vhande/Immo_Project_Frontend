@@ -22,7 +22,7 @@ function LoginModal({ closeModal, modalShow }) {
   const context = useContext(Token);
 
   const clickEvent = async () => {
-    fetch("https://immo-website.herokuapp.com/api/login", {
+    fetch("https://immo-backend.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

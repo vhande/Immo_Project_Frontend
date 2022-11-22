@@ -22,7 +22,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       context.setClassifiedtype(e.target.id)
     }
 
-     const autocorrectEvent = (e) => {
+     const autocompleteEvent = (e) => {
       context.setCity(e.target.value.toLowerCase())
      }
 
@@ -76,7 +76,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
     }}
     options={options}
   >
-    <Input.Search onChange={(e)=>{autocorrectEvent(e)}} size="large" placeholder="Where?" onSelect={(e)=>{autocorrectEvent(e)}} />
+    <Input.Search onChange={(e)=>{autocompleteEvent(e)}} size="large" placeholder="Where?" onSelect={(e)=>{autocompleteEvent(e)}} />
   </AutoComplete>
  </Col>
  </div>

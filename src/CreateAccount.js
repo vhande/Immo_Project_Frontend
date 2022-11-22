@@ -51,7 +51,7 @@ function CreateAccount() {
     },
     validate,
     onSubmit: (values) => {
-      fetch('https://localhost:4000/register', {
+      fetch('https://immo-backend.herokuapp.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
