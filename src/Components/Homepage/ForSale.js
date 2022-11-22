@@ -71,7 +71,6 @@ function ForSale() {
               </Card>
             </a>
         ) : ""}
-        <Card></Card>
       </Carousel>
     </Container>
 

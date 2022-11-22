@@ -234,7 +234,7 @@ function Ad() {
         <Container fluid className="center-div d-flex flex-column justify-content-center align-items-center">
               <MdPostAdd size={70} />
           <h2 className="my-3">Publication of your classified</h2>
-          <p className="lead my-3">
+          <p className="lead my-3 text-center">
             We recommend you to provide as many details as possible to optimize
             the quality of your classified.
           </p>
