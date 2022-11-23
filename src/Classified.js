@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row, Navbar, Button, DropdownButton, Dropdown, Card} from "react-bootstrap";
+import { Container, Navbar, Button, DropdownButton, Dropdown, Card} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import {useState,useEffect} from 'react';
 import {BsFillShareFill} from 'react-icons/bs'

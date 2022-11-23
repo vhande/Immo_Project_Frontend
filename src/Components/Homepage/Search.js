@@ -52,7 +52,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       size="large" 
       defaultValue="house"
       style={{
-        width: 250,
+        minWidth: "100px"
       }}
       onChange={(value)=>{context.setPropertytype(value)}} 
       options={[
@@ -72,7 +72,9 @@ console.log(context.propertytype, context.classifiedtype, context.city)
     filterOption={true}
    
     style={{
-      width: 250,
+      minWidth: "100px",
+      width:"auto"
+
     }}
     options={options}
   >

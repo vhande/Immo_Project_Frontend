@@ -163,6 +163,12 @@ body {
   text-align: justify;
 }
 
+.for-rent {
+  max-width: 250px;
+  max-height: 250px;
+  width: auto;
+}
+
 
 @media screen and (max-width: 400px) {
   .classifiedPhoto {

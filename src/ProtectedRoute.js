@@ -4,7 +4,9 @@ import Token from './Context/Token'
 
 function ProtectedRoute({children}) {
     const context = useContext(Token)
-    const validate = ()  => {
+  
+    useEffect(()=> {   
+      const validate = ()  => {
         fetch('https://immo-backend.herokuapp.com/profile',{
         method:'POST',
         headers:{
@@ -23,9 +25,8 @@ function ProtectedRoute({children}) {
           }
         })
     }
-    useEffect(()=> {   
         validate()
-    },[])
+    },[context])
         return(
             children
         )

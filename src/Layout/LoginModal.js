@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { BsCheckLg } from "react-icons/bs";
 import { useRef, useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { AiFillCloseCircle, AiFillEye } from "react-icons/ai";
 import Token from "../Context/Token";
 
@@ -67,7 +66,7 @@ function LoginModal({ closeModal, modalShow }) {
     context.setToken(localStorage.getItem("token"));
     context.setFirstname(localStorage.getItem("firstname"));
     context.setLastname(localStorage.getItem("lastname"));
-  }, []);
+  }, [context]);
 
   return (
     <Modal show={modalShow} onHide={closeModal} size="lg">

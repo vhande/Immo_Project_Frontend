@@ -26,8 +26,8 @@ function ForRent() {
     <Container className="mb-3 d-flex flex-column justify-content-between justify-content-sm-center align-items-center flex-md-row flex-lg-row flex-xl-row">
     {result.length !== 0 ? 
     result.slice(0,2).map(item=> 
-    <Card className="m-2" style={{"width":"22rem"}}>
-      <Card.Img style={{"maxHeight":"200px"}} variant="top" src={`https://immo-backend.herokuapp.com${item.file}`} />
+    <Card className="m-2">
+      <Card.Img className="card-img for-rent" variant="top" src={`https://immo-backend.herokuapp.com${item.file}`} />
       <Card.Body>
         <Card.Title style={{"fontSize":"0.9em"}}>{toUpperCase(item.type)}</Card.Title>
         <Card.Title className="my-1" style= {{"fontSize":"1.4em"}}>€{item.price}</Card.Title>
@@ -36,7 +36,7 @@ function ForRent() {
       </Card.Body>
     </Card> )
     : "" }
-    <Card className="m-2"style={{"width":"22rem"}}>
+    <Card className="m-2 for-rent">
       <Card.Body className="d-flex flex-column align-items-center justify-content-center">
           <Card.Title>See All Recent Properties</Card.Title>
           <Button href="/search/sale/house" style={{width:'50%', height:"20%", marginTop:'10px'}}><FcNext style={{fontSize: '40px'}}/></Button>

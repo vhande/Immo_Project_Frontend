@@ -14,6 +14,8 @@ function Ad() {
   const [success, setSuccess] = useState("")
   const [radioValue, setRadioValue] = useState('1');
 
+  const SUPPORTED_FORMATS = ["image/jpeg","image/jpg","image/png"]
+
   const propertySchema =
   yup.object().shape({
     classifiedtype: yup.string().required('This field is required').test('classifiedtype', 'This field is required', value => value !== "Select one"),
@@ -24,13 +26,11 @@ function Ad() {
     bedrooms: yup.number().required('This field is required').min(0, 'Min value 0.')
     .max(10, 'Max value 10.'),
     description: yup.string().required('This field is required'),
-    file: yup.mixed().required('File is required').test('fileSize', "File is too large", value => value.size <= 4000000).test("type", "Only the following formats are accepted: .jpeg, .jpg and .png", (value) => {
-      return value && (
-          value.type === "image/jpeg" ||
-          value.type === "image/jpg" ||
-          value.type === "image/png"
-      );
-  }),
+    file: yup.mixed().required('File is required').test('fileSize', 'File is too large, max 1MB', (value) => value === undefined || (value && value.size <= 1000000)).test(
+      'fileFormat',
+      'Unsupported file type',
+      (value) => value === null || (value && SUPPORTED_FORMATS.includes(value.type))
+    )
   })
 
   const formik = useFormik({
@@ -81,7 +81,7 @@ function Ad() {
     
       {count > 0 ? success === "" ?
       <Container fluid style={{maxWidth:"700px"}} className="d-flex flex-column justify-content-center align-items-center mt-3">
-        <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data" method="post" action='/ad'>
+        <Form onSubmit={formik.handleSubmit} encType="multipart/form-data" method="post" action='/ad'>
             <Form.Group
             className="mb-3">
             <Form.Label className="m-0">Type of classified</Form.Label>
