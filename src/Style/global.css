@@ -117,14 +117,12 @@ body {
   border: none;
 }
 
-.carousel-card {
-  max-width: 270px;
-  max-height: 276px;
-}
+
 
 .card-img {
-  max-width: 270x;
-  max-height: 160px;
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
 }
 
 .modal-content {
@@ -139,7 +137,15 @@ body {
   right: 15px;
 }
 
-
+.text-break {
+word-break: inherit;
+line-height: 1.6rem;
+overflow: hidden;
+display: -webkit-box; 
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+max-height: 3.2rem;
+}
   
 /* --------------------------Classified PART------------------------ */
 
