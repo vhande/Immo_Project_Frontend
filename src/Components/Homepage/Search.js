@@ -46,13 +46,13 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       </Nav.Item>
     </Nav>
     <Row>
-    <div className="d-flex align-items-center">
-      <Col md={6}>
+    <div className="d-flex flex-column justify-content-center align-items-center flex-md-row flex-lg-row flex-xl-row">
       <Select 
-      size="large" 
+      size="large"
       defaultValue="house"
       style={{
-        minWidth: "100px"
+        width: 200,
+    
       }}
       onChange={(value)=>{context.setPropertytype(value)}} 
       options={[
@@ -64,23 +64,22 @@ console.log(context.propertytype, context.classifiedtype, context.city)
           value: 'appartment',
           label: 'Appartment',
         },]} />
-    </Col>
+ 
 
-    <Col md={6}>
+  
     <AutoComplete
     popupClassName="certain-category-search-dropdown"
     filterOption={true}
    
     style={{
-      minWidth: "100px",
-      width:"auto"
+      width: 200,
 
     }}
     options={options}
   >
     <Input.Search onChange={(e)=>{autocompleteEvent(e)}} size="large" placeholder="Where?" onSelect={(e)=>{autocompleteEvent(e)}} />
   </AutoComplete>
- </Col>
+
  </div>
     </Row>
     
