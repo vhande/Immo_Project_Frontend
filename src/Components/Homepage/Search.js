@@ -3,10 +3,13 @@ import {Container,Card, Nav, Button, Row, Col} from 'react-bootstrap'
 import {useEffect, useContext} from 'react'
 import Features from '../../Context/Features'
 import { AutoComplete, Input, Select } from 'antd';
+import {useNavigate,  createSearchParams, } from 'react-router-dom'
 
 function Search() {
 
 const context = useContext(Features)
+const params = {page:"1"}
+const navigate = useNavigate();
 
 console.log(context.propertytype, context.classifiedtype, context.city)
 
@@ -31,6 +34,14 @@ console.log(context.propertytype, context.classifiedtype, context.city)
     const options = [
       {value: "Brussels"}, {value:"Antwerp"}, {value:"Gent"}, {value:"Charleroi"}, {value:"Liege"}, {value:"Bruges"}, {value:"Namur"}, {value:"Leuven"}, {value:"Mons"}, {value:"Mechelen"}, {value:"Aalst"}, {value:"Hasselt"}, 
     ];
+
+    const clickAction = () => {
+
+      navigate({
+        pathname: `/search/${context.classifiedtype}/${context.propertytype}/${context.city}`,
+        search: `?${createSearchParams(params)}`
+      }); 
+    }
     
 
   return (
@@ -50,6 +61,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
       <Select 
       size="large"
       defaultValue="house"
+      className="mb-1"
       style={{
         width: 200,
     
@@ -77,13 +89,13 @@ console.log(context.propertytype, context.classifiedtype, context.city)
     }}
     options={options}
   >
-    <Input.Search onChange={(e)=>{autocompleteEvent(e)}} size="large" placeholder="Where?" onSelect={(e)=>{autocompleteEvent(e)}} />
+    <Input.Search className="no-radius mb-1" onChange={(e)=>{autocompleteEvent(e)}} size="large" placeholder="Where?" onSelect={(e)=>{autocompleteEvent(e)}} />
   </AutoComplete>
 
  </div>
     </Row>
     
-    <a href={`/search/${context.classifiedtype}/${context.propertytype}/${context.city}`}><Button className="m-3 ">Search on the list</Button></a>
+   <Button className="m-3" onClick={clickAction}>Search on the list</Button>
         </Card>
     </Container>
   )

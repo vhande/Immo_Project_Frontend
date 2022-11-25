@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, Container, Dropdown, DropdownButton } from "react-bootstrap";
+import { Card, Container, Dropdown, DropdownButton, Pagination } from "react-bootstrap";
 import { useEffect, useState } from 'react'
-import { useParams, Link, useLocation } from 'react-router-dom'
+import { useNavigate, createSearchParams, useParams, Link, useLocation } from 'react-router-dom'
 
 
 
@@ -11,6 +11,9 @@ function Search() {
   const { city } = useParams()
   const [result, setResult] = useState([])
   const [value,setValue] = useState("Newest")
+  const [active,setActive] = useState(1)
+  const navigate = useNavigate(); 
+
 
   // to get queries from URL
 
@@ -18,10 +21,11 @@ function Search() {
   const minBedroomCount = query.get('minBedroomCount')
   const minPrice = query.get('minPrice')
   const maxPrice = query.get('maxPrice')
+  const page = query.get('page')
 
   useEffect(() => {
     const action = () => {
-      fetch(`https://immo-backend.herokuapp.com/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
+      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`)
         .then(res => res.json())
         .then(data => {
           setResult(data.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)}))
@@ -29,10 +33,13 @@ function Search() {
         })
     }
     action() 
-  }, [classifiedtype, type, city, minBedroomCount, minPrice, maxPrice])
+
+  }, [classifiedtype, type, city, minBedroomCount, minPrice, maxPrice, page])
 
 
-
+  const toUpperCase = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
 
   const sortEvent = (e) => {
      console.log(e.target.name)
@@ -44,14 +51,38 @@ function Search() {
      setResult(result.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)})) : setResult(result)
     
   }
+  const params = {page:`${active}`, minBedroomCount: `${minBedroomCount}`, }
+  const clickAction = () => {
+    navigate({
+      pathname: `/search/${classifiedtype}/${type}/${city}`,
+      search: `?${createSearchParams(params)}`
+    }); 
+  }
 
-  console.log(result, "new")
+
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+  items.push(
+    <Pagination.Item 
+    onClick={(e) => {setActive(number); clickAction();}} name={number} active={active===number}>
+      {number}
+    </Pagination.Item>,
+    
+  );
+}
+
+  console.log(result)
 
   return (
     <>
       <Container fluid className="search-page-container d-flex flex-row justify-content-around align-items-start">
         <Container fluid className="d-flex flex-column justify-content-center align-items-center">
-      <Container fluid className="d-flex flex-row justify-content-end align-items-center mt-5">
+        <h4>{toUpperCase(type)} for {classifiedtype}</h4>
+          <Container fluid className="d-flex flex-row justify-content-between align-items-center">
+            <Container className="d-flex flex-row justify-content-start align-items-center mt-5">
+            <Pagination>{items}</Pagination>
+            </Container>
+      <Container className="d-flex flex-row justify-content-end align-items-center mt-5">
         <h5 className="mx-2 my-1">Sort:</h5>
     <DropdownButton title={value}>
       <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Newest">Newest</Dropdown.Item>
@@ -59,23 +90,25 @@ function Search() {
       <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e); {console.log(e.target.name)}}} href="#" name="Most expensive">Most expensive</Dropdown.Item>
     </DropdownButton>
           </Container>  
+          </Container>
          
-
+          
           {result.length === 0 ? <p className="lead mt-4">No properties to show, try a different combination.</p> :
             result.map(item =>
-              <Link to={`/classified/${item._id}`} className="text-decoration-none">
+              <>
+              <Link to={`/classified/${item._id}`} className="text-decoration-none"
+              key={item._id}>
                 <Card
                   style={{ maxWidth: "400px", maxHeight: "500px" }}
                   className="m-5 d-flex justify-content-center align-items-center">
                   <Card.Img
                     variant="top"
                     style={{ maxWidth: "400px", maxHeight: "500px" }}
-                    src={`https://immo-backend.herokuapp.com${item.file}`}
-                    key={item.file}
+                    src={item.file}
                   />
                   <Card.Body className="align-items-center d-flex flex-column">
                     <Card.Title style={{ "fontSize": "1.9em" }}>
-                      {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+                      {toUpperCase(item.type)}
                     </Card.Title>
                     <Card.Title className="my-1" style={{ "fontSize": "1.4em" }}>
                       €{item.price}
@@ -90,17 +123,18 @@ function Search() {
                       className="m-0 text-secondary"
                       style={{ "fontSize": "1em" }}
                     >
-                      {(item.city).charAt(0).toUpperCase() + item.city.slice(1)}
+                      {toUpperCase(item.city)}
                     </Card.Title>
                   </Card.Body>
                 </Card>
               </Link>
+              </>
             )}
         </Container>
         <Container fluid className="agency d-flex flex-column justify-content-center">
          <Card className="immo-agency">
             <div>
-              <Card.Img src="https://static.immoweb.be/logos/francois.gif?cache=2022481309777"></Card.Img>
+              <img src="https://static.immoweb.be/logos/francois.gif?cache=2022481309777"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>
@@ -111,7 +145,7 @@ function Search() {
           </Card>
           <Card className="immo-agency">
             <div>
-              <Card.Img src="https://static.immoweb.be/logos/3709747.gif?cache=2021411502473"></Card.Img>
+              <img src="https://static.immoweb.be/logos/3709747.gif?cache=2021411502473"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>
@@ -122,7 +156,7 @@ function Search() {
           </Card>
           <Card className="immo-agency">
             <div>
-              <Card.Img src="https://static.immoweb.be/logos/38321.gif?cache=2021310808307"></Card.Img>
+              <img src="https://static.immoweb.be/logos/38321.gif?cache=2021310808307"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>

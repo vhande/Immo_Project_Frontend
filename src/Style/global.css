@@ -28,9 +28,6 @@ body {
   padding-top: 5rem;
 }
 
-.center-div {
-  height: calc(100vh - 20rem) !important;
-}
 
 .footer {
   position: absolute;
@@ -88,7 +85,12 @@ body {
   max-height: 30rem;
   max-width: 30rem;
 }
-
+.active>.page-link {
+  background-color:var(--blue)
+}
+.pagination {
+  --bs-pagination-color: var(--blue);
+}
 .nav-pills .nav-link.active {
   background-color: var(--blue);
   color: white !important;
@@ -137,6 +139,10 @@ body {
   right: 15px;
 }
 
+.no-radius {
+  border-radius: 0 !important;
+}
+
 .text-break {
 word-break: inherit;
 line-height: 1.6rem;
@@ -145,6 +151,11 @@ display: -webkit-box;
 -webkit-line-clamp: 1;
 -webkit-box-orient: vertical;
 max-height: 3.2rem;
+}
+
+
+.center-div {
+  height: calc(100vh - 20rem) !important;
 }
   
 /* --------------------------Classified PART------------------------ */
@@ -206,6 +217,7 @@ max-height: 3.2rem;
   }
 
 
+
 }
 
 
@@ -237,7 +249,6 @@ max-height: 3.2rem;
     visibility:visible;
     max-height: 100%;
   }
-
 
 }
 
@@ -271,6 +282,7 @@ max-height: 3.2rem;
   }
 
 
+
 }
 @media screen and (min-width: 992px) {
   .classifiedPhoto {
@@ -301,6 +313,8 @@ max-height: 3.2rem;
     max-height: 0;
   }
 
+
+
 }
 @media screen and (min-width: 1200px) {
   .classifiedPhoto {
@@ -330,6 +344,7 @@ max-height: 3.2rem;
     visibility:hidden;
     max-height: 0;
   }
+
 
 }
 

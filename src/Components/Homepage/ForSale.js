@@ -9,7 +9,7 @@ function ForSale() {
 
   useEffect(() => {
     const action = () => {
-      fetch(`https://immo-backend.herokuapp.com/getall`)
+      fetch(`http://localhost:4000/getall`)
         .then(res => res.json())
         .then(data => {
           setResult(data)
@@ -59,14 +59,33 @@ function ForSale() {
        containerClass="carousel-container"
       itemAriaLabel='forSale'>
         {result.length !== 0 ? result.map(item =>
-            <a href={`/classified/${item._id}`} className="text-decoration-none">
-              <Card className="mx-3" key={item._id}>
-                <Card.Img className="card-img" variant="top" src={`https://immo-backend.herokuapp.com${item.file}`} />
+            <a key={item._id}
+            href={`/classified/${item._id}`}>
+              <Card 
+              className="mx-3">
+                <Card.Img 
+                className="card-img" 
+                variant="top" 
+                src={`${item.file}`} />
                 <Card.Body>
-                  <Card.Title className="text-break" style={{ "fontSize": "0.9em" }}>{toUpperCase(item.type)}</Card.Title>
-                  <Card.Title className="my-1 text-break" style={{ "fontSize": "1.4em" }}>€{item.price}</Card.Title>
-                  <Card.Title className="m-0 text-secondary text-break" style={{ "fontSize": "0.9em" }}>{item.bedrooms} bdr.</Card.Title>
-                  <Card.Title className="m-0 text-secondary text-break" style={{ "fontSize": "0.9em" }}>{toUpperCase(item.city)}</Card.Title>
+                  <Card.Title 
+                  className="text-break" 
+                  style={{ "fontSize": "0.9em" }}>{toUpperCase(item.type)}
+                  </Card.Title>
+                  <Card.Title 
+                  className="my-1 text-break"      
+                  style={{ "fontSize": "1.4em" }}>
+                  €{item.price}
+                  </Card.Title>
+                  <Card.Title 
+                  className="m-0 text-secondary text-break"
+                  style={{ "fontSize": "0.9em" }}>
+                  {item.bedrooms} bdr.
+                  </Card.Title>
+                  <Card.Title 
+                  className="m-0 text-secondary text-break"
+                  style={{ "fontSize": "0.9em" }}>{toUpperCase(item.city)}
+                  </Card.Title>
                 </Card.Body>
               </Card>
             </a>

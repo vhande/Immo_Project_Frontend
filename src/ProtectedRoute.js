@@ -7,7 +7,7 @@ function ProtectedRoute({children}) {
   
     useEffect(()=> {   
       const validate = ()  => {
-        fetch('https://immo-backend.herokuapp.com/profile',{
+        fetch('http://localhost:4000/profile',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'

@@ -11,7 +11,7 @@ function Classified() {
 
   useEffect(()=> {
     const action = () => {
-      fetch(`https://immo-backend.herokuapp.com/classified/${id}`)
+      fetch(`http://localhost:4000/classified/${id}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)
@@ -58,31 +58,31 @@ function Classified() {
           <div className="d-flex justify-content-center">
             <img
               className="classifiedPhotoBig"
-              src={`https://immo-backend.herokuapp.com${result[0].file}`}
+              src={result[0].file}
               alt="new"
             />
           </div>
           <div className="d-flex flex-column classifiedImages">
             <img
               className="classifiedPhoto"
-              src={`https://immo-backend.herokuapp.com${result[0].file}`}
+              src={result[0].file}
               alt="new"
             />
             <img
               className="classifiedPhoto"
-              src={`https://immo-backend.herokuapp.com${result[0].file}`}
+              src={result[0].file}
               alt="new"
             />
             <img
               className="classifiedPhoto"
-              src={`https://immo-backend.herokuapp.com${result[0].file}`}
+              src={result[0].file}
               alt="new"
             />
           </div> 
           <div className="agency">
           <Card className="immo-agency mt-4">
             <div>
-              <Card.Img src="https://static.immoweb.be/logos/3709747.gif?cache=2021411502473"></Card.Img>
+              <img src="https://static.immoweb.be/logos/3709747.gif?cache=2021411502473"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>

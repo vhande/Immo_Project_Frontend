@@ -10,7 +10,7 @@ import {useNavigate,  createSearchParams, } from 'react-router-dom'
 function AdvancedSearch() {
   const [radioValue, setRadioValue] = useState('sale');
   const context = useContext(Features)
-  const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`}
+  const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`, page:1}
 
   const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ function AdvancedSearch() {
   return (
     <>
     <Container fluid className="center-div d-flex flex-column align-items-center justify-content-center" style={{maxWidth:"500px"}}>
-    <h4 className="pb-2">Advanced Search</h4>
+    <h4 className="py-2">Advanced Search</h4>
      {console.log(formik.values, context.classifiedtype)}
           <Form onSubmit={formik.handleSubmit}>
             <InputGroup className="mb-3">

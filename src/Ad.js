@@ -55,7 +55,7 @@ function Ad() {
       formData.append('bedrooms',values.bedrooms)
       formData.append('description',values.description)
       formData.append('file',values.file)
-      fetch('https://immo-backend.herokuapp.com/ad', {
+      fetch('http://localhost:4000/ad', {
         method: 'POST',
         headers: new Headers ({Accept: "application.json"}),
         body: formData
@@ -103,8 +103,7 @@ function Ad() {
             <div className="d-flex justify-content-center align-items-center mt-2">
             <ButtonGroup
       value={formik.values.type}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}>
+      onChange={formik.handleChange}>
         <ToggleButton
             id="house"
             type="radio"
@@ -233,7 +232,7 @@ function Ad() {
         :
         <Container fluid className="center-div d-flex flex-column justify-content-center align-items-center">
               <MdPostAdd size={70} />
-          <h2 className="my-3">Publication of your classified</h2>
+          <h2 className="my-3 text-center">Publication of your classified</h2>
           <p className="lead my-3 text-center">
             We recommend you to provide as many details as possible to optimize
             the quality of your classified.
