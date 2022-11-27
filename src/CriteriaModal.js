@@ -1,67 +1,78 @@
-import { InputGroup, Form, Button, ButtonGroup, Container} from "react-bootstrap";
+import React from 'react'
+import {useState, useContext} from 'react'
+import Features from './Context/Features'
+import { AiFillCloseCircle } from 'react-icons/ai'
 import { BsSearch } from "react-icons/bs";
-import { useState, useContext } from 'react'
+import {
+    Modal,
+    ButtonGroup,
+    InputGroup,
+    Form,
+    Button
+  } from "react-bootstrap";
+
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { AiFillCloseCircle } from 'react-icons/ai'
-import Features from './Context/Features'
 import {useNavigate,  createSearchParams, } from 'react-router-dom'
 
-function AdvancedSearch() {
-  const [radioValue, setRadioValue] = useState('sale');
-  const context = useContext(Features)
-  const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`, page:1}
+function CriteriaModal({closeModal, modalShow}) {
+    const [radioValue, setRadioValue] = useState('sale');
+    const context = useContext(Features)
+    const navigate = useNavigate();
+    const propertySchema =
+    yup.object().shape({
+    minbedroom: yup.number().typeError("Please enter a number").min(1, 'Min 1').max(10, 'Max 10'),
+    minbudget: yup.number().typeError("Please enter a number").min(0, 'Min 1').max(1000000, 'Max 10'),
+    maxbudget: yup.number().typeError("Please enter a number").min(100, 'Min 100').max(1000000, 'Max 1000000')})
+  
+    const formik = useFormik({
+  
+      initialValues: {
+      immocode: "",
+      transaction:"sale",
+      location:"allbelgium",
+      type:"house",
+      minbedroom:"",
+      minbudget:"",
+      maxbudget:"",
+      },
+      validationSchema: propertySchema,
+      onSubmit: (values) => {
+        }
+      })
+  
+  
+      context.setImmocode(formik.values.immocode)
+      context.setClassifiedtype(formik.values.transaction)
+      context.setPropertytype(formik.values.type)
+      context.setCity(formik.values.location)
+      context.setMinbedroom(formik.values.minbedroom)
+      context.setMinbudget(formik.values.minbudget)
+      context.setMaxbudget(formik.values.maxbudget)
 
-  const navigate = useNavigate();
+    
+    const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`, page:1, orderBy:"newest"}
 
-  // to direct to user to the search page with queries.
-
-  const clickAction = () => {
-
-    navigate({
-      pathname: `/search/${context.classifiedtype}/${context.propertytype}/${context.city}`,
-      search: `?${createSearchParams(params)}`
-    }); 
-  }
-
-
-  const propertySchema =
-  yup.object().shape({
-  minbedroom: yup.number().typeError("Please enter a number").min(1, 'Min 1').max(10, 'Max 10'),
-  minbudget: yup.number().typeError("Please enter a number").min(0, 'Min 1').max(1000000, 'Max 10'),
-  maxbudget: yup.number().typeError("Please enter a number").min(100, 'Min 100').max(1000000, 'Max 1000000')})
-
-  const formik = useFormik({
-
-    initialValues: {
-    immocode: "",
-    transaction:"sale",
-    location:"allbelgium",
-    type:"house",
-    minbedroom:"",
-    minbudget:"",
-    maxbudget:"",
-    },
-    validationSchema: propertySchema,
-    onSubmit: (values) => {
+    const clickAction = () => {
+        navigate({
+          pathname: `/search/${context.classifiedtype}/${context.propertytype}/${context.city}`,
+          search: `?${createSearchParams(params)}`
+        }); 
+        closeModal()
       }
-    })
-
-
-    context.setImmocode(formik.values.immocode)
-    context.setClassifiedtype(formik.values.transaction)
-    context.setPropertytype(formik.values.type)
-    context.setCity(formik.values.location)
-    context.setMinbedroom(formik.values.minbedroom)
-    context.setMinbudget(formik.values.minbudget)
-    context.setMaxbudget(formik.values.maxbudget)
 
   return (
-    <>
-    <Container fluid className="center-div d-flex flex-column align-items-center justify-content-center" style={{maxWidth:"500px"}}>
-    <h4 className="py-2">Advanced Search</h4>
-     {console.log(formik.values, context.classifiedtype)}
-          <Form onSubmit={formik.handleSubmit}>
+    <Modal
+    size="lg"
+    show={modalShow}
+  >
+    <Modal.Header closeButton>
+      <Modal.Title id="example-modal-sizes-title-sm">
+        Criteria
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+    <Form onSubmit={formik.handleSubmit}>
             <InputGroup className="mb-3">
             <Form.Control 
               placeholder="Immo code"
@@ -127,11 +138,12 @@ function AdvancedSearch() {
             <Form.Group>
             <Form.Label>Type of Property</Form.Label>
             <Form.Select
+            name="type"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.type}>
-              <option value="1">House</option>
-              <option value="2">Appartment</option>
+              <option value="house">House</option>
+              <option value="appartment">Appartment</option>
             </Form.Select>
             </Form.Group>
             <Form.Group>
@@ -166,16 +178,11 @@ function AdvancedSearch() {
             {formik.touched.maxbudget && formik.errors.maxbudget ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.maxbudget}</Form.Label> : null}
             </Form.Group>
             </Form>
-            
             {context.immocode !== "" ? <a href={`/classified/${context.immocode}`}><Button disabled={Object.keys(formik.errors).length > 0}>Search</Button></a> :
-            <Button className="mt-3"disabled={Object.keys(formik.errors).length > 0} onClick={clickAction}>Search</Button>} 
-
-
-        
-            </Container>
-            </>
- 
-  );
+            <Button className="mt-3"disabled={Object.keys(formik.errors).length > 0} onClick= {clickAction}>Search</Button>}
+    </Modal.Body>
+  </Modal>
+  )
 }
 
-export default AdvancedSearch;
+export default CriteriaModal

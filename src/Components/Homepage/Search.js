@@ -32,7 +32,7 @@ console.log(context.propertytype, context.classifiedtype, context.city)
 
     
     const options = [
-      {value: "Brussels"}, {value:"Antwerp"}, {value:"Gent"}, {value:"Charleroi"}, {value:"Liege"}, {value:"Bruges"}, {value:"Namur"}, {value:"Leuven"}, {value:"Mons"}, {value:"Mechelen"}, {value:"Aalst"}, {value:"Hasselt"}, 
+      {value:"All Belgium"}, {value: "Brussels"}, {value:"Antwerp"}, {value:"Gent"}, {value:"Charleroi"}, {value:"Liege"}, {value:"Bruges"}, {value:"Namur"}, {value:"Leuven"}, {value:"Mons"}, {value:"Mechelen"}, {value:"Aalst"}, {value:"Hasselt"}, 
     ];
 
     const clickAction = () => {
