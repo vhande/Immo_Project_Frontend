@@ -65,6 +65,7 @@ function CriteriaModal({closeModal, modalShow}) {
     <Modal
     size="lg"
     show={modalShow}
+    onHide={closeModal}
   >
     <Modal.Header closeButton>
       <Modal.Title id="example-modal-sizes-title-sm">

@@ -14,12 +14,9 @@ const navigate = useNavigate();
 console.log(context.propertytype, context.classifiedtype, context.city)
 
   useEffect(()=> {
-      if (context.classifiedtype === "") {
-        context.setClassifiedtype("rent") }
-      else if (context.propertytype === "") {
+        context.setClassifiedtype("rent")
         context.setPropertytype("house")
-      }
-    },[context])
+      },[])
 
       const clickEvent = (e) => {
       context.setClassifiedtype(e.target.id)
