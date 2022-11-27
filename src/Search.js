@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Container, Dropdown, DropdownButton, Pagination } from "react-bootstrap";
 import { useEffect, useState } from 'react'
-import { useNavigate, createSearchParams, useParams, Link, useLocation } from 'react-router-dom'
+import { useNavigate, createSearchParams, useParams, Link, useLocation,  } from 'react-router-dom'
 
 
 
@@ -10,9 +10,13 @@ function Search() {
   const { type } = useParams()
   const { city } = useParams()
   const [result, setResult] = useState([])
-  const [value,setValue] = useState("Newest")
+  const [title,setTitle] = useState("Newest")
   const [active,setActive] = useState(1)
+  const [pagenum, setPagenum] = useState(1)
+  const [order, setOrder] = useState("newest")
   const navigate = useNavigate(); 
+
+ 
 
 
   // to get queries from URL
@@ -22,56 +26,43 @@ function Search() {
   const minPrice = query.get('minPrice')
   const maxPrice = query.get('maxPrice')
   const page = query.get('page')
+  const orderby = query.get('orderBy')
+
+  const params = {minBedroomCount:`${minBedroomCount}`, minPrice:`${minPrice}`,maxPrice:`${maxPrice}`, page:active, orderBy:order}
 
   useEffect(() => {
     const action = () => {
-      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}`)
+      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&orderBy=${orderby}`)
         .then(res => res.json())
         .then(data => {
-          setResult(data.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)}))
+          data.length === 2 ?
+          setResult(data[0]) : setResult(data)
+          setPagenum((Math.ceil(data[1]/5)))
           console.log(data)
         })
     }
     action() 
 
-  }, [classifiedtype, type, city, minBedroomCount, minPrice, maxPrice, page])
-
+    navigate({
+      pathname: `/search/${classifiedtype}/${type}/${city}`,
+      search: `?${createSearchParams(params)}`
+    }) 
+  }, [classifiedtype, type, city, minBedroomCount, minPrice, maxPrice, page, orderby,active,order])
 
   const toUpperCase = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  const sortEvent = (e) => {
-     console.log(e.target.name)
-     e.target.name === "Cheapest" ?
-     setResult(result.sort((a,b) => { return a.price - b.price}))
-     : e.target.name === "Most expensive" ?
-     setResult(result.sort((a,b) => { return b.price - a.price}))
-     : e.target.name === "Newest" ? 
-     setResult(result.sort((a,b) => { return new Date(b.created_at) - new Date(a.created_at)})) : setResult(result)
-    
-  }
-  const params = {page:`${active}`, minBedroomCount: `${minBedroomCount}`, }
-  const clickAction = () => {
-    navigate({
-      pathname: `/search/${classifiedtype}/${type}/${city}`,
-      search: `?${createSearchParams(params)}`
-    }); 
-  }
-
-
   let items = [];
-  for (let number = 1; number <= 5; number++) {
+  for (let number = 1; number <= pagenum; number++) {
   items.push(
     <Pagination.Item 
-    onClick={(e) => {setActive(number); clickAction();}} name={number} active={active===number}>
+    onClick={() => {setActive(number)}} active={active===number}>
       {number}
-    </Pagination.Item>,
+    </Pagination.Item>
     
   );
 }
-
-  console.log(result)
 
   return (
     <>
@@ -84,10 +75,10 @@ function Search() {
             </Container>
       <Container className="d-flex flex-row justify-content-end align-items-center mt-5">
         <h5 className="mx-2 my-1">Sort:</h5>
-    <DropdownButton title={value}>
-      <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Newest">Newest</Dropdown.Item>
-      <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e);}} href="#" name="Cheapest">Cheapest</Dropdown.Item>
-      <Dropdown.Item onClick={(e)=>{setValue(e.target.name); sortEvent(e); {console.log(e.target.name)}}} href="#" name="Most expensive">Most expensive</Dropdown.Item>
+    <DropdownButton title={title}>
+      <Dropdown.Item onClick={(e)=> {setOrder(e.target.name); setTitle(e.target.title)}} name="newest" title="Newest">Newest</Dropdown.Item>
+      <Dropdown.Item onClick={(e)=> {setOrder(e.target.name); setTitle(e.target.title)}}   name="cheapest" title="Cheapest" >Cheapest</Dropdown.Item>
+      <Dropdown.Item onClick={(e)=>{setOrder(e.target.name); setTitle(e.target.title)}} name="most_expensive" title="Most expensive">Most expensive</Dropdown.Item>
     </DropdownButton>
           </Container>  
           </Container>

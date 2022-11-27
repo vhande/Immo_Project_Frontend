@@ -155,7 +155,15 @@ max-height: 3.2rem;
 
 
 .center-div {
-  height: calc(100vh - 20rem) !important;
+
+  display: flex;       
+    align-items: center;
+    justify-content:center; 
+    
+    /* vh refers to viewport height. Very useful! */ 
+    min-height: calc(100vh - 13rem);
+    max-width: 100%;       	
+
 }
   
 /* --------------------------Classified PART------------------------ */
