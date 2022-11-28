@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown, Dropdown, Button } from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link,NavLink} from 'react-router-dom'
 import { BsFillPersonFill } from 'react-icons/bs'
 import {RiHomeSmileFill} from 'react-icons/ri'
 import {FiExternalLink} from 'react-icons/fi'
@@ -31,13 +31,13 @@ function Header() {
         <>
         
         <LoginModal closeModal={closeModal} modalShow={modalShow}/>
-        <Navbar style={{"color":"var(--blue)"}} fixed="top" collapseOnSelect expand="lg" className="navbar" bg="white">
+        <Navbar collapseOnSelect style={{"color":"var(--blue)"}} fixed="top"  expand="lg" className="navbar" bg="white">
             <Container className="d-flex justify-content-between">
                
-                <Link style={{"color":"var(--blue)"}} className="navbar-brand" to={'/'}><div className="d-flex align-items-center justify-content-center">
+                <NavLink style={{"color":"var(--blue)"}} className="navbar-brand" to={'/'}><div className="d-flex align-items-center justify-content-center">
                 <RiHomeSmileFill fontSize="1.5em" className="me-1"/>
                 <div className="navbar-brand"> IMMO</div>
-                </div></Link>
+                </div></NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
@@ -45,10 +45,10 @@ function Header() {
                             <Nav  >
                                 <NavDropdown
                                     title="For Sale">
-                                    <NavDropdown.Item href="/search/sale/house">House</NavDropdown.Item>
-                                    <NavDropdown.Item href="/search/sale/appartment">Appartment</NavDropdown.Item>
+                                    <NavDropdown.Item to="/search/sale/house" as={Link} eventKey="0" >House</NavDropdown.Item>
+                                    <NavDropdown.Item to="/search/sale/appartment" as={Link} eventKey="1" >Appartment</NavDropdown.Item>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item className="d-flex align-items-center" href="/advanced-search">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
+                                    <Dropdown.Item className="d-flex align-items-center" to="/advanced-search" as={Link} eventKey="2" >Advanced search<BsSearch className="m-1"/></Dropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
@@ -58,10 +58,10 @@ function Header() {
                                 <NavDropdown
                                     title="For Rent"
                                 >
-                                    <NavDropdown.Item href="/search/rent/house">House</NavDropdown.Item>
-                                    <NavDropdown.Item href="/search/rent/appartment">Appartment</NavDropdown.Item>
+                                    <NavDropdown.Item to="/search/rent/house" as={Link} eventKey="3">House</NavDropdown.Item>
+                                    <NavDropdown.Item to="/search/rent/appartment" as={Link} eventKey="4">Appartment</NavDropdown.Item>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item className="d-flex align-items-center" href="/advanced-search">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
+                                    <Dropdown.Item className="d-flex align-items-center" to="/advanced-search" as={Link} eventKey="5">Advanced search<BsSearch className="m-1"/></Dropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
@@ -81,19 +81,19 @@ function Header() {
                         </Navbar.Collapse>
                     </Nav>
                     <Nav className="">
-                        <a href='/ad' className="nav-link text-decoration-none">Publish an Ad</a>
+                        <Nav.Link to='/ad' as={Link} className="nav-link text-decoration-none" eventKey="6">Publish an Ad</Nav.Link>
                         {context.token !== null ?
                           <Navbar.Collapse>
                           <Nav>
                               <NavDropdown
                                   title="My Immo">
-                                  <NavDropdown.Item href="/profile">My profile</NavDropdown.Item>
-                                  <NavDropdown.Item href="/" onClick={logout}>Log out</NavDropdown.Item>
+                                  <NavDropdown.Item to="/profile" as={Link} eventKey="7">My profile</NavDropdown.Item>
+                                  <NavDropdown.Item to="/" as={Link} eventKey="8" onClick={logout}>Log out</NavDropdown.Item>
                               </NavDropdown>
                           </Nav>
                       </Navbar.Collapse>
                         : 
-                        <Button onClick={showModal} className="text-start loginbtn nav-link text-decoration-none border-0 bg-white"><span className="me-1"><BsFillPersonFill /></span>Log in</Button> }
+                        <Nav.Link onClick={showModal} as={Link} eventKey="9" className="text-start loginbtn nav-link text-decoration-none border-0 bg-white"><span className="me-1"><BsFillPersonFill /></span>Log in</Nav.Link> }
                     </Nav>
                 </Navbar.Collapse>
             </Container>

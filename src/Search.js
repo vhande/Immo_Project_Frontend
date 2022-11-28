@@ -70,21 +70,22 @@ function Search() {
   for (let number = 1; number <= pagenum; number++) {
   items.push(
     <Pagination.Item 
-    onClick={() => {setActive(number)}} active={active===number}>
-      {number}
+    onClick={() => {setActive(number)}} active={active===number} key={number}>
+      {number} 
     </Pagination.Item>
     
   );
 }
   return (
     <>
+    <CriteriaModal closeModal={closeModal} modalShow={modalShow}/>
       <Container fluid className="search-page-container d-flex flex-row justify-content-around align-items-start">
         <Container fluid className="d-flex flex-column justify-content-center align-items-center">
        
             <Container fluid className="d-flex flex-row justify-content-start align-items-center mt-5">
             <h3>{toUpperCase(type)} for {classifiedtype}</h3>
             <Button onClick={showModal} className="mx-2">Criteria</Button>
-            <CriteriaModal closeModal={closeModal} modalShow={modalShow}/>
+            
             </Container>
       <Container fluid className="d-flex flex-row justify-content-between align-items-center mt-5">
       <Pagination>{items}</Pagination>
@@ -99,7 +100,6 @@ function Search() {
           </Container>  
           {result.length === 0 ? <p className="lead mt-4">No properties to show, try a different combination.</p> :
             result.map(item =>
-              <>
               <Link to={`/classified/${item._id}`} className="text-decoration-none"
               key={item._id}>
                 <Card
@@ -132,7 +132,6 @@ function Search() {
                   </Card.Body>
                 </Card>
               </Link>
-              </>
             )}
             <Pagination>{items}</Pagination>
         </Container>

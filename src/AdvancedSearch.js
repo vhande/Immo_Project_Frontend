@@ -1,6 +1,6 @@
 import { InputGroup, Form, Button, ButtonGroup, Container} from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { AiFillCloseCircle } from 'react-icons/ai'
@@ -44,24 +44,27 @@ function AdvancedSearch() {
     },
     validationSchema: propertySchema,
     onSubmit: (values) => {
+      
       }
     })
 
-
-    context.setImmocode(formik.values.immocode)
-    context.setClassifiedtype(formik.values.transaction)
-    context.setPropertytype(formik.values.type)
-    context.setCity(formik.values.location)
-    context.setMinbedroom(formik.values.minbedroom)
-    context.setMinbudget(formik.values.minbudget)
-    context.setMaxbudget(formik.values.maxbudget)
+    useEffect(()=> {
+      context.setImmocode(formik.values.immocode)
+      context.setClassifiedtype(formik.values.transaction)
+      context.setPropertytype(formik.values.type)
+      context.setCity(formik.values.location)
+      context.setMinbedroom(formik.values.minbedroom)
+      context.setMinbudget(formik.values.minbudget)
+      context.setMaxbudget(formik.values.maxbudget)
+    },[context])
+      
 
   return (
     <>
     <Container fluid className="center-div d-flex flex-column align-items-center justify-content-center" style={{maxWidth:"500px"}}>
     <h4 className="py-2">Advanced Search</h4>
      {console.log(formik.values, context.classifiedtype)}
-          <Form onSubmit={formik.handleSubmit}>
+     <Form onSubmit={formik.handleSubmit}>
             <InputGroup className="mb-3">
             <Form.Control 
               placeholder="Immo code"
@@ -127,11 +130,12 @@ function AdvancedSearch() {
             <Form.Group>
             <Form.Label>Type of Property</Form.Label>
             <Form.Select
+            name="type"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.type}>
-              <option value="1">House</option>
-              <option value="2">Appartment</option>
+              <option value="house">House</option>
+              <option value="appartment">Appartment</option>
             </Form.Select>
             </Form.Group>
             <Form.Group>

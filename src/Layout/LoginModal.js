@@ -9,6 +9,7 @@ import {
   Form,
 } from "react-bootstrap";
 import { BsCheckLg } from "react-icons/bs";
+import {Link} from 'react-router-dom'
 import { useRef, useState, useContext, useEffect } from "react";
 import { AiFillCloseCircle, AiFillEye } from "react-icons/ai";
 import Token from "../Context/Token";
@@ -21,7 +22,7 @@ function LoginModal({ closeModal, modalShow }) {
   const context = useContext(Token);
 
   const clickEvent = async () => {
-    fetch("https://immo-backend.herokuapp.com/login", {
+    fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +105,7 @@ function LoginModal({ closeModal, modalShow }) {
               </span>{" "}
               Our policy respects the privacy of the users of our website
             </p>
-              <Button href="/create-account" style={{ marginBottom: "1rem" }} onClick={closeModal}>
+              <Button to="/create-account" as={Link} style={{ marginBottom: "1rem" }} onClick={closeModal}>
                 Register
               </Button>
           </Col>

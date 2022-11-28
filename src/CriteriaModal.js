@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useContext} from 'react'
+import {useState, useContext, useEffect} from 'react'
 import Features from './Context/Features'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { BsSearch } from "react-icons/bs";
@@ -42,13 +42,15 @@ function CriteriaModal({closeModal, modalShow}) {
       })
   
   
-      context.setImmocode(formik.values.immocode)
-      context.setClassifiedtype(formik.values.transaction)
-      context.setPropertytype(formik.values.type)
-      context.setCity(formik.values.location)
-      context.setMinbedroom(formik.values.minbedroom)
-      context.setMinbudget(formik.values.minbudget)
-      context.setMaxbudget(formik.values.maxbudget)
+      useEffect(()=> {
+        context.setImmocode(formik.values.immocode)
+        context.setClassifiedtype(formik.values.transaction)
+        context.setPropertytype(formik.values.type)
+        context.setCity(formik.values.location)
+        context.setMinbedroom(formik.values.minbedroom)
+        context.setMinbudget(formik.values.minbudget)
+        context.setMaxbudget(formik.values.maxbudget)
+      },[context])
 
     
     const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`, page:1, orderBy:"newest"}
