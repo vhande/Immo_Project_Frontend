@@ -22,7 +22,7 @@ function LoginModal({ closeModal, modalShow }) {
   const context = useContext(Token);
 
   const clickEvent = async () => {
-    fetch("http://localhost:4000/login", {
+    fetch("https://immo-backend.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

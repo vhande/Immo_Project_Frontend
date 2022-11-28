@@ -11,8 +11,6 @@ const context = useContext(Features)
 const params = {page:"1"}
 const navigate = useNavigate();
 
-console.log(context.propertytype, context.classifiedtype, context.city)
-
   useEffect(()=> {
         context.setClassifiedtype("rent")
         context.setPropertytype("house")

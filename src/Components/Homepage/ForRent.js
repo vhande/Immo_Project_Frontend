@@ -3,6 +3,7 @@ import {Container, Card, Button} from 'react-bootstrap'
 import {FcNext} from 'react-icons/fc'
 import {useEffect, useState} from 'react'
 import useMeasure from "react-use-measure";
+import {Link} from 'react-router-dom'
 
 function ForRent() {
   const [result, setResult] = useState([])
@@ -10,7 +11,7 @@ function ForRent() {
 
   useEffect(() => {
     const action = () => {
-      fetch(`http://localhost:4000/latest`)
+      fetch(`https://immo-backend.onrender.com/latest`)
         .then(res => res.json())
         .then(data => {
           setResult(data)
@@ -22,6 +23,11 @@ function ForRent() {
   const toUpperCase = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
+
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
+
   return (
     <Container fluid>
     <h3 
@@ -33,8 +39,8 @@ function ForRent() {
     className="d-flex flex-column flex-md-row flex-lg-row flex-xl-row  align-items-center">
     {result.length !== 0 ? 
     result.slice(0,2).map(item=> 
-    <a key={item._id}
-    href={`/classified/${item._id}`}
+    <Link key={item._id}
+    to={`/classified/${item._id}`}
     ref={ref} 
     className="m-2" 
     style={{width: "100%",height: "auto"}}>
@@ -52,7 +58,7 @@ function ForRent() {
         <Card.Title 
         className="my-1 text-break"
         style= {{"fontSize":"1.4em"}}>
-        €{item.price}
+        €{formatNumber(item.price)}
         </Card.Title>
         <Card.Title 
         className="m-0 text-secondary text-break"
@@ -66,7 +72,7 @@ function ForRent() {
         </Card.Title>
       </Card.Body>
     </Card>
-    </a> )
+    </Link> )
     : "" }
     <Card className="m-2" style={{width: "100%",height: height}} >
       <Card.Body className="d-flex flex-column align-items-center justify-content-center">

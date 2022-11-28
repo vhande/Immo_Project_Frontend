@@ -3,17 +3,17 @@ import { Card, Container } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import {Link} from 'react-router-dom'
 
 function ForSale() {
   const [result, setResult] = useState([])
 
   useEffect(() => {
     const action = () => {
-      fetch(`http://localhost:4000/getall`)
+      fetch(`https://immo-backend.onrender.com/getall`)
         .then(res => res.json())
         .then(data => {
           setResult(data)
-          console.log(data)
         })
     }
     action()
@@ -23,7 +23,9 @@ function ForSale() {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 
-  console.log(result)
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
 
   const responsive = {
     desktop: {
@@ -59,8 +61,8 @@ function ForSale() {
        containerClass="carousel-container"
       itemAriaLabel='forSale'>
         {result.length !== 0 ? result.map(item =>
-            <a key={item._id}
-            href={`/classified/${item._id}`}>
+            <Link key={item._id}
+            to={`/classified/${item._id}`}>
               <Card 
               className="mx-3">
                 <Card.Img 
@@ -75,7 +77,7 @@ function ForSale() {
                   <Card.Title 
                   className="my-1 text-break"      
                   style={{ "fontSize": "1.4em" }}>
-                  €{item.price}
+                  €{formatNumber(item.price)}
                   </Card.Title>
                   <Card.Title 
                   className="m-0 text-secondary text-break"
@@ -88,7 +90,7 @@ function ForSale() {
                   </Card.Title>
                 </Card.Body>
               </Card>
-            </a>
+            </Link>
         ) : ""}
       </Carousel>
     </Container>

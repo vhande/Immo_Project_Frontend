@@ -40,20 +40,18 @@ function CriteriaModal({closeModal, modalShow}) {
       onSubmit: (values) => {
         }
       })
-  
-  
-      useEffect(()=> {
-        context.setImmocode(formik.values.immocode)
-        context.setClassifiedtype(formik.values.transaction)
-        context.setPropertytype(formik.values.type)
-        context.setCity(formik.values.location)
-        context.setMinbedroom(formik.values.minbedroom)
-        context.setMinbudget(formik.values.minbudget)
-        context.setMaxbudget(formik.values.maxbudget)
-      },[context])
-
     
     const params = { minBedroomCount: `${context.minbedroom}`, minPrice: `${context.minbudget}`, maxPrice: `${context.maxbudget}`, page:1, orderBy:"newest"}
+
+    useEffect(()=> {
+      context.setImmocode(formik.values.immocode)
+      context.setClassifiedtype(formik.values.transaction)
+      context.setPropertytype(formik.values.type)
+      context.setCity(formik.values.location)
+      context.setMinbedroom(formik.values.minbedroom)
+      context.setMinbudget(formik.values.minbudget)
+      context.setMaxbudget(formik.values.maxbudget)
+    },[formik.values])
 
     const clickAction = () => {
         navigate({

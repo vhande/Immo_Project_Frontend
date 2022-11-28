@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Button, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { Container, Button, Form, ButtonGroup, ToggleButton, Spinner } from "react-bootstrap";
 import { MdApartment, MdPostAdd } from 'react-icons/md'
 import { GiFamilyHouse } from 'react-icons/gi'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useFormik } from 'formik'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
@@ -13,6 +13,8 @@ function Ad() {
   const [count, setCount] = useState(0)
   const [success, setSuccess] = useState("")
   const [radioValue, setRadioValue] = useState('1');
+  const btnRef = useRef(null);
+  const spinnerRef = useRef(null);
 
   const SUPPORTED_FORMATS = ["image/jpeg","image/jpg","image/png"]
 
@@ -73,8 +75,14 @@ function Ad() {
         })
       }
     })
-
-    console.log(formik.values, formik.values.city, formik.values.bedrooms, "Hello")
+  
+    const preventDoubleclick = () => {
+      if(btnRef.current){
+        btnRef.current.setAttribute("disabled", "disabled");
+        spinnerRef.current.removeAttribute("hidden");
+        formik.handleSubmit();
+      }
+    }
 
   return (
     <>
@@ -221,7 +229,20 @@ function Ad() {
             onChange={(e)=> {formik.setFieldValue('file', e.target.files[0])}}/>
             {formik.touched.file && formik.errors.file ? <Form.Label className="error form-text text-danger d-flex align-items-center"> <AiFillCloseCircle className="me-1" fontSize="1.3em" />{formik.errors.file}</Form.Label> : null}
           </Form.Group>
-          <Button className="d-block mx-auto mb-3" type="submit" disabled={Object.keys(formik.errors).length > 0}>Submit</Button>
+          <Button ref={btnRef} className="d-block mx-auto mb-3" onClick={preventDoubleclick} type="submit" disabled={Object.keys(formik.errors).length > 0}>
+          <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+          variant="light"
+          className="mx-1"
+          ref={spinnerRef}
+          hidden
+        />
+        Submit
+        </Button>
         </Form>
         </Container>
         : 

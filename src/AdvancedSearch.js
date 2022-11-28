@@ -56,14 +56,13 @@ function AdvancedSearch() {
       context.setMinbedroom(formik.values.minbedroom)
       context.setMinbudget(formik.values.minbudget)
       context.setMaxbudget(formik.values.maxbudget)
-    },[context])
+    },[formik.values])
       
 
   return (
     <>
     <Container fluid className="center-div d-flex flex-column align-items-center justify-content-center" style={{maxWidth:"500px"}}>
     <h4 className="py-2">Advanced Search</h4>
-     {console.log(formik.values, context.classifiedtype)}
      <Form onSubmit={formik.handleSubmit}>
             <InputGroup className="mb-3">
             <Form.Control 

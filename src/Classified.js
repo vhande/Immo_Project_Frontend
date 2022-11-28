@@ -11,7 +11,7 @@ function Classified() {
 
   useEffect(()=> {
     const action = () => {
-      fetch(`http://localhost:4000/classified/${id}`)
+      fetch(`https://immo-backend.onrender.com/classified/${id}`)
       .then(res=>res.json())
       .then(data=>
         { setResult(data)
@@ -22,6 +22,10 @@ function Classified() {
 
   const toUpperCase = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
 
   return (
@@ -37,7 +41,7 @@ function Classified() {
           <h4>{toUpperCase(result[0].city)}</h4>
           </div>
           <div>
-            <h1>€{result[0].price}</h1>
+            <h1>€{formatNumber(result[0].price)}</h1>
             <Button>Simulate my loan</Button>
           </div>
           <div>
@@ -82,7 +86,7 @@ function Classified() {
           <div className="agency">
           <Card className="immo-agency mt-4">
             <div>
-              <img src="https://static.immoweb.be/logos/3709747.gif?cache=2021411502473"></img>
+              <img className="agency-logo" src="https://cdn.pixabay.com/photo/2020/07/31/03/34/home-5451871_960_720.png" alt="company-logo"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>
@@ -98,7 +102,7 @@ function Classified() {
           <h2>{toUpperCase(result[0].type)} for {result[0].classifiedtype}</h2>
           <h4>{result[0].bedrooms} bdr.</h4>
           <h4>{toUpperCase(result[0].city)}</h4>
-            <h1>€{result[0].price}</h1>
+            <h1>€{formatNumber(result[0].price)}</h1>
             <h6>Immo Code: {result[0]._id}</h6>
         </div>
         <div >

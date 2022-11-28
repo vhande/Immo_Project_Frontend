@@ -8,7 +8,7 @@ function Profile() {
    
     useEffect(()=> {   
       const validate = ()  => {
-        fetch('http://localhost:4000/profile',{
+        fetch('https://immo-backend.onrender.com/profile',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'

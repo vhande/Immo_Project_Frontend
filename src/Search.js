@@ -37,7 +37,7 @@ function Search() {
 
   useEffect(() => {
     const action = () => {
-      fetch(`http://localhost:4000/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&orderBy=${orderby}`)
+      fetch(`https://immo-backend.onrender.com/search/${classifiedtype}/${type}/${city}?minBedroomCount=${minBedroomCount}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&orderBy=${orderby}`)
         .then(res => res.json())
         .then(data => {
           data.length === 2 ?
@@ -62,6 +62,10 @@ function Search() {
 
   const toUpperCase = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
 
   // pagination
@@ -115,7 +119,7 @@ function Search() {
                       {toUpperCase(item.type)}
                     </Card.Title>
                     <Card.Title className="my-1" style={{ "fontSize": "1.4em" }}>
-                      €{item.price}
+                      €{formatNumber(item.price)}
                     </Card.Title>
                     <Card.Title
                       className="mt-1 text-secondary"
@@ -138,7 +142,7 @@ function Search() {
         <Container fluid className="agency d-flex flex-column justify-content-center">
          <Card className="immo-agency">
             <div>
-              <img src="https://static.immoweb.be/logos/francois.gif?cache=2022481309777" alt="agency"></img>
+              <img className="agency-logo" src="https://cdn.pixabay.com/photo/2020/07/31/03/34/home-5451871_960_720.png" alt="company-logo"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>
@@ -149,7 +153,7 @@ function Search() {
           </Card>
           <Card className="immo-agency">
             <div>
-              <img src="https://static.immoweb.be/logos/3709747.gif?cache=2021411502473" alt="agency"></img>
+              <img className="agency-logo" src="https://cdn.pixabay.com/photo/2015/05/04/20/23/color-752919_960_720.png" alt="company-logo"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>
@@ -160,7 +164,7 @@ function Search() {
           </Card>
           <Card className="immo-agency">
             <div>
-              <img src="https://static.immoweb.be/logos/38321.gif?cache=2021310808307" alt="agency"></img>
+              <img className="agency-logo" src="https://cdn.pixabay.com/photo/2022/01/25/21/58/company-logo-6967389_960_720.png" alt="company-logo"></img>
             </div>
             <div>
               <Card.Title>Agency Example</Card.Title>

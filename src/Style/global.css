@@ -56,6 +56,11 @@ body {
   width: 9em;
 }
 
+.agency-logo {
+  max-width: 150px;
+  max-height: 150px;
+}
+
 .city {
   height: 5rem;
   background-repeat: no-repeat;
